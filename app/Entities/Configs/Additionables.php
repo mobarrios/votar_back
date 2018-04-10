@@ -2,12 +2,13 @@
  namespace App\Entities\Configs;
 
 
- use App\Entities\Moto\Budgets;
- use App\Entities\Moto\Models;
- use App\Entities\Moto\Sales;
+ use App\Entities\Entity;
+ use App\Entities\Admin\Budgets;
+ use App\Entities\Admin\Models;
+ use App\Entities\Admin\Sales;
  use Illuminate\Database\Eloquent\Model;
 
- class Additionables extends Model
+ class Additionables extends Entity
  {
      protected $fillable    = ['additionals_id','amount','sales_items_id'];
 

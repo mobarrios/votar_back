@@ -1,9 +1,10 @@
 <?php
  namespace App\Entities\Configs;
 
+ use App\Entities\Entity;
  use Illuminate\Database\Eloquent\Model;
 
- class Updateables extends Model
+ class Updateables extends Entity
  {
 
 

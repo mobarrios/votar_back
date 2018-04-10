@@ -8,6 +8,8 @@ use App\Entities\Configs\User;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -62,8 +64,8 @@ class AuthController extends Controller
 
 
 
-    public function validateLogin(Request $request){
-
+    public function validateLogin(Request $request)
+    {
 
         if (! $request->has('user_name') || ! $request->has('_token'))
                 return redirect()->back()->withErrors(['Completar Campos!']);
@@ -71,7 +73,7 @@ class AuthController extends Controller
          // Reviso que el usuario exista y tenga acceso
          //$user = $this->usersRepo->searchByEmail($request->get('email'),$request->get('password'));
 
-        if (!Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password], $request->remember))
+        if (!Auth::attempt(['name' => $request->user_name, 'password' => $request->password], $request->remember))
            // if(empty($user) || is_null($user))
                 return redirect()->back()->withInput()->withErrors(['Usuario Inválido!']);
            // else
@@ -79,8 +81,6 @@ class AuthController extends Controller
              //   Auth::login($user, false);
 
         return redirect()->route('home');
-
-
 
     }
 

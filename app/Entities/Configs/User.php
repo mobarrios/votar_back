@@ -2,8 +2,7 @@
 
 namespace App\Entities\Configs;
 
-use App\Entities\Entity;
-use Bican\Roles\Models\Role;
+use App\Entities\EntityUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -13,9 +12,11 @@ use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Entity implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
+class User extends EntityUser implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
 {
     use Authenticatable, CanResetPassword, HasRoleAndPermission;
+
+
 
     /**
      * The database table used by the model.
@@ -42,15 +43,22 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
     protected $hidden = ['password', 'remember_token'];
 
 
+    /*public function __construct()
+    {
+        DB::setDefaultConnection('mysql');
+
+        Config::set('database.connections.mysql.database', env('DB_DATABASE_USERS'));
+    }*/
+
     public function images()
     {
-        return $this->morphOne(Images::class,'imageable');
+        return $this->morphOne('App\Entities\Configs\Images','imageable');
     }
 
 
     public function BranchesActive()
     {
-        return $this->belongsTo(Branches::class,'branches_active_id');
+        return $this->belongsTo('App\Entities\Configs\Branches','branches_active_id');
     }
 
     public function getFullNameAttribute()
@@ -60,7 +68,7 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
 
     public function Roles()
     {
-        return $this->belongsToMany(Role::class,'role_user');
+        return $this->belongsToMany('App\Entities\Configs\Role','role_user');
     }
 
 

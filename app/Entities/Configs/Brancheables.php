@@ -2,7 +2,8 @@
  namespace App\Entities\Configs;
 
 
- use App\Entities\Moto\Items;
+ use App\Entities\Entity;
+ use App\Entities\Admin\Items;
  use Illuminate\Database\Eloquent\Model;
 
  class Brancheables extends Model

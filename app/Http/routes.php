@@ -14,27 +14,12 @@
 
 Route::get('fe','\App\Http\Controllers\Configs\VouchersController@store');
 
-Route::get('/constancia', function(\Illuminate\Http\Request $request,\Illuminate\Routing\Route $route , \Barryvdh\DomPDF\PDF $pdf){
 
-    $pdf->setPaper('a5', 'landscape')->loadView('moto.constancia');
-
-    return $pdf->stream();
+Route::get('', function()
+{
+   return redirect()->intended('home');
 });
 
-
-Route::get('/ficha', function(){
-
-    //$pdf->setPaper('a5', 'landscape')->loadView('moto.constancia');
-    $data['section'] = 'Servicio técnico';
-    return view('moto.technicalServices.serviceOrder')->with($data);
-});
-
-
-
-
-Route::get('', function(){
-   return redirect() ->intended('home');
-});
 
 Route::group(['middleware'=>'auth'],function(){
 

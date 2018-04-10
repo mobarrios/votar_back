@@ -17,22 +17,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-class Entity extends Model {
+class EntityUser extends Model {
 
-    protected $connection =  'mysql';
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        //if(Auth::check())
-        //{
-           // DB::setDefaultConnection('mysql');
-            Config::set('database.connections.mysql.database', Auth::user()->db);
-        //}
-    }
-
-
+    protected $connection = 'mysql_users';
 
     use SoftDeletes;
     protected $dates        = ['deleted_at'];

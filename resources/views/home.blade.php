@@ -32,7 +32,6 @@
             </div>
         </div>
 
-        {{--
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-aqua">
@@ -56,7 +55,6 @@
                 {!! Form::close() !!}
             </div>
         </div>
-        --}}
 
         <div class="col-sm-3 col-xs-12">
             <!-- small box -->
