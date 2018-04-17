@@ -28,6 +28,7 @@ class Entity extends Model {
         //if(Auth::check())
         //{
            // DB::setDefaultConnection('mysql');
+        
             Config::set('database.connections.mysql.database', Auth::user()->db);
         //}
     }

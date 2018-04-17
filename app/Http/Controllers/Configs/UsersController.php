@@ -28,7 +28,7 @@ class UsersController extends Controller
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
 
         $this->data['section'] = $this->section;
-
+       
     }
 
 

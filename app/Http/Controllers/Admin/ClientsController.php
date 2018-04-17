@@ -74,11 +74,13 @@ class ClientsController extends Controller
 
         }else{
             if(\Illuminate\Support\Facades\Request::segment(2) == $this->section)
+
                 $model = $this->repo->listAllWhere($this->section,['prospecto' => 0]);
             else
                 $model = $this->repo->listAllWhere($this->section,['prospecto' => 1]);
-        }
 
+        }
+       
         //guarda en session lo que se busco para exportar
 //        Session::put('export',collect(['model' => $model->get(), 'section' => config('models.'.$this->section.'.sectionName'),'company' => Branches::find(Auth::user()->branches_active_id)->company]));
 
