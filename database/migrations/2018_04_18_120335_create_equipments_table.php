@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersStatesTable extends Migration
+class CreateEquipmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateOrdersStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordenes_estados', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('orders_id');
-            $table->integer('states_id');
-            $table->integer('user_id');
-            
+        Schema::create('equipments', function (Blueprint $table) {
+
+            $table->increments('id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->string('name');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateOrdersStatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ordenes_estados');
+        Schema::drop('equipments');
     }
 }

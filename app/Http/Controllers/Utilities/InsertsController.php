@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
-
+use App\Entities\Admin\Brands;
+use App\Entities\Admin\Models;
 
 class InsertsController extends Controller
 {
@@ -1967,5 +1967,146 @@ class InsertsController extends Controller
 		}
 		
 		dd('clientes insertados');   	
+   	}
+
+
+   	public function brands(){
+   		 $marca = array(
+          array('id' => '12','name' => 'Acer'),
+          array('id' => '2','name' => 'samsung'),
+          array('id' => '3','name' => 'blackberry'),
+          array('id' => '4','name' => 'nokia'),
+          array('id' => '5','name' => 'motorola'),
+          array('id' => '6','name' => 'htc'),
+          array('id' => '7','name' => 'sony'),
+          array('id' => '9','name' => 'ibm'),
+          array('id' => '10','name' => 'gigaset'),
+          array('id' => '11','name' => 'Apple')
+        );
+        
+        Brands::insert($marca);
+
+   	}
+
+   	public function models(){
+   		$modelos = array(
+		  array('id' => '3','brands_id' => '11','name' => 'iPhone 3G 8GB'),
+		  array('id' => '4','brands_id' => '11','name' => 'iPhone 3G 16GB'),
+		  array('id' => '5','brands_id' => '11','name' => 'iPhone 3G 32GB'),
+		  array('id' => '6','brands_id' => '11','name' => 'iPhone 3GS 8GB'),
+		  array('id' => '7','brands_id' => '11','name' => 'iPhone 3GS 16GB'),
+		  array('id' => '8','brands_id' => '11','name' => 'iPhone 3GS 32GB'),
+		  array('id' => '9','brands_id' => '11','name' => 'iPhone 4G 8GB'),
+		  array('id' => '10','brands_id' => '11','name' => 'iPhone 4G 16GB'),
+		  array('id' => '11','brands_id' => '11','name' => 'iPhone 4G 32GB'),
+		  array('id' => '12','brands_id' => '11','name' => 'iPhone 4S 8GB'),
+		  array('id' => '13','brands_id' => '11','name' => 'iPhone 4S 16GB'),
+		  array('id' => '14','brands_id' => '11','name' => 'iPhone 4S 32GB'),
+		  array('id' => '15','brands_id' => '11','name' => 'iPhone 4S 64GB'),
+		  array('id' => '16','brands_id' => '11','name' => 'iPhone 5G 16GB'),
+		  array('id' => '17','brands_id' => '11','name' => 'iPhone 5G  32GB'),
+		  array('id' => '18','brands_id' => '11','name' => 'iPhone 5G 64GB'),
+		  array('id' => '19','brands_id' => '11','name' => 'iPhone 5C 16GB'),
+		  array('id' => '20','brands_id' => '11','name' => 'iPhone 5C 32GB'),
+		  array('id' => '21','brands_id' => '11','name' => 'iPhone 5C 64GB'),
+		  array('id' => '22','brands_id' => '11','name' => 'iPhone 5S 16GB'),
+		  array('id' => '23','brands_id' => '11','name' => 'iPhone 5S 32GB'),
+		  array('id' => '24','brands_id' => '11','name' => 'iPhone 5S 64GB'),
+		  array('id' => '25','brands_id' => '11','name' => 'iPod TOUCH 4G 8GB'),
+		  array('id' => '26','brands_id' => '11','name' => 'iPod TOUCH 4G 16GB'),
+		  array('id' => '27','brands_id' => '11','name' => 'iPod TOUCH 4G 32GB'),
+		  array('id' => '28','brands_id' => '11','name' => 'iPod TOUCH 4G 64GB'),
+		  array('id' => '29','brands_id' => '11','name' => 'iPod NANO 6G 8GB'),
+		  array('id' => '30','brands_id' => '11','name' => 'iPod NANO 6G 16GB'),
+		  array('id' => '31','brands_id' => '11','name' => 'iPad 2G 16GB'),
+		  array('id' => '32','brands_id' => '11','name' => 'iPad 2G 32GB'),
+		  array('id' => '33','brands_id' => '11','name' => 'iPad 2G 64GB'),
+		  array('id' => '34','brands_id' => '11','name' => 'iPad 2G 16GB 3G'),
+		  array('id' => '35','brands_id' => '11','name' => 'iPad 2G 32GB 3G'),
+		  array('id' => '36','brands_id' => '11','name' => 'iPad 2G 64GB 3G'),
+		  array('id' => '37','brands_id' => '11','name' => 'iPad 3G 16GB 3G'),
+		  array('id' => '38','brands_id' => '11','name' => 'iPad 3G 32GB 3G'),
+		  array('id' => '39','brands_id' => '11','name' => 'iPad 3G 64GB 3G'),
+		  array('id' => '40','brands_id' => '11','name' => 'iPad 3G 16GB  '),
+		  array('id' => '41','brands_id' => '11','name' => 'iPad 3G 32GB  '),
+		  array('id' => '42','brands_id' => '11','name' => 'iPad 3G 64GB  '),
+		  array('id' => '43','brands_id' => '11','name' => 'iPad 4G 16GB  '),
+		  array('id' => '44','brands_id' => '11','name' => 'iPad 4G 32GB  '),
+		  array('id' => '45','brands_id' => '11','name' => 'iPad 4G 64GB  '),
+		  array('id' => '46','brands_id' => '11','name' => 'iPad 4G 16GB  3G'),
+		  array('id' => '47','brands_id' => '11','name' => 'iPad 4G 32GB  3G'),
+		  array('id' => '48','brands_id' => '11','name' => 'iPad 4G 64GB  3G'),
+		  array('id' => '49','brands_id' => '3','name' => '8350i'),
+		  array('id' => '50','brands_id' => '3','name' => '8520'),
+		  array('id' => '51','brands_id' => '3','name' => '8900'),
+		  array('id' => '52','brands_id' => '3','name' => '9300'),
+		  array('id' => '53','brands_id' => '3','name' => '9500 '),
+		  array('id' => '54','brands_id' => '3','name' => '9530'),
+		  array('id' => '55','brands_id' => '3','name' => '9520'),
+		  array('id' => '56','brands_id' => '3','name' => '9550'),
+		  array('id' => '57','brands_id' => '3','name' => '9700'),
+		  array('id' => '58','brands_id' => '3','name' => '9780'),
+		  array('id' => '59','brands_id' => '3','name' => '9800'),
+		  array('id' => '60','brands_id' => '3','name' => '9810'),
+		  array('id' => '61','brands_id' => '3','name' => '9900'),
+		  array('id' => '62','brands_id' => '3','name' => '9320'),
+		  array('id' => '63','brands_id' => '3','name' => '9790'),
+		  array('id' => '64','brands_id' => '3','name' => '9360'),
+		  array('id' => '65','brands_id' => '3','name' => 'Q10'),
+		  array('id' => '66','brands_id' => '3','name' => 'Z10'),
+		  array('id' => '67','brands_id' => '3','name' => '9380'),
+		  array('id' => '68','brands_id' => '11','name' => 'iPad MINI 16GB'),
+		  array('id' => '69','brands_id' => '11','name' => 'iPad MINI 32GB'),
+		  array('id' => '70','brands_id' => '11','name' => 'iPad MINI 64GB'),
+		  array('id' => '71','brands_id' => '2','name' => 'S2'),
+		  array('id' => '72','brands_id' => '2','name' => 'S3'),
+		  array('id' => '73','brands_id' => '2','name' => 'S4'),
+		  array('id' => '74','brands_id' => '2','name' => 'Note 1'),
+		  array('id' => '75','brands_id' => '2','name' => 'Note 2'),
+		  array('id' => '76','brands_id' => '2','name' => 'Note 3'),
+		  array('id' => '77','brands_id' => '2','name' => 'S3 Mini'),
+		  array('id' => '78','brands_id' => '2','name' => 'S4 Mini'),
+		  array('id' => '79','brands_id' => '11','name' => 'iPad 4S'),
+		  array('id' => '80','brands_id' => '11','name' => 'iPhone 4G'),
+		  array('id' => '81','brands_id' => '11','name' => 'iPhone 3G'),
+		  array('id' => '82','brands_id' => '11','name' => 'iPhone 3GS'),
+		  array('id' => '83','brands_id' => '11','name' => 'iPhone 5G'),
+		  array('id' => '84','brands_id' => '11','name' => 'iPhone 5S'),
+		  array('id' => '86','brands_id' => '11','name' => 'iPad 3G'),
+		  array('id' => '87','brands_id' => '11','name' => 'iPad 2G'),
+		  array('id' => '88','brands_id' => '11','name' => 'iPad 1G'),
+		  array('id' => '89','brands_id' => '11','name' => 'iPad 4G'),
+		  array('id' => '90','brands_id' => '11','name' => 'iPad 4G 3G'),
+		  array('id' => '91','brands_id' => '11','name' => 'iPod TOUCH 5G'),
+		  array('id' => '92','brands_id' => '11','name' => 'iPod NANO'),
+		  array('id' => '93','brands_id' => '2','name' => 's5'),
+		  array('id' => '94','brands_id' => '2','name' => 'core i8260'),
+		  array('id' => '95','brands_id' => '2','name' => 'fame s6810'),
+		  array('id' => '96','brands_id' => '2','name' => 'trend s7560'),
+		  array('id' => '97','brands_id' => '2','name' => 'win i8550'),
+		  array('id' => '98','brands_id' => '2','name' => 'advance i9070'),
+		  array('id' => '99','brands_id' => '11','name' => 'iPod Video'),
+		  array('id' => '100','brands_id' => '11','name' => 'iPod Classic'),
+		  array('id' => '101','brands_id' => '11','name' => 'Macbook Pro'),
+		  array('id' => '102','brands_id' => '11','name' => 'Macbook air'),
+		  array('id' => '103','brands_id' => '11','name' => 'Macbook White'),
+		  array('id' => '104','brands_id' => '11','name' => 'iPhone 6'),
+		  array('id' => '105','brands_id' => '11','name' => 'iPhone 6 Plus'),
+		  array('id' => '106','brands_id' => '11','name' => 'iPhone 6 16GB'),
+		  array('id' => '107','brands_id' => '11','name' => 'iPhone 6 64GB'),
+		  array('id' => '108','brands_id' => '11','name' => 'iPhone 6 128GB'),
+		  array('id' => '109','brands_id' => '11','name' => 'iPhone 6 Plus 16GB'),
+		  array('id' => '121','brands_id' => '11','name' => 'iPhone 6 Plus 64GB'),
+		  array('id' => '111','brands_id' => '11','name' => 'iPhone 6 Plus 128GB'),
+		  array('id' => '112','brands_id' => '11','name' => 'iPhone 6S'),
+		  array('id' => '113','brands_id' => '11','name' => 'iPhone 6S 16GB'),
+		  array('id' => '114','brands_id' => '11','name' => 'iPhone 6S 64GB'),
+		  array('id' => '115','brands_id' => '11','name' => 'iPhone 6S 128GB'),
+		  array('id' => '116','brands_id' => '11','name' => 'iPhone 6S Plus 128GB'),
+		  array('id' => '117','brands_id' => '11','name' => 'iPhone 6S Plus 64GB'),
+		  array('id' => '118','brands_id' => '11','name' => 'iPhone 6S Plus 16GB')
+		);
+       
+		Models::insert($modelos);
    	}
 }

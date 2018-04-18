@@ -16,7 +16,7 @@ class CreateStatesTable extends Migration
             $table->increments('id');
             $table->string('description');
             $table->string('text_email');
-            $table->string('colour');
+            $table->string('color');
             
             $table->timestamps();
             $table->softDeletes();
