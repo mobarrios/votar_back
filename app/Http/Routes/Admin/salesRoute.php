@@ -1,20 +1,20 @@
 <?php
 
-Route::group(['prefix'=>'sales'],function(){
+Route::group(['prefix' => 'sales'], function () {
 
-        $section =  'sales';
+    $section = 'sales';
 
-        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'admin.sales.destroy','uses'=>'Admin\SalesController@destroy']);
-        Route::get('/edit/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'admin.sales.edit','uses'=>'Admin\SalesController@edit']);
-        Route::post('/update/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'admin.sales.update','uses'=>'Admin\SalesController@update']);
+    Route::get('/destroy/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'admin.sales.destroy', 'uses' => 'Admin\SalesController@destroy']);
+    Route::get('/edit/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'admin.sales.edit', 'uses' => 'Admin\SalesController@edit']);
+    Route::post('/update/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'admin.sales.update', 'uses' => 'Admin\SalesController@update']);
 
-        Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.sales.create','uses'=>'Admin\SalesController@create']);
-        Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.sales.store','uses'=>'Admin\SalesController@store']);
-        Route::post('/storeFromBudgets',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.sales.storeFromBudgets','uses'=>'Admin\SalesController@storeFromBudgets']);
-        Route::get('/show/{id}',             ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.show','uses'=>'Admin\SalesController@show']);
-        Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.index','uses'=>'Admin\SalesController@index']);
+    Route::get('/create', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.create', 'uses' => 'Admin\SalesController@create']);
+    Route::post('/store', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.store', 'uses' => 'Admin\SalesController@store']);
+    Route::post('/storeFromBudgets', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.storeFromBudgets', 'uses' => 'Admin\SalesController@storeFromBudgets']);
+    Route::get('/show/{id}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.show', 'uses' => 'Admin\SalesController@show']);
+    Route::get('/index/{search?}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.index', 'uses' => 'Admin\SalesController@index']);
 
-    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+    Route::get('/pdf', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.pdf', 'uses' => 'Utilities\UtilitiesController@exportListToPdf']);
 
     Route::get('/addItem/{sales_id?}', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.addItems', 'uses' => 'Admin\SalesController@addItems']);
     Route::post('/createItems/{item?}', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.createItems', 'uses' => 'Admin\SalesController@createItems']);
@@ -46,29 +46,24 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/deleteRecibos/{recibo}/{id}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'admin.sales.deleteRecibos', 'uses' => 'Admin\SalesController@deleteRecibos']);
 
 
-
-    Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
-
-
-    Route::get('/showAside',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.showAside','uses'=>'Admin\SalesController@showAside']);
+    Route::get('/pdf/{id}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.pdf', 'uses' => 'Utilities\UtilitiesController@exportToPdf']);
 
 
+    Route::get('/showAside', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.showAside', 'uses' => 'Admin\SalesController@showAside']);
 
 
-    Route::get('/recibo/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);
+    Route::get('/recibo/{id}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.recibo', 'uses' => 'Utilities\UtilitiesController@reciboPdf']);
 
-    Route::get('/factura/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.factura','uses'=>'Utilities\UtilitiesController@facturaPdf']);
+    Route::get('/factura/{id}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.factura', 'uses' => 'Utilities\UtilitiesController@facturaPdf']);
 
-    Route::get('/add/{id?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.sales.modal','uses'=>'Admin\SalesController@modal']);
+    Route::get('/add/{id?}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'admin.sales.modal', 'uses' => 'Admin\SalesController@modal']);
 
 
     //change status
 
-    Route::get('/changeStatus',  ['middleware'=>'permission:'.$section.'.edit','as'=>'admin.sales.changeStatus','uses'=>'Admin\SalesController@changeStatus']);
+    Route::get('/changeStatus', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'admin.sales.changeStatus', 'uses' => 'Admin\SalesController@changeStatus']);
 
-    Route::get('/createBudget/{id}',  ['middleware'=>'permission:'.$section.'.create','as'=>'admin.sales.createBudget','uses'=>'Admin\SalesController@createBudget']);
-
-
+    Route::get('/createBudget/{id}', ['middleware' => 'permission:' . $section . '.create', 'as' => 'admin.sales.createBudget', 'uses' => 'Admin\SalesController@createBudget']);
 
 
 });

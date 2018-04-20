@@ -42,7 +42,8 @@
          return $this->belongsTo(Budgets::class);
      }
 
-    public function Items(){
+    public function Items()
+    {
         return $this->belongsToMany(Items::class,'sales_items')->with('models')->withPivot('price_actual','cant');
     }
 

@@ -21,7 +21,7 @@ class Entity extends Model {
 
     protected $connection =  'mysql';
 
-    public function __construct(array $attributes = [])
+    /*public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
 
@@ -31,7 +31,7 @@ class Entity extends Model {
             Config::set('database.connections.mysql.database', Auth::user()->db);
         //}
     }
-
+*/
 
 
     use SoftDeletes;

@@ -25,10 +25,16 @@ class EntityUser extends Model {
     protected $dates        = ['deleted_at'];
 
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
     public static function getClass()
     {
         return get_class(new static);
     }
+
 
     public function getSectionAttribute()
     {

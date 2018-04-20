@@ -23,12 +23,12 @@ class UsersController extends Controller
         $this->rolesRepo    = $rolesRepo;
         $this->section      = 'users';
 
+
         //data select
         $this->data['roles']    = $rolesRepo->listsData('name','id');
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
 
         $this->data['section'] = $this->section;
-
     }
 
 

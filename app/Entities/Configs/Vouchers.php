@@ -50,7 +50,7 @@
                  break;
              case 'F': return "Factura";
                  break;
-             case 'R': return "Recibo";
+             case 'X': return "Recibo";
                  break;
              case 'RM': return "Remito";
                  break;

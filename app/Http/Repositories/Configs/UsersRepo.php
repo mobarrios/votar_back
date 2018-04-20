@@ -47,6 +47,11 @@ class UsersRepo extends BaseRepo {
 
         return $data->lists('fullName','id');
     }
+
+    public function ListAll($section = null)
+    {
+        return $this->model;
+    }
     
 
 }
