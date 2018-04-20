@@ -16,8 +16,8 @@ class CreateOrdersStatesTable extends Migration
             $table->increments('id');
             $table->integer('orders_id');
             $table->integer('states_id');
-            $table->integer('user_id');
-            
+            $table->integer('users_id');
+            //$table->integer('users_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

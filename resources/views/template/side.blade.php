@@ -158,6 +158,24 @@
                 </li>
             @endpermission
 
+            <li class="treeview {{ in_array(Request::segment(2), ["tecnica"]) ? 'active' : '' }}">
+                    <a href="#">
+                        <i class="fa fa-wrench "></i> <span>Tecnica</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu">
+                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
+                                href="{{route('admin.orders.index')}}"><span>Ordenes</span></a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
+                                href="{{route('admin.orders.index')}}"><span>Estados</span></a></li>
+                    </ul>
+                    
+            </li>
+
 
             @permission('smallboxes.list')
             <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">
