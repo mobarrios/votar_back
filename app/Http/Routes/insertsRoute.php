@@ -7,4 +7,6 @@ Route::group(['prefix'=>'inserts'],function(){
 	Route::get('/models',['uses'=>'Utilities\InsertsController@models']);
 	Route::get('/orders',['uses'=>'Utilities\InsertsController@orders']);
 	Route::get('/states',['uses'=>'Utilities\InsertsController@states']);
+	Route::get('/equipments',['uses'=>'Utilities\InsertsController@equipments']);
+	
 });

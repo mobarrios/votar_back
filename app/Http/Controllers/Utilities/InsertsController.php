@@ -5270,4 +5270,52 @@ class InsertsController extends Controller
         ]); 
 
    	}
+
+
+   	public function equipments(){
+   		DB::table('equipments')->insert([
+            [
+                'id'    => 1,
+                'name' => 'iphone'
+            ],
+            [
+                'id'    => 2,
+                'name' => 'celular'
+            ],
+            [
+                'id'    => 3,
+                'name' => 'notebook'
+            ],
+            [
+                'id'    => 4,
+                'name' => 'pc'
+            ],
+            [
+                'id'    => 5,
+                'name' => 'camara de fotos'
+            ],
+            [
+                'id'    => 6,
+                'name' => 'consola'
+            ],
+            [
+                'id'    => 7,
+                'name' => 'ipad'
+            ],
+            [
+                'id'    => 8,
+                'name' => 'ipod'
+            ],
+            [
+                'id'    => 9,
+                'name' => 'tableta'
+            ],
+            [
+                'id'    => 10,
+                'name' => 'imac'
+            ],
+
+        ]);   
+
+   	}
 }

@@ -32,6 +32,7 @@
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
+                    
                       Codigo Cliente : {{ isset($models->Cliente->id) ? $models->Cliente->id : '' }}
                       <br>
                       Apellido y Nombre : {{ isset($models->Cliente->fullname) ? $models->Cliente->fullname : '' }}

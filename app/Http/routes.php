@@ -50,8 +50,8 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Admin/checkbooksRoute.php');
         require(__DIR__ . '/Routes/Admin/profilesRoute.php');
         require(__DIR__ . '/Routes/Tecnica/ordersRoute.php');
+        require(__DIR__ . '/Routes/Tecnica/statesRoute.php');
         
-       
         //require(__DIR__ . '/Routes/Tecnica/ordersRoute.php');
     });
 

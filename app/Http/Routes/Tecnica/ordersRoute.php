@@ -16,7 +16,7 @@ Route::group(['prefix'=>'orders'],function(){
         Route::get('/index/{search?}',  ['as'=>'admin.orders.index','uses'=>'Tecnica\OrdersController@index']);
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.orders.pdf','uses'=>'Tecnica\OrdersController@exportListToPdf']);
         Route::get('/detail/{id?}',       ['as'=>'admin.orders.details','uses'=>'Tecnica\OrdersController@detail']);
-         Route::get('/show',             ['as'=>'ordenes.reporte','uses'=>'Tecnica\OrdersController@show']);
+        Route::get('/show',             ['as'=>'ordenes.reporte','uses'=>'Tecnica\OrdersController@show']);
 	/*
         detail
 	Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'admin.orders.destroy','uses'=>'Tecnica\OrdersController@destroy']);
