@@ -88,7 +88,6 @@ class SalesController extends Controller
 
         $this->data['provincias'] = $provinciasRepo->listAll()->get();
 
-        //$this->data['mecanicos'] = Role::find(3)->users->lists('user_name','id');
 
         $this->data['status'] = config('status.sales') ;
 

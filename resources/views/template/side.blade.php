@@ -92,71 +92,23 @@
             </li>
             @endpermission
 
-            @permission('providers.list|purchasesorders.list|dispatches.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["providers","purchasesListsPrices","purchasesOrders","purchasesOrders","dispatches"]) ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-industry "></i> <span>Compras</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-          </span>
-                </a>
-                <ul class="treeview-menu">
-                    @permission('providers.list')
-                    <li class={{ Request::segment(2) == "providers" ? 'active' : '' }}><a
-                                href="{{route('admin.providers.index')}}"><span> Proveedores</span></a></li>
-                    @endpermission
-                    {{--
-                    @permission('modelslistsprices.list')
-                    <li class={{ Request::segment(2) == "purchasesListsPrices" ? 'active' : '' }}><a
-                                href="{{route('admin.purchasesListsPrices.index')}}"><span> Listas de Precios Compra</span></a>
-                    </li>
-                    @endpermission
-                    --}}
-                    @permission('purchasesorders.list')
-                    <li class={{ Request::segment(2) == "purchasesOrders" ? 'active' : '' }}><a
-                                href="{{route('admin.purchasesOrders.index')}}"><span>Perdidos de Mercaderias</span></a>
-                    </li>
-                    @endpermission
-                    {{--
-                    @permission('purchasesorders.list')
-                    <li class={{ Request::segment(2) == '' ? 'active' : '' }}><a href=""><span>Notas de Pedidos</span></a></li>
-                    @endpermission
-                    --}}
-                    @permission('dispatches.list')
-                    <li class={{ Request::segment(2) == "dispatches" ? 'active' : '' }}><a
-                                href="{{route('admin.dispatches.index')}}"><span>Remitos</span></a></li>
-                    @endpermission
-
-                </ul>
-            </li>
-            @endpermission
-
-            @permission('sales.list|vouchers.list')
-                <li class="treeview {{ in_array(Request::segment(2), ["sales","vouchers","budgets"]) ? 'active' : '' }}">
+            <li class="treeview {{ in_array(Request::segment(2), ["tecnica"]) ? 'active' : '' }}">
                     <a href="#">
-                        <i class="fa fa-shopping-cart "></i> <span>Ventas</span>
+                        <i class="fa fa-wrench "></i> <span>Tecnica</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                       </span>
                     </a>
                     <ul class="treeview-menu">
-                        {{--@permission('budgets.list')--}}
-                        {{--<li class={{ Request::segment(2) == "budgets" ? 'active' : '' }}><a--}}
-                                    {{--href="{{route('admin.budgets.index')}}"><span>Presupuestos</span></a></li>--}}
-                        {{--@endpermission--}}
-                        @permission('sales.list')
-                        <li class={{ Request::segment(2) == "sales" ? 'active' : '' }}><a
-                                    href="{{route('admin.sales.index')}}"><span>Ventas</span></a></li>
-                        @endpermission
-
-                        @permission('vouchers.list')
-                        <li class={{ Request::segment(2) == "vouchers" ? 'active' : '' }}><a
-                                    href="{{route('configs.vouchers.index')}}"><span>Comprobantes</span></a></li>
-                        @endpermission
-
+                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
+                                href="{{route('admin.orders.index')}}"><span>Ordenes</span></a></li>
                     </ul>
-                </li>
-            @endpermission
+                    <ul class="treeview-menu">
+                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
+                                href="{{route('admin.states.index')}}"><span>Estados</span></a></li>
+                    </ul>
+                    
+            </li>
 
 
             @permission('smallboxes.list')

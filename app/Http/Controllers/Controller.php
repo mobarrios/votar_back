@@ -24,7 +24,8 @@ abstract class Controller extends BaseController
     protected $section;
     
     public function index()
-    {
+    {   
+        
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
 
@@ -41,7 +42,7 @@ abstract class Controller extends BaseController
         {
             $model  = $this->repo->listAll($this->section);
         }
-
+        
 
         //guarda en session lo que se busco para exportar
 //        Session::put('export',$model->get());
@@ -52,7 +53,6 @@ abstract class Controller extends BaseController
 
         //pagina el query
         $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
-
 
         //return view($this->getConfig()->indexRoute)->with($this->data);
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
