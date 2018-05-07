@@ -71,6 +71,20 @@
 @if(Auth::user())
 <script>
 
+
+
+    $('.menu').on('click',function ()
+    {
+        localStorage.clear();
+        localStorage.active = $(this).text() ;
+    });
+
+    $('.menu').each(function(){
+        if($(this).text() == localStorage.active)
+            $(this).parent().parent().addClass('active');
+            $(this).parent().parent().parent().parent().addClass('active');
+    });
+
     $('.table').addClass('table-striped  table-hover');
 
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};

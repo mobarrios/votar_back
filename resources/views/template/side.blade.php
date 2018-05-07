@@ -6,17 +6,14 @@
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
 
-            <li class="{{ Request::is('home') ? 'active' : '' }}">
+            <li>
                 <a href="{{route('home')}}">
                     <i class="fa fa-home"></i> <span>Home </span>
-                    <span class="pull-right-container">
-                        <small class="label pull-right bg-green">1</small>
-                    </span>
                 </a>
             </li>
 
             @permission('clients.list|budgets.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos"]) ? 'active' : ''  }}">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group "></i> <span>Clientes</span>
                     <span class="pull-right-container">
@@ -25,8 +22,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @permission('clients.list')
-                         <li class={{ Request::segment(2) == "clients" ? 'active' : '' }}><a
-                                href="{{route('admin.clients.index')}}"><span>Lista de Clientes</span></a></li>
+                         <li><a href="{{route('admin.clients.index')}}"><span class="menu">Lista de Clientes</span></a></li>
                     {{--<li class={{ Request::segment(2) == "prospectos" ? 'active' : '' }}><a--}}
                                 {{--href="{{route('admin.prospectos.index')}}"><span>Lista de Prospectos</span></a></li>--}}
                     @endpermission
@@ -36,7 +32,7 @@
 
 
             @permission('items.list|modelslistsprices.list|additionals.list | brands.list | categories.list | models.list | colors.list | additionals.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["items","modelsListsPrices"]) ? 'active' : '' }}">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-briefcase "></i> <span>Articulos</span>
                 <span class="pull-right-container">
@@ -46,8 +42,7 @@
                 <ul class="treeview-menu">
 
                     @permission('items.list')
-                    <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
-                                href="{{route('admin.items.index')}}"><span>Stock</span></a></li>
+                    <li ><a href="{{route('admin.items.index')}}"><span class="menu" >Stock</span></a></li>
                     @endpermission
                     @permission('modelslistsprices.list')
                     <li class={{ Request::segment(2) == "modelsListsPrices" ? 'active' : '' }}><a
@@ -91,25 +86,6 @@
                 </ul>
             </li>
             @endpermission
-
-            <li class="treeview {{ in_array(Request::segment(2), ["tecnica"]) ? 'active' : '' }}">
-                    <a href="#">
-                        <i class="fa fa-wrench "></i> <span>Tecnica</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                      </span>
-                    </a>
-                    <ul class="treeview-menu">
-                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
-                                href="{{route('admin.orders.index')}}"><span>Ordenes</span></a></li>
-                    </ul>
-                    <ul class="treeview-menu">
-                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
-                                href="{{route('admin.states.index')}}"><span>Estados</span></a></li>
-                    </ul>
-                    
-            </li>
-
 
             @permission('smallboxes.list')
             <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">
@@ -184,3 +160,5 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+
+
