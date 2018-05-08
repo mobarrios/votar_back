@@ -30,12 +30,11 @@ class DatabaseSeeder extends Seeder
         $this->call(BanksTableSeeder::class);
         //$this->call(AdditionalsTableSeeder::class);
 
-
         $this->call(BrandsSeeders::class);
         $this->call(CategoriesSeeders::class);
-        //$this->call(ColorsSeeders::class);
+        $this->call(ColorsSeeders::class);
         $this->call(ModelsPruebaSeeders::class);
-        //$this->call(SizesSeeders::class);
+        $this->call(SizesSeeders::class);
 
 
         //branches

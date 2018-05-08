@@ -71,16 +71,83 @@
                             <li ><a class="menu"
                                         href="{{route('admin.models.index')}}"><span> Modelos</span></a></li>
                             @endpermission
-                            {{--@permission('colors.list')--}}
-                            {{--<li class={{ Request::segment(2) == "colors" ? 'active' : '' }}><a--}}
-                            {{--href="{{route('admin.colors.index')}}"><span> Colores</span></a></li>--}}
-                            {{--@endpermission--}}
+                            @permission('colors.list')
+                            <li><a class="menu"
+                            href="{{route('admin.colors.index')}}"><span> Colores</span></a></li>
+                            @endpermission
                             {{--@permission('additionals.list')--}}
                             {{--<li class={{ Request::segment(2) == "additionals" ? 'active' : '' }}><a--}}
                             {{--href="{{route('configs.additionals.index')}}"><span> Adicionales</span></a></li>--}}
                             {{--@endpermission--}}
                         </ul>
                     </li>
+                    @endpermission
+
+                </ul>
+            </li>
+            @endpermission
+
+
+            @permission('providers.list|purchasesorders.list|dispatches.list')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-industry "></i> <span>Compras</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+                </a>
+                <ul class="treeview-menu">
+                    @permission('providers.list')
+                    <li><a class="menu"
+                                href="{{route('admin.providers.index')}}"><span> Proveedores</span></a></li>
+                    @endpermission
+                    {{--
+                    @permission('modelslistsprices.list')
+                    <li class={{ Request::segment(2) == "purchasesListsPrices" ? 'active' : '' }}><a
+                                href="{{route('admin.purchasesListsPrices.index')}}"><span> Listas de Precios Compra</span></a>
+                    </li>
+                    @endpermission
+                    --}}
+                    @permission('purchasesorders.list')
+                    <li ><a class="menu"
+                                href="{{route('admin.purchasesOrders.index')}}"><span>Perdidos de Mercaderias</span></a>
+                    </li>
+                    @endpermission
+                    {{--
+                    @permission('purchasesorders.list')
+                    <li class={{ Request::segment(2) == '' ? 'active' : '' }}><a href=""><span>Notas de Pedidos</span></a></li>
+                    @endpermission
+                    --}}
+                    @permission('dispatches.list')
+                    <li ><a class="menu"
+                                href="{{route('admin.dispatches.index')}}"><span>Remitos</span></a></li>
+                    @endpermission
+
+                </ul>
+            </li>
+            @endpermission
+
+            @permission('sales.list|vouchers.list')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-shopping-cart "></i> <span>Ventas</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                </a>
+                <ul class="treeview-menu">
+                    {{--@permission('budgets.list')--}}
+                    {{--<li class={{ Request::segment(2) == "budgets" ? 'active' : '' }}><a--}}
+                    {{--href="{{route('admin.budgets.index')}}"><span>Presupuestos</span></a></li>--}}
+                    {{--@endpermission--}}
+                    @permission('sales.list')
+                    <li><a class="menu"
+                                href="{{route('admin.sales.index')}}"><span>Ventas</span></a></li>
+                    @endpermission
+
+                    @permission('vouchers.list')
+                    <li><a class="menu"
+                                href="{{route('configs.vouchers.index')}}"><span>Comprobantes</span></a></li>
                     @endpermission
 
                 </ul>

@@ -15,7 +15,7 @@ class CompanySeeders extends Seeder
                 [
                     'id' => 1,
                     'razon_social' => 'Razon Social A',
-                    'nombre_fantasia' => 'Fantasia A',
+                    'nombre_fantasia' => 'N Fantasia A',
                     'direccion' => 'Av. Balbin 486, San Miguel , Buenos Aires',
                     'telefono' => '11 4444 4444',
                     'cuit' => '2311111119',
@@ -25,9 +25,9 @@ class CompanySeeders extends Seeder
 
                 ], [
                     'id' => 2,
-                    'razon_social' => 'Razon Social A',
-                    'nombre_fantasia' => 'Fantasia A',
-                    'direccion' => 'Av. Ricardo Balbin, 451 , SAN MIGUEL, BUENOS AIRES',
+                    'razon_social' => 'Razon Social B',
+                    'nombre_fantasia' => 'N Fantasia B',
+                    'direccion' => 'Av. Ricardo Balbin, 422 , SAN MIGUEL, BUENOS AIRES',
                     'telefono' => '1144443222',
                     'cuit' => '3311111119',
                     'iva_conditions_id' => 1,

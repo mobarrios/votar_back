@@ -20,8 +20,8 @@ class ColorsSeeders extends Seeder
             'name'=>'Negro',
         ],
                 [
-                    'id'    => 3,
-                    'name'=>'Azul',
+                    'id' => 3,
+                    'name' => 'Azul',
                 ]
             ]
         );

@@ -28,13 +28,13 @@ class BranchSeeders extends Seeder
                     'address'=> 'Ruta 8',
                 ],
 
-                [
+                /*[
                     'id' => 3,
                     'name' => 'Sucursal 2',
                     'company_id' => 2,
                     'punto_venta' => '001',
                     'address'=> 'AV. RIVADAVIA 18175, MORON ',
-                ]
+                ]*/
                 
             ]
         );
