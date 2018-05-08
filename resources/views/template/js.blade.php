@@ -72,18 +72,19 @@
 <script>
 
 
+        // guarda en localstorage el nombre del menu para luego volver a abrirlo
+        var menu = localStorage.getItem('menu');
 
-    $('.menu').on('click',function ()
-    {
-        localStorage.clear();
-        localStorage.active = $(this).text() ;
-    });
+        $('.sidebar-menu li a').each(function(){
+        if($(this).text() == menu)
+        $(this).parents().addClass('active');
+        });
 
-    $('.menu').each(function(){
-        if($(this).text() == localStorage.active)
-            $(this).parent().parent().addClass('active');
-            $(this).parent().parent().parent().parent().addClass('active');
-    });
+
+        $('.menu').on('click',function()
+        {
+        localStorage.setItem('menu',$(this).text());
+        });
 
     $('.table').addClass('table-striped  table-hover');
 
