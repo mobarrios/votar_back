@@ -26,6 +26,8 @@ class CreateCompanyTable extends Migration
             $table->integer('iva_conditions_id');
             $table->string('inicio_actividades');
             $table->string('ingresos_brutos');
+            $table->tinyInteger('fe');
+
 
 
         });
