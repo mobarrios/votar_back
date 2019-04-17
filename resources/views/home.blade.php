@@ -6,12 +6,14 @@
 
 
         <!-- Default box -->
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-2">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="{!! Auth::user()->images ? Auth::user()->images->path : "vendors/LTE/dist/img/avatar5.png"!!}" alt="User profile picture">
 
-                    <h3 class="profile-username text-center"><a href="{!! route('admin.profiles.index') !!}">{{\Illuminate\Support\Facades\Auth::user()->fullName}}</a></h3>
+                    <h3 class="profile-username text-center">
+                        <a href="{!! route('admin.profiles.index') !!}">{{\Illuminate\Support\Facades\Auth::user()->fullName}}</a>
+                    </h3>
 
                     <p class="text-center ">
                         <span class="text-muted">Perfil : </span>
@@ -20,19 +22,19 @@
                             <label class=" label label-primary"> {{$rol->slug}}</label>
                         @endforeach
                     </p>
-                    <span >
+                    {{-- <span >
                         <span class="text-muted">Sucursales : </span>
                       @foreach(\Illuminate\Support\Facades\Auth::user()->brancheables as $branch)
                         <label class=" label label-default">{{$branch->branches->name}}</label>
                       @endforeach
-                    </span>
+                    </span> --}}
 
                 </div>
 
             </div>
         </div>
 
-        <div class="col-sm-3 col-xs-12">
+        {{-- <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
@@ -54,9 +56,9 @@
                     </div>
                 {!! Form::close() !!}
             </div>
-        </div>
+        </div> --}}
 
-        <div class="col-sm-3 col-xs-12">
+        {{-- <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-red-active">
                 <div class="inner">
@@ -68,9 +70,9 @@
                 </div>
                 <a href="{{route('admin.sales.create')}}" class="small-box-footer">Nueva Venta <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="col-sm-3 col-xs-12">
+        {{-- <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-orange ">
                 <div class="inner">
@@ -82,7 +84,7 @@
                 </div>
                 <a href="{{route('admin.models.index')}}" class="small-box-footer">ir a Lista  <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div> --}}
 
 
     </div>

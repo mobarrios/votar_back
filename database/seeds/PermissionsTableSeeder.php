@@ -880,7 +880,134 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'additionals.destroy',
                     'model' => '',
                 ],
+                //opertivos
+                [
+                    'id'    => 136,
+                    'name' => 'Listar Operativos',
+                    'slug' => 'operativos.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 137,
+                    'name' => 'Crear Operativos',
+                    'slug' => 'operativos.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 138,
+                    'name' => 'Editar Operativos',
+                    'slug' => 'operativos.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 139,
+                    'name' => 'Borrar Operativos',
+                    'slug' => 'operativos.destroy',
+                    'model' => '',
+                ],
 
+                //escuelas
+                [
+                    'id'    => 140,
+                    'name' => 'Listar Escuelas',
+                    'slug' => 'escuelas.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 141,
+                    'name' => 'Crear Escuelas',
+                    'slug' => 'escuelas.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 142,
+                    'name' => 'Editar Escuelas',
+                    'slug' => 'escuelas.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 143,
+                    'name' => 'Borrar Escuelas',
+                    'slug' => 'escuelas.destroy',
+                    'model' => '',
+                ],
+                //mesas
+                [
+                    'id'    => 144,
+                    'name' => 'Listar Mesas',
+                    'slug' => 'mesas.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 145,
+                    'name' => 'Crear Mesas',
+                    'slug' => 'mesas.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 146,
+                    'name' => 'Editar Mesas',
+                    'slug' => 'mesas.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 147,
+                    'name' => 'Borrar Mesas',
+                    'slug' => 'mesas.destroy',
+                    'model' => '',
+                ],
+
+                //partidos
+                [
+                    'id'    => 148,
+                    'name' => 'Listar Partidos',
+                    'slug' => 'partidos.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 149,
+                    'name' => 'Crear Partidos',
+                    'slug' => 'partidos.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 150,
+                    'name' => 'Editar Partidos',
+                    'slug' => 'partidos.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 151,
+                    'name' => 'Borrar Partidos',
+                    'slug' => 'partidos.destroy',
+                    'model' => '',
+                ],
+
+                //candidatos
+                [
+                    'id'    => 152,
+                    'name' => 'Listar Candidatos',
+                    'slug' => 'candidatos.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 153,
+                    'name' => 'Crear Candidatos',
+                    'slug' => 'candidatos.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 154,
+                    'name' => 'Editar Candidatos',
+                    'slug' => 'candidatos.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 155,
+                    'name' => 'Borrar Candidatos',
+                    'slug' => 'candidatos.destroy',
+                    'model' => '',
+                ],
             ]);
     }
 }

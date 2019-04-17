@@ -31,24 +31,33 @@ Route::group(['middleware'=>'auth'],function(){
 
         require(__DIR__ . '/Routes/Admin/ajaxRoute.php');
         
-        require(__DIR__ . '/Routes/Admin/budgetsRoute.php');
-        require(__DIR__ . '/Routes/Admin/brandsRoute.php');
-        require(__DIR__ . '/Routes/Admin/clientsRoute.php');
-        require(__DIR__ . '/Routes/Admin/categoriesRoute.php');
-        require(__DIR__ . '/Routes/Admin/colorsRoute.php');
-        require(__DIR__ . '/Routes/Admin/dispatchesRoute.php');
-        require(__DIR__ . '/Routes/Admin/financialsRoute.php');
-        require(__DIR__ . '/Routes/Admin/itemsRoute.php');
-        require(__DIR__ . '/Routes/Admin/modelsRoute.php');
-        require(__DIR__ . '/Routes/Admin/modelsListsPricesRoute.php');
-        require(__DIR__ . '/Routes/Admin/payMethodsRoutes.php');
-        require(__DIR__ . '/Routes/Admin/purchasesListsPricesRoute.php');
-        require(__DIR__ . '/Routes/Admin/purchasesOrdersRoute.php');
-        require(__DIR__ . '/Routes/Admin/providersRoute.php');
-        require(__DIR__ . '/Routes/Admin/salesRoute.php');
-        require(__DIR__ . '/Routes/Admin/smallBoxesRoute.php');
-        require(__DIR__ . '/Routes/Admin/checkbooksRoute.php');
+        // require(__DIR__ . '/Routes/Admin/budgetsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/brandsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/clientsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/categoriesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/colorsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/dispatchesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/financialsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/itemsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/modelsRoute.php');
+        // require(__DIR__ . '/Routes/Admin/modelsListsPricesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/payMethodsRoutes.php');
+        // require(__DIR__ . '/Routes/Admin/purchasesListsPricesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/purchasesOrdersRoute.php');
+        // require(__DIR__ . '/Routes/Admin/providersRoute.php');
+        // require(__DIR__ . '/Routes/Admin/salesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/smallBoxesRoute.php');
+        // require(__DIR__ . '/Routes/Admin/checkbooksRoute.php');
         require(__DIR__ . '/Routes/Admin/profilesRoute.php');
+
+        require(__DIR__ . '/Routes/Admin/operativosRoute.php');
+        require(__DIR__ . '/Routes/Admin/escuelasRoute.php');
+        require(__DIR__ . '/Routes/Admin/mesasRoute.php');
+        require(__DIR__ . '/Routes/Admin/partidosRoute.php');
+        require(__DIR__ . '/Routes/Admin/candidatosRoute.php');
+
+
+        
 
     });
 
