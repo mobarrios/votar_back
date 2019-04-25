@@ -10,7 +10,7 @@ class ApiController extends Controller
 
     public function getUsers()
     {
-        $res = collect('results');
+        $res = collect();
 
 
     $res->push([
@@ -28,7 +28,7 @@ class ApiController extends Controller
        
 
         
-        return response()->json($res,200);
+        return response()->json(['results'=>$res],200);
 
     }
 
