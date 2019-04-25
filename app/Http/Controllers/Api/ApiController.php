@@ -14,7 +14,7 @@ class ApiController extends Controller
 
     public function getOperativos(OperativosRepo $operativosRepo)
     {
-        $res =  $operativosRepo->getModel()->all();
+        $res =  $operativosRepo->getModel()->with('Escuelas')->with('Escuelas.Mesas')->get();
     
         return response()->json(['results'=>$res],200);
     }
