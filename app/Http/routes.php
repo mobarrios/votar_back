@@ -11,6 +11,12 @@
 |
 */
 
+// API para ecommerce
+Route::group(['middleware'=>'cors','prefix'=>'api'],function(){
+    require(__DIR__ . '/Routes/Api/apiRoute.php');
+});
+
+
 
 Route::get('fe','\App\Http\Controllers\Configs\VouchersController@store');
 
