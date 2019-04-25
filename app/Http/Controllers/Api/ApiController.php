@@ -10,23 +10,25 @@ class ApiController extends Controller
 
     public function getUsers()
     {
-        $resultado['results'] =[] ;
+        $res = collect('results');
 
-            array_push($resultado,[
-                [
-                    'nombre'=>'pepe',
-                    'apellido'=>'argento',
-                    'email' => 'mno@das.dcom'
-                ] ,
-                [
-                    'nombre'=>'Juan',
-                    'apellido'=>'Perez',
-                    'email' => '1231@das.dcom'
-                ] 
-                ]);
+
+    $res->push([
+        'nombre'=>'pepe',
+        'apellido'=>'argento',
+        'email' => 'mno@das.dcom'
+    ]);
+    $res->push([
+        'nombre'=>'Juan',
+        'apellido'=>'Perez',
+        'email' => '1231@das.dcom'
+    ]);
+
+
+       
 
         
-        return response()->json($resultado,200);
+        return response()->json($res,200);
 
     }
 
