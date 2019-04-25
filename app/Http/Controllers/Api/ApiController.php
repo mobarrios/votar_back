@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 
-class CandidatosController extends Controller
+class ApiController extends Controller
 {
 
     public function getUsers()
