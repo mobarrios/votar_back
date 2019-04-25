@@ -12,6 +12,11 @@
      protected $fillable = ['nombre','direccion','observaciones'];
 
      protected $section = 'escuelas';
+
+     public function Mesas()
+     {
+         return $this->hasMany(Mesas::class);
+     }
  }
 
 

@@ -35,7 +35,7 @@ class ApiController extends Controller
 
     public function getEscuelas( EscuelasRepo $escuelasRepo)
     {
-       $res =  $escuelasRepo->getModel()->all();
+       $res =  $escuelasRepo->getModel()->with('Mesas')->get();
     
        return response()->json(['results'=>$res],200);
 
