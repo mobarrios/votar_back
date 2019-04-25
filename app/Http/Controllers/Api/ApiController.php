@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use App\Http\Repositories\Admin\EscuelasRepo;
+use App\Http\Repositories\Admin\OperativosRepo;
+
 
 
 class ApiController extends Controller
 {
+
+    public function getOperativos(OperativosRepo $operativosRepo)
+    {
+        $res =  $operativosRepo->getModel()->all();
+    
+        return response()->json(['results'=>$res],200);
+    }
 
     public function getUsers()
     {
@@ -38,7 +47,8 @@ class ApiController extends Controller
        $res =  $escuelasRepo->getModel()->with('Mesas')->get();
     
        return response()->json(['results'=>$res],200);
-
     } 
+
+
 
 }

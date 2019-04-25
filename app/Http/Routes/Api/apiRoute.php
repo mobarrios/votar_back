@@ -3,6 +3,7 @@
 
 Route::get('getusers', 'Api\ApiController@getUsers');
 Route::get('getEscuelas', 'Api\ApiController@getEscuelas');
+Route::get('getOperativos', 'Api\ApiController@getOperativos');
 
 
 
