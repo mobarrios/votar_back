@@ -11,7 +11,7 @@ class ApiController extends Controller
     public function getUsers()
     {
         $resultado['results'] = [];
-            array_push($resultado['results'],['das'=>'dasd','dadasdas'=>'xss']);
+            array_push($resultado['results'],['nombre'=>'pepe','nombre'=>'argento']);
 
         
         return response()->json($resultado,200);
