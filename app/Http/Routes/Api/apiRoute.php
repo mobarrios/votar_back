@@ -2,6 +2,7 @@
 
 
 Route::get('getusers', 'Api\ApiController@getUsers');
+Route::get('getEscuelas', 'Api\ApiController@getEscuelas');
 
 
 
