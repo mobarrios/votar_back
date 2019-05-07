@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use App\Http\Repositories\Admin\EscuelasRepo;
+use App\Http\Repositories\Admin\MesasRepo;
 use App\Http\Repositories\Admin\OperativosRepo;
+use Illuminate\Routing\Route;
 
 
 
 class ApiController extends Controller
 {
+
 
     public function getOperativos(OperativosRepo $operativosRepo)
     {
@@ -45,6 +48,14 @@ class ApiController extends Controller
     public function getEscuelas( EscuelasRepo $escuelasRepo)
     {
        $res =  $escuelasRepo->getModel()->with('Mesas')->get();
+    
+       return response()->json(['results'=>$res],200);
+    } 
+
+    public function getMesas( MesasRepo $mesasRepo, Route $route)
+    {
+
+       $res =  $mesasRepo->getModel()->find($route->getParameter('id'));
     
        return response()->json(['results'=>$res],200);
     } 
