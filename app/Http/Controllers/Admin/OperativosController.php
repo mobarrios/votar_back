@@ -10,15 +10,16 @@ use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\TipoOperativosRepo as Tipo;
 use App\Http\Repositories\Admin\NivelesOperativosRepo as Niveles;
 use App\Http\Repositories\Admin\EscuelasRepo as Escuelas;
+use App\Http\Repositories\Admin\CandidatosRepo as Candidatos;
+
 
 
 
 
 class OperativosController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas)
+    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas, Candidatos $candidatos)
     {
-
         $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
@@ -29,7 +30,7 @@ class OperativosController extends Controller
         $this->data['tipos']    = $tipo->ListsData('nombre','id');
         $this->data['niveles']  = $niveles->ListsData('nombre','id');
         $this->data['escuelas'] = $escuelas->ListsData('nombre','id');
-
+        $this->data['candidatos'] = $candidatos->getModel()->all();
     }
 
 
@@ -43,6 +44,9 @@ class OperativosController extends Controller
 
         //asigna los escuelas
         $model->escuelas()->attach($this->request->escuelas_id);
+        //asigna los candidatos
+        $model->candidatos()->attach($this->request->candidatos_id);
+        
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
@@ -58,6 +62,8 @@ class OperativosController extends Controller
 
         //asigna los escuelas
         $model->escuelas()->sync($this->request->escuelas_id);
+        //asigna los candidatos
+        $model->candidatos()->attach($this->request->candidatos_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);

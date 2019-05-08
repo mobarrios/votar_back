@@ -12,6 +12,12 @@
      protected $fillable = ['nombre','apellido','partidos_id'];
 
      protected $section = 'partidos';
+
+     public function Partidos()
+     {
+         return $this->belongsTo(Partidos::class);
+     }
  }
+
 
 

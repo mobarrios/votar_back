@@ -31,6 +31,35 @@
                 {!! Form::label('Escuelas ') !!}
                 {!! Form::select('escuelas_id[]', $escuelas, null,['class'=>'select2 form-control', 'multiple']) !!}
             </div>
+
+            {{-- 
+            <div class="col-xs-6 form-group">
+                {!! Form::label('Candidatos ') !!}
+                {!! Form::select('candidatos_id[]', $candidatos, null,['class'=>'select2 form-control', 'multiple']) !!}
+            </div>
+             --}}
+        
+            <div class="col-xs-6">
+                <div class="responsive">
+                        <table class="table" >
+                            <thead>
+                                <td></td>
+                                <td>Partido</td>
+                                <td>Candidato</td>
+                            </thead>
+                            <tbody>
+                                @foreach($candidatos as $candidato)
+                                    <tr>
+                                        {{$models->Candidatos}}
+                                    <td><input type="checkbox" name="candidatos_id[]" value="{{$candidato->id}}"  ></td>
+                                        <td>{{$candidato->Partidos->nombre}}</td>
+                                        <td>{{$candidato->apellido}}, {{$candidato->nombre}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                </div>
+            </div>
            
 
 @endsection

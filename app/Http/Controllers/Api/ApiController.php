@@ -17,7 +17,7 @@ class ApiController extends Controller
 
     public function getOperativos(OperativosRepo $operativosRepo)
     {
-        $res =  $operativosRepo->getModel()->with('Escuelas')->with('Escuelas.Mesas')->get();
+        $res =  $operativosRepo->getModel()->with('Escuelas')->with('Escuelas.Mesas')->with('Candidatos')->with('Candidatos.Partidos')->get();
     
         return response()->json(['results'=>$res],200);
     }
@@ -55,7 +55,7 @@ class ApiController extends Controller
     public function getMesas( MesasRepo $mesasRepo, Route $route)
     {
 
-       $res =  $mesasRepo->getModel()->find($route->getParameter('id'));
+       $res =  $mesasRepo->getModel()->with('Escuelas')->with('Escuelas.Operativos')->with('Escuelas.Operativos.Candidatos')->find($route->getParameter('id'));
     
        return response()->json(['results'=>$res],200);
     } 

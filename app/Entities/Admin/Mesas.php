@@ -12,6 +12,13 @@
      protected $fillable = ['numero','escuelas_id','users_id'];
 
      protected $section = 'mesas';
+
+
+
+     public function Escuelas()
+     {
+         return $this->belongsTo(Escuelas::class);
+     }
  }
 
 

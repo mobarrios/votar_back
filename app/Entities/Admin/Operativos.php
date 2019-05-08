@@ -43,6 +43,11 @@
      {
          return $this->belongsTo(NivelesOperativos::class,'niveles_operativos_id');
      }
+
+     public function Candidatos()
+     {
+        return $this->belongsToMany(Candidatos::class,'operativos_candidatos','operativos_id','candidatos_id');
+     }
  }
 
 
