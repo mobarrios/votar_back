@@ -25,7 +25,6 @@ class ApiController extends Controller
         ->with('Candidatos.Partidos.Images')
         ->get();   
         
-        dd($res);
         return response()->json(['results'=>$res],200);
     }
 
