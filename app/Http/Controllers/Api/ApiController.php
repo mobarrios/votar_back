@@ -66,6 +66,13 @@ class ApiController extends Controller
        return response()->json(['results'=>$res],200);
     } 
 
+    public function getCandidatos( OperativosRepo $operativosRepo, Route $route)
+    {
+       $res =  $operativosRepo->getModel()->with('Candidatos')->with('Candidatos.Partidos')->find($route->getParameter('id'));
+    
+       return response()->json(['results'=>$res],200);
+    } 
+
 
 
 }
