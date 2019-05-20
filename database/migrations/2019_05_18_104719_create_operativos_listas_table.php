@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOperativosEscuelasTable extends Migration
+class CreateOperativosListasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreateOperativosEscuelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('operativos_escuelas', function (Blueprint $table) {
-
+        Schema::create('operativos_listas', function (Blueprint $table) {
+         
             $table->increments('id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
@@ -21,9 +21,9 @@ class CreateOperativosEscuelasTable extends Migration
             $table->integer('operativos_id')->unsigned();
             $table->foreign('operativos_id')->references('id')->on('operativos');
 
-            $table->integer('escuelas_id')->unsigned();
-            $table->foreign('escuelas_id')->references('id')->on('escuelas');
-        });    
+            $table->integer('listas_id')->unsigned();
+            $table->foreign('listas_id')->references('id')->on('listas');
+        });
     }
 
     /**
@@ -33,7 +33,6 @@ class CreateOperativosEscuelasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('operativos_escuelas');
-
+        Schema::drop('operativos_listas');
     }
 }

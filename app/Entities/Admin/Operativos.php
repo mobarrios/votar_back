@@ -48,6 +48,11 @@
      {
         return $this->belongsToMany(Candidatos::class,'operativos_candidatos','operativos_id','candidatos_id');
      }
+
+      public function Listas()
+     {
+        return $this->belongsToMany(Listas::class,'operativos_listas','operativos_id','listas_id');
+     }
  }
 
 

@@ -1008,6 +1008,31 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'candidatos.destroy',
                     'model' => '',
                 ],
+                //listas
+                [
+                    'id'    => 156,
+                    'name' => 'Listar Listas',
+                    'slug' => 'listas.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 157,
+                    'name' => 'Crear Listas',
+                    'slug' => 'listas.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 158,
+                    'name' => 'Editar Listas',
+                    'slug' => 'listas.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 159,
+                    'name' => 'Borrar Listas',
+                    'slug' => 'listas.destroy',
+                    'model' => '',
+                ],
             ]);
     }
 }

@@ -12,7 +12,6 @@
                 </td> --}}
                 <td>{{$model->fecha }}</td>
                 <td>{{$model->nombre}}</td>
-                <td>{{$model->Tipos->nombre}}</td>
                 <td>{{$model->Niveles->nombre}}</td>
             </tr>
         @endforeach

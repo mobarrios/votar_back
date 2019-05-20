@@ -19,7 +19,18 @@ class CreateEscuelasTable extends Migration
 
             $table->string('nombre');
             $table->string('direccion');
+
+            $table->integer('provincias_id');
+            $table->integer('municipios_id');
+            $table->integer('localidades_id');
+
+            $table->string('latitud');
+            $table->string('longitud');
+
+
             $table->text('observaciones')->nullable();
+
+
         });    
     }
 

@@ -21,8 +21,8 @@ class CreateOperativosTable extends Migration
             $table->date('fecha');
 
 
-            $table->integer('tipo_operativos_id')->unsigned();
-            $table->foreign('tipo_operativos_id')->references('id')->on('tipo_operativos');
+            // $table->integer('tipo_operativos_id')->unsigned();
+            // $table->foreign('tipo_operativos_id')->references('id')->on('tipo_operativos');
 
             $table->integer('niveles_operativos_id')->unsigned();
             $table->foreign('niveles_operativos_id')->references('id')->on('niveles_operativos');

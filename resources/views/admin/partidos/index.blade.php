@@ -10,7 +10,7 @@
                     </div>
                 </td>
                 <td>{{$model->nombre }}</td>
-                <td><a href="{{route('admin.candidatos.index',$model->id)}}" class="btn btn-success btn-xs"><span class="fa fa-user"></span> Candidatos </a></td>
+                <td><a href="{{route('admin.listas.index',$model->id)}}" class="btn btn-success btn-xs"><span class="fa fa-table"></span> Listas </a></td>
             </tr>
         @endforeach
     @endsection

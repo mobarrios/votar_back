@@ -34,30 +34,23 @@
             </div>
         </div>
 
-        {{-- <div class="col-sm-3 col-xs-12">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <h3>{{\App\Entities\Admin\Budgets::all()->count()}}</h3>
-                    <p>Presupuestos</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-android-bookmark"></i>
-                </div>
-            </div>
-            <div class="box-footer">
-                {!! Form::open(['route'=>('admin.budgets.index'),'method'=>'GET']) !!}
-                    <div class="input-group">
-                        <input name="search" placeholder="Buscar Presupuesto..." class="form-control" type="text">
-                        <input  type="hidden" name="filter[]" value="id">
-                          <span class="input-group-btn">
-                            <button type="submit" class="btn bg-aqua btn-flat"><span class="fa fa-search"></span></button>
-                          </span>
-                    </div>
-                {!! Form::close() !!}
-            </div>
-        </div> --}}
 
+        {{-- <div class="col-xs-12 col-sm-12">
+                <div class="box box-primary">
+                    <div class="box-body">     --}}
+                        {{-- <span >
+                            <span class="text-muted">Sucursales : </span>
+                          @foreach(\Illuminate\Support\Facades\Auth::user()->brancheables as $branch)
+                            <label class=" label label-default">{{$branch->branches->name}}</label>
+                          @endforeach
+                        </span> --}}
+    
+                    {{-- </div>
+    
+                </div>
+            </div>
+     --}}
+       
         {{-- <div class="col-sm-3 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-red-active">

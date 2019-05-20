@@ -61,8 +61,12 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Admin/mesasRoute.php');
         require(__DIR__ . '/Routes/Admin/partidosRoute.php');
         require(__DIR__ . '/Routes/Admin/candidatosRoute.php');
+        require(__DIR__ . '/Routes/Admin/listasRoute.php');
 
 
+
+        Route::get('bahra','Utilities\BahraController@getProvincias');
+        
         
 
     });

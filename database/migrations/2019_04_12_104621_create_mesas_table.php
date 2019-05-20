@@ -18,7 +18,6 @@ class CreateMesasTable extends Migration
             $table->softDeletes();
 
             $table->string('numero');
-        
 
             $table->integer('escuelas_id')->unsigned();
             $table->foreign('escuelas_id')->references('id')->on('escuelas');

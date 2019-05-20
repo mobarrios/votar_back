@@ -19,10 +19,10 @@
                 {!! Form::label('Nombre') !!}
                 {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
             </div>
-            <div class="col-xs-6 form-group">
+           {{--  <div class="col-xs-6 form-group">
                 {!! Form::label('Tipo ') !!}
                 {!! Form::select('tipo_operativos_id', $tipos,null, ['class'=>'select2 form-control']) !!}
-            </div>
+            </div> --}}
             <div class="col-xs-6 form-group">
                 {!! Form::label('Nivel ') !!}
                 {!! Form::select('niveles_operativos_id', $niveles, null,['class'=>'select2 form-control']) !!}
@@ -45,15 +45,18 @@
                             <thead>
                                 <td></td>
                                 <td>Partido</td>
-                                <td>Candidato</td>
+                                <td>Lista</td>      
+                                <td>Tipo</td>
+
                             </thead>
                             <tbody>
-                                @foreach($candidatos as $candidato)
+                                @foreach($listas as $lista)
                                     <tr>
-                                        {{$models->Candidatos}}
-                                    <td><input type="checkbox" name="candidatos_id[]" value="{{$candidato->id}}"  ></td>
-                                        <td>{{$candidato->Partidos->nombre}}</td>
-                                        <td>{{$candidato->apellido}}, {{$candidato->nombre}}</td>
+                                
+                                    <td><input type="checkbox" name="candidatos_id[]" value="{{$lista->id}}"  ></td>
+                                        <td>{{$lista->Partidos->nombre}}</td>
+                                        <td>{{$lista->nombre}}</td>
+                                        <td>{{$lista->TipoOperativos->nombre}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
