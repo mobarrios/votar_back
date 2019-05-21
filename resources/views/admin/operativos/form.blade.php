@@ -52,8 +52,14 @@
                             <tbody>
                                 @foreach($listas as $lista)
                                     <tr>
-                                
-                                    <td><input type="checkbox" name="candidatos_id[]" value="{{$lista->id}}"  ></td>
+                                    <td>
+                                            @if($models->hasListas($lista->id))
+                                                <input type="checkbox" name="listas_id[]" value="{{$lista->id}}" checked="checked">
+                                             @else
+                                                <input type="checkbox" name="listas_id[]" value="{{$lista->id}}"  >
+                                            @endif
+
+                                    </td>
                                         <td>{{$lista->Partidos->nombre}}</td>
                                         <td>{{$lista->nombre}}</td>
                                         <td>{{$lista->TipoOperativos->nombre}}</td>

@@ -53,6 +53,18 @@
      {
         return $this->belongsToMany(Listas::class,'operativos_listas','operativos_id','listas_id');
      }
+
+     public function hasListas($listas_id)
+     {
+        foreach ($this->Listas as $li )
+                if($li->id == $listas_id)
+                        return true;
+
+
+        return false;
+                
+     }
+
  }
 
 

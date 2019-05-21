@@ -31,6 +31,7 @@ class OperativosController extends Controller
         $this->data['niveles']  = $niveles->ListsData('nombre','id');
         $this->data['escuelas'] = $escuelas->ListsData('nombre','id');
         $this->data['listas'] = $listas->getModel()->all();
+        
     }
 
 
@@ -44,7 +45,7 @@ class OperativosController extends Controller
 
         //asigna los escuelas
         $model->escuelas()->attach($this->request->escuelas_id);
-        //asigna los candidatos
+        //asigna los listas
         $model->listas()->attach($this->request->listas_id);
         
 
@@ -62,8 +63,8 @@ class OperativosController extends Controller
 
         //asigna los escuelas
         $model->escuelas()->sync($this->request->escuelas_id);
-        //asigna los candidatos
-        $model->candidatos()->attach($this->request->candidatos_id);
+        //asigna los listas
+        $model->listas()->sync($this->request->listas_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
