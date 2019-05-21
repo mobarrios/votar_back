@@ -8,7 +8,7 @@ use App\Http\Repositories\Admin\EscuelasRepo;
 use App\Http\Repositories\Admin\MesasRepo;
 use App\Http\Repositories\Admin\OperativosRepo;
 use Illuminate\Routing\Route;
-use App\Entities\Votos;
+use App\Entities\Admin\Votos;
 
 
 class ApiController extends Controller
