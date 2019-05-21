@@ -99,7 +99,7 @@ class ApiController extends Controller
 
         $votos->save();
 
-        return true;
+       return response()->json(true,200);
     }
 
 
