@@ -68,7 +68,7 @@ class ApiController extends Controller
 
     public function getCandidatos( OperativosRepo $operativosRepo, Route $route)
     {
-       $res =  $operativosRepo->getModel()->with('Candidatos')->with('Candidatos.Partidos')->find($route->getParameter('id'));
+       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->find($route->getParameter('id'));
     
        return response()->json(['results'=>$res],200);
     } 
