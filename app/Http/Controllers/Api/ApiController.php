@@ -82,5 +82,25 @@ class ApiController extends Controller
     } 
 
 
+    public function postVotos()
+    {
+        $votos = new Votos();
+
+        $cantVotos = $route->getParameter('cantVotos');
+        $idOperativos = $route->getParameter('idOperativos');
+        $idMesas = $route->getParameter('idMesas');
+        $idListas = $route->getParameter('idListas');
+
+
+        $votos->total = $cantVotos;
+        $votos->operativos_id = $idOperativos;
+        $votos->listas_id = $idListas;
+        $votos->mesas_id = $idMesas;
+
+        $votos->save();
+
+        return true;
+    }
+
 
 }

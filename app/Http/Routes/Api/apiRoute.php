@@ -8,6 +8,9 @@ Route::get('getMesas/{id?}', 'Api\ApiController@getMesas');
 Route::get('getCandidatos/{id?}', 'Api\ApiController@getCandidatos');
 Route::get('getListas/{id?}', 'Api\ApiController@getListas');
 
+Route::post('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}', 'Api\ApiController@postVotos');
+
+
 
 
 
