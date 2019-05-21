@@ -10,7 +10,7 @@ Route::group(['prefix'=>'operativos'],function(){
 
         Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.operativos.create','uses'=>'Admin\OperativosController@create']);
         Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.operativos.store','uses'=>'Admin\OperativosController@store']);
-        Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'admin.operativos.show','uses'=>'Admin\OperativosController@show']);
+        Route::get('/show/{id?}',       ['middleware'=>'permission:'.$section.'.show','as'=>'admin.operativos.show','uses'=>'Admin\OperativosController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.operativos.index','uses'=>'Admin\OperativosController@index']);
 
     Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.operativos.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);

@@ -157,6 +157,21 @@ abstract class Controller extends BaseController
 
     }
 
+
+     public function show()
+    {
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Detalle';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+        return view(config('models.'.$this->section.'.showView'))->with($this->data);
+    }
+
+
 /*
     public function createImage($model, $data )
     {

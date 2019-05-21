@@ -27,6 +27,8 @@ return [
     //views
     'storeView' =>  'admin.'.$model.'.form',
     'editView'  =>  'admin.'.$model.'.form',
+    'showView'  =>  'admin.'.$model.'.show',
+
 
     //path
     'imagesPath' => 'uploads/'.$model.'/images/',

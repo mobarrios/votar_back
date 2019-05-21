@@ -39,6 +39,7 @@
             </div>
              --}}
         
+
             <div class="col-xs-6">
                 <div class="table-responsive">
                         <table class="table" >
@@ -53,7 +54,7 @@
                                 @foreach($listas as $lista)
                                     <tr>
                                     <td>
-                                            @if($models->hasListas($lista->id))
+                                            @if(isset($models) && $models->hasListas($lista->id))
                                                 <input type="checkbox" name="listas_id[]" value="{{$lista->id}}" checked="checked">
                                              @else
                                                 <input type="checkbox" name="listas_id[]" value="{{$lista->id}}"  >
@@ -70,16 +71,17 @@
                 </div>
             </div>
 
+            @if(isset($models))
+                <div class="col-xs-12">
+                      @foreach($models->Votos as $voto)
 
-            <div class="col-xs-12">
-                  @foreach($models->Votos as $voto)
-
-                    {{$voto->Listas->nombre}}
-                    {{$voto->Mesas->numero}}
-                    {{$voto->total}}
-                    <br>
-                  @endforeach   
-            </div>
+                        {{$voto->Listas->nombre}}
+                        {{$voto->Mesas->numero}}
+                        {{$voto->total}}
+                        <br>
+                      @endforeach   
+                </div>
+            @endif
            
 
 @endsection

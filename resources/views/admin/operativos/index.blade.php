@@ -11,7 +11,7 @@
                     </div>
                 </td> --}}
                 <td>{{$model->fecha }}</td>
-                <td>{{$model->nombre}}</td>
+                <td><a href="{{route('admin.operativos.show',$model->id)}}">{{$model->nombre}}</a></td>
                 <td>{{$model->Niveles->nombre}}</td>
             </tr>
         @endforeach
