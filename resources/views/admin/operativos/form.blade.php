@@ -77,9 +77,7 @@
                     {{$voto->Listas->nombre}}
                     {{$voto->Mesas->numero}}
                     {{$voto->total}}
-
-
-
+                    <br>
                   @endforeach   
             </div>
            
