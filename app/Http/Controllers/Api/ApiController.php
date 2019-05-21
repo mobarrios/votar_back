@@ -75,7 +75,7 @@ class ApiController extends Controller
 
      public function getListas( OperativosRepo $operativosRepo, Route $route)
     {
-       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->find($route->getParameter('id'));
+       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.TipoOperativos')->find($route->getParameter('id'));
     
        return response()->json(['results'=>$res],200);
     } 
