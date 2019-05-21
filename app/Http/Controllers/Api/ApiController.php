@@ -23,6 +23,7 @@ class ApiController extends Controller
         ->with('Listas')
         ->with('Listas.Partidos')
         ->with('Listas.Partidos.Images')
+        ->with('Listas.TipoOperativos')
         ->get();   
         
         return response()->json(['results'=>$res],200);
