@@ -40,7 +40,7 @@
              --}}
         
             <div class="col-xs-6">
-                <div class="responsive">
+                <div class="table-responsive">
                         <table class="table" >
                             <thead>
                                 <td></td>
@@ -68,6 +68,19 @@
                             </tbody>
                         </table>
                 </div>
+            </div>
+
+
+            <div class="col-xs-12">
+                  @foreach($models->Votos as $voto)
+
+                    {{$voto->Listas->nombre}}
+                    {{$voto->Mesas->numero}}
+                    {{$voto->total}}
+
+
+
+                  @endforeach   
             </div>
            
 

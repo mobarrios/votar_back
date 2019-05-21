@@ -54,6 +54,11 @@
         return $this->belongsToMany(Listas::class,'operativos_listas','operativos_id','listas_id');
      }
 
+    public function Votos()
+     {
+        return $this->hasMany(Votos::class,'operativos_id');
+     }
+
      public function hasListas($listas_id)
      {
         foreach ($this->Listas as $li )
