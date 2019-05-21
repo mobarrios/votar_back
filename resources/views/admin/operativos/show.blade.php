@@ -25,7 +25,7 @@
 
                                     </div>
                                     <div class="col-xs-3">
-                                            <h1>{{ number_format((($lista->Votos->sum('total')*100)/ $total),2)}} %</h1>
+                                            <h1><strong class="text-danger">{{ number_format((($lista->Votos->sum('total')*100)/ $total),2)}} %</strong></h1>
                                             <h3>{{$lista->Votos->sum('total')}} votos</h3>
                                     </div>
                                     
