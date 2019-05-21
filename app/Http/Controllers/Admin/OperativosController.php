@@ -31,7 +31,7 @@ class OperativosController extends Controller
         $this->data['niveles']  = $niveles->ListsData('nombre','id');
         $this->data['escuelas'] = $escuelas->ListsData('nombre','id');
         $this->data['listas'] = $listas->getModel()->all();
-        
+
     }
 
 
@@ -68,6 +68,23 @@ class OperativosController extends Controller
 
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
+    }
+
+
+    public function show()
+    {
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Detalle';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+        $this->data['total'] = $this->repo->find($id)->Votos->sum('total') ;
+
+
+
+        return view(config('models.'.$this->section.'.showView'))->with($this->data);
     }
 
 

@@ -22,6 +22,11 @@
      {
          return $this->belongsTo(TipoOperativos::class);
      }
+
+    public function Votos()
+    {
+        return $this->hasMany(Votos::class);
+    }     
  }
 
 
