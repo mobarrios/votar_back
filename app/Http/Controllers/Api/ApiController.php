@@ -82,7 +82,7 @@ class ApiController extends Controller
     } 
 
 
-    public function postVotos()
+    public function postVotos(Route $route)
     {
         $votos = new Votos();
 
