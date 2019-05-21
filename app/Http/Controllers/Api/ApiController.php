@@ -20,9 +20,9 @@ class ApiController extends Controller
         $res =  $operativosRepo->getModel()
         ->with('Escuelas')
         ->with('Escuelas.Mesas')
-        ->with('Candidatos')
-        ->with('Candidatos.Partidos')
-        ->with('Candidatos.Partidos.Images')
+        ->with('Listas')
+        ->with('Listas.Partidos')
+        ->with('Listas.Partidos.Images')
         ->get();   
         
         return response()->json(['results'=>$res],200);
@@ -68,7 +68,7 @@ class ApiController extends Controller
 
     public function getCandidatos( OperativosRepo $operativosRepo, Route $route)
     {
-       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->find($route->getParameter('id'));
+       $res =  $operativosRepo->getModel()->with('Candidatos')->with('Candidatos.Partidos')->find($route->getParameter('id'));
     
        return response()->json(['results'=>$res],200);
     } 
