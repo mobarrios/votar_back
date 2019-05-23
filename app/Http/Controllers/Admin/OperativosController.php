@@ -83,7 +83,6 @@ class OperativosController extends Controller
         $this->data['total'] = $this->repo->find($id)->Votos->sum('total') ;
 
 
-
         return view(config('models.'.$this->section.'.showView'))->with($this->data);
     }
 

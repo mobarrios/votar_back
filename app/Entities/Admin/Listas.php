@@ -26,7 +26,12 @@
     public function Votos()
     {
         return $this->hasMany(Votos::class);
-    }     
+    }    
+
+    public function VotosOperativos($operativosId)
+    {
+        return $this->votos->where('operativos_id',$operativosId);
+    }    
  }
 
 

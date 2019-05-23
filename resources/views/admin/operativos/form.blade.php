@@ -71,18 +71,7 @@
                 </div>
             </div>
 
-            @if(isset($models))
-                <div class="col-xs-12">
-                      @foreach($models->Votos as $voto)
-
-                        {{$voto->Listas->nombre}}
-                        {{$voto->Mesas->numero}}
-                        {{$voto->total}}
-                        <br>
-                      @endforeach   
-                </div>
-            @endif
-           
+    
 
 @endsection
 
