@@ -43,7 +43,6 @@ class ApiController extends Controller
         )
         ->get();
 
-        dd($res);
 
       return response()->json(['results'=>$res],200);
     }
