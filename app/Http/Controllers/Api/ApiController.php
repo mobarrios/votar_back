@@ -9,11 +9,48 @@ use App\Http\Repositories\Admin\MesasRepo;
 use App\Http\Repositories\Admin\OperativosRepo;
 use Illuminate\Routing\Route;
 use App\Entities\Admin\Votos;
+use Illuminate\Support\Facades\Hash;
+use Auth;
+use App\Entities\Configs\User;
+use Illuminate\Support\Str;
+
+
 
 
 class ApiController extends Controller
 {
 
+    public function getUsers(Route $route)
+    {
+
+
+        if (Auth::once(['user_name' => $route->getParameter('user_name'), 'password' => $route->getParameter('password')]))
+        {
+                $user = User::find(Auth::id());
+                $user->remember_token = Str::random(60);
+                $user->save();
+                
+            return response()->json($user->remember_token,200);
+        
+        }else{
+
+            return response()->json(false,401);
+        }
+
+        // $res =  $operativosRepo->getModel()
+        // ->where('user_name',$route->getParameter('user_name'))
+        // ->first();
+
+
+        // $pass =  $operativosRepo->getModel()
+        // ->where('user_name',$route->getParameter('user_name'))
+        // ->first();
+
+
+        
+        return response()->json(['results'=>$res],200);
+
+    }
 
     public function getOperativos(OperativosRepo $operativosRepo)
     {
@@ -29,28 +66,28 @@ class ApiController extends Controller
         return response()->json(['results'=>$res],200);
     }
 
-    public function getUsers()
-    {
-        $res = collect();
+    // public function getUsers()
+    // {
+    //     $res = collect();
 
 
-    $res->push([
-        'nombre'=>'pepe',
-        'apellido'=>'argento',
-        'email' => 'mno@das.dcom'
-    ]);
-    $res->push([
-        'nombre'=>'Juan',
-        'apellido'=>'Perez',
-        'email' => '1231@das.dcom'
-    ]);
+    // $res->push([
+    //     'nombre'=>'pepe',
+    //     'apellido'=>'argento',
+    //     'email' => 'mno@das.dcom'
+    // ]);
+    // $res->push([
+    //     'nombre'=>'Juan',
+    //     'apellido'=>'Perez',
+    //     'email' => '1231@das.dcom'
+    // ]);
 
 
 
         
-        return response()->json(['results'=>$res],200);
+    //     return response()->json(['results'=>$res],200);
 
-    }
+    // }
 
     public function getEscuelas( EscuelasRepo $escuelasRepo)
     {

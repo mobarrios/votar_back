@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('getusers', 'Api\ApiController@getUsers');
+Route::get('getUsers/{user_name?}/{password?}', 'Api\ApiController@getUsers');
 Route::get('getEscuelas', 'Api\ApiController@getEscuelas');
 Route::get('getOperativos', 'Api\ApiController@getOperativos');
 Route::get('getMesas/{id?}', 'Api\ApiController@getMesas');

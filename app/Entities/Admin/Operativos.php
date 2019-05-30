@@ -64,10 +64,12 @@
         foreach ($this->Listas as $li )
                 if($li->id == $listas_id)
                         return true;
-
-
         return false;
-                
+     }
+
+     public function OperativosMesasUsers()
+     {
+        return $this->hasMany(OperativosMesasUsers::class);
      }
 
  }

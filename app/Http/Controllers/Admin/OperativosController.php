@@ -11,6 +11,10 @@ use App\Http\Repositories\Admin\TipoOperativosRepo as Tipo;
 use App\Http\Repositories\Admin\NivelesOperativosRepo as Niveles;
 use App\Http\Repositories\Admin\EscuelasRepo as Escuelas;
 use App\Http\Repositories\Admin\ListasRepo as Listas;
+use App\Http\Repositories\Configs\UsersRepo as Usuarios;
+use App\Entities\Admin\OperativosMesasUsers ;
+
+
 
 
 
@@ -18,7 +22,7 @@ use App\Http\Repositories\Admin\ListasRepo as Listas;
 
 class OperativosController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas, Listas $listas)
+    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas, Listas $listas, Usuarios $usuarios)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -31,6 +35,8 @@ class OperativosController extends Controller
         $this->data['niveles']  = $niveles->ListsData('nombre','id');
         $this->data['escuelas'] = $escuelas->ListsData('nombre','id');
         $this->data['listas'] = $listas->getModel()->all();
+        $this->data['usuarios'] = $usuarios->getModel()->all();
+
 
     }
 
@@ -84,6 +90,42 @@ class OperativosController extends Controller
 
 
         return view(config('models.'.$this->section.'.showView'))->with($this->data);
+    }
+
+    public function mesasUsuarios()
+    {
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Mesas Usuarios';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+
+        return view('admin.operativos.mesasUsuarios')->with($this->data);
+    }
+
+
+     public function postMesasUsuarios(OperativosMesasUsers $operativosMesasUsers)
+    {
+        
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+         
+        foreach($this->request->mesas as $mesa)
+        {
+            $a =  explode('_', $mesa);
+            $mesa = $a[0];
+            $user = $a[1];
+
+            $operativosMesasUsers->create(['operativos_id'=>$this->request->operativos_id ,'mesas_id'=>$mesa,'users_id'=>$user])->save();
+        }
+
+        return redirect()->back();
+
+
     }
 
 
