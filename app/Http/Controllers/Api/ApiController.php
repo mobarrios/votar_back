@@ -13,12 +13,40 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Entities\Configs\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 
 
 class ApiController extends Controller
 {
+
+    public function getMesasByUsers(Route $route)
+    {   
+        //$res = User::with('Mesas')->with('Mesas.Escuelas')->with('Mesas.Escuelas.Operativos')->where('user_name', $route->getParameter('user_name'))->first();
+
+        $res = DB::table('users')
+        ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
+        ->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')
+        ->join('escuelas','escuelas.id','=','mesas.escuelas_id')
+        ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
+        ->join('niveles_operativos','niveles_operativos.id','=','operativos.niveles_operativos_id')
+        ->where('users.user_name','=',$route->getParameter('user_name'))
+        ->select('operativos.id as operativos_id',
+            'operativos.nombre as operativos_nombre',
+            'mesas.id as mesas_id',
+            'mesas.numero as mesas_numero',
+            'escuelas.id as escuelas_id',
+            'escuelas.nombre as escuelas_nombre',
+            'niveles_operativos.id as niveles_operativos_id',
+            'niveles_operativos.nombre as niveles_operativos_nombre'
+        )
+        ->get();
+
+        dd($res);
+
+      return response()->json(['results'=>$res],200);
+    }
 
     public function getUsers(Route $route)
     {
@@ -29,27 +57,13 @@ class ApiController extends Controller
                 $user = User::find(Auth::id());
                 $user->remember_token = Str::random(60);
                 $user->save();
-                
+
             return response()->json($user->remember_token,200);
         
         }else{
 
             return response()->json(false,401);
         }
-
-        // $res =  $operativosRepo->getModel()
-        // ->where('user_name',$route->getParameter('user_name'))
-        // ->first();
-
-
-        // $pass =  $operativosRepo->getModel()
-        // ->where('user_name',$route->getParameter('user_name'))
-        // ->first();
-
-
-        
-        return response()->json(['results'=>$res],200);
-
     }
 
     public function getOperativos(OperativosRepo $operativosRepo)

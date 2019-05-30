@@ -19,6 +19,13 @@
      {
          return $this->belongsTo(Escuelas::class);
      }
+
+     public function Operativos()
+     {
+     	return $this->belongsToMany(Operativos::class,'operativos_mesas_users','mesas_id','operativos_id');
+     }
+
+
  }
 
 

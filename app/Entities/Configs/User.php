@@ -12,6 +12,9 @@ use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Illuminate\Support\Facades\Hash;
 
+use  App\Entities\Admin\Mesas;
+
+
 class User extends EntityUser implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
 {
     use Authenticatable, CanResetPassword, HasRoleAndPermission;
@@ -70,8 +73,7 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
     {
         return $this->belongsToMany('App\Entities\Configs\Role','role_user');
     }
-
-
+  
     public function setPasswordAttribute($pass){
 
         if(!empty($pass))
@@ -89,6 +91,12 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
         }
 
         return $arr ;
+    }
+
+
+    public function Mesas()
+    {
+        return $this->belongsToMany(Mesas::class,'operativos_mesas_users','users_id','mesas_id');
     }
 
 }
