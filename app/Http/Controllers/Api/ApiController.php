@@ -57,7 +57,7 @@ class ApiController extends Controller
                 $user->remember_token = Str::random(60);
                 $user->save();
 
-            return response()->json($user->remember_token,200);
+            return response()->json($user,200);
         
         }else{
 
@@ -65,8 +65,10 @@ class ApiController extends Controller
         }
     }
 
-    public function getOperativos(OperativosRepo $operativosRepo)
+    public function getOperativos(Route $route,OperativosRepo $operativosRepo)
     {
+        $userId = $route->getParameter('userId');
+
         $res =  $operativosRepo->getModel()
         ->with('Escuelas')
         ->with('Escuelas.Mesas')
@@ -74,7 +76,12 @@ class ApiController extends Controller
         ->with('Listas.Partidos')
         ->with('Listas.Partidos.Images')
         ->with('Listas.TipoOperativos')
+        ->with('Escuelas.Mesas.User')
+        ->whereHas('Escuelas.Mesas.User',function($q) use ($userId) {
+            $q->where('users.id',$userId);
+        })
         ->get();   
+
         
         return response()->json(['results'=>$res],200);
     }

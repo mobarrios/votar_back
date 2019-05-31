@@ -13,6 +13,8 @@ use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Illuminate\Support\Facades\Hash;
 
 use  App\Entities\Admin\Mesas;
+use Illuminate\Support\Facades\DB;
+
 
 
 class User extends EntityUser implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
@@ -43,7 +45,7 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
 
     protected $section = 'users';
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password'];
 
 
     /*public function __construct()
@@ -97,6 +99,23 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
     public function Mesas()
     {
         return $this->belongsToMany(Mesas::class,'operativos_mesas_users','users_id','mesas_id');
+    }
+
+    public function OperativosMesasUsers($operativosId, $mesasId, $usersId)
+    {
+        $res = DB::table('operativos_mesas_users')
+        ->where('operativos_id',$operativosId)
+        ->where('mesas_id',$mesasId)
+        ->where('users_id',$usersId)
+        ->count();
+
+
+        if($res > 0)
+            return true;
+        else
+            return false;
+
+
     }
 
 }

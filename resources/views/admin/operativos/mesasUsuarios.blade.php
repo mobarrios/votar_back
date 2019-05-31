@@ -32,7 +32,12 @@
                                             <td class="col-xs-8">
                                                 <select name="mesas[]" class="form-control select2" multiple="multiple">
                                                     @foreach($usuarios as $usuario)
-                                                        <option value="{{$mesa->id}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
+
+                                                        @if($usuario->OperativosMesasUsers($models->id,$mesa->id,$usuario->id) )
+                                                            <option selected="selected" value="{{$mesa->id}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
+                                                        @else
+                                                            <option  value="{{$mesa->id}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </td>

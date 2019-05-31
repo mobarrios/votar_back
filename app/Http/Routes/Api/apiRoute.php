@@ -5,7 +5,7 @@ Route::get('getUsers/{user_name?}/{password?}', 'Api\ApiController@getUsers');
 Route::get('getMesasByUsers/{user_name?}', 'Api\ApiController@getMesasByUsers');
 
 Route::get('getEscuelas', 'Api\ApiController@getEscuelas');
-Route::get('getOperativos', 'Api\ApiController@getOperativos');
+Route::get('getOperativos/{userId?}', 'Api\ApiController@getOperativos');
 Route::get('getMesas/{id?}', 'Api\ApiController@getMesas');
 Route::get('getCandidatos/{id?}', 'Api\ApiController@getCandidatos');
 Route::get('getListas/{id?}', 'Api\ApiController@getListas');

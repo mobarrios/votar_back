@@ -4,6 +4,8 @@
 
  
  use App\Entities\Entity;
+ use App\Entities\Configs\User;
+
 
  class Mesas extends Entity
  {
@@ -25,6 +27,11 @@
      	return $this->belongsToMany(Operativos::class,'operativos_mesas_users','mesas_id','operativos_id');
      }
 
+
+     public function User()
+     {
+     	return $this->belongsToMany(User::class,'operativos_mesas_users','mesas_id','operativos_id');						
+     }
 
  }
 
