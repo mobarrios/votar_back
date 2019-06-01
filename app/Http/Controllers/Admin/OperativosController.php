@@ -120,7 +120,12 @@ class OperativosController extends Controller
             $mesa = $a[0];
             $user = $a[1];
 
-            $operativosMesasUsers->create(['operativos_id'=>$this->request->operativos_id ,'mesas_id'=>$mesa,'users_id'=>$user])->save();
+            $op  = $operativosMesasUsers->where('operativos_id',$this->request->operativos_id)->where('mesas_id',$mesa)->where('users_id',$user)->get();
+
+            if($op->count() == 0 )
+                    $operativosMesasUsers->create(['operativos_id'=>$this->request->operativos_id ,'mesas_id'=>$mesa,'users_id'=>$user])->save();
+
+
         }
 
         return redirect()->back();
