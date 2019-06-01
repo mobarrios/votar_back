@@ -69,18 +69,37 @@ class ApiController extends Controller
     {
         $userId = $route->getParameter('userId');
 
-        $res =  $operativosRepo->getModel()
-        ->with('Escuelas')
-        ->with('Escuelas.Mesas')
-        ->with('Listas')
-        ->with('Listas.Partidos')
-        ->with('Listas.Partidos.Images')
-        ->with('Listas.TipoOperativos')
-        ->with('Escuelas.Mesas.User')
-        ->whereHas('Escuelas.Mesas.User',function($q) use ($userId) {
-            $q->where('users.id',$userId);
-        })
-        ->get();   
+        // $res =  $operativosRepo->getModel()
+        // ->with('Escuelas')
+        // ->with('Escuelas.Mesas')
+        // ->with('Listas')
+        // ->with('Listas.Partidos')
+        // ->with('Listas.Partidos.Images')
+        // ->with('Listas.TipoOperativos')
+        // ->with('Escuelas.Mesas.User')
+        // // ->whereHas('Escuelas.Mesas.User',function($q) use ($userId) {
+        // //     $q->where('users_id',$userId);
+        // // })
+        // ->get();   
+        // 
+        $res = DB::table('users')
+        ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
+        ->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')
+        ->join('escuelas','escuelas.id','=','mesas.escuelas_id')
+        ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
+        ->join('niveles_operativos','niveles_operativos.id','=','operativos.niveles_operativos_id')
+        ->where('users.id','=',$route->getParameter('userId'))
+        ->select('operativos.id as operativos_id',
+            'operativos.nombre as operativos_nombre',
+            'mesas.id as mesas_id',
+            'mesas.numero as mesas_numero',
+            'escuelas.id as escuelas_id',
+            'escuelas.nombre as escuelas_nombre',
+            'niveles_operativos.id as niveles_operativos_id',
+            'niveles_operativos.nombre as niveles_operativos_nombre'
+        )
+        ->get();
+
 
         
         return response()->json(['results'=>$res],200);
