@@ -13,7 +13,12 @@ class UpdateVotosTable extends Migration
     public function up()
     {
         Schema::table('votos', function (Blueprint $table) {
-            //
+
+            $table->integer('total_blancos');
+            $table->integer('total_nulos');
+            $table->integer('total_recurridos');
+            $table->integer('total_impugnados');
+
         });
     }
 
@@ -25,7 +30,11 @@ class UpdateVotosTable extends Migration
     public function down()
     {
         Schema::table('votos', function (Blueprint $table) {
-            //
-        });
+            
+            $table->integer('total_blancos');
+            $table->integer('total_nulos');
+            $table->integer('total_recurridos');
+            $table->integer('total_impugnados');       
+         });
     }
 }

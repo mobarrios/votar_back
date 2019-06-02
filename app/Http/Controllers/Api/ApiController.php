@@ -167,11 +167,20 @@ class ApiController extends Controller
         $idMesas = $route->getParameter('idMesas');
         $idListas = $route->getParameter('idListas');
 
+        $cantVotosRecurridos = $route->getParameter('total_recurridos');
+        $cantVotosNulos = $route->getParameter('total_nulos');
+        $cantVotosImpugnados = $route->getParameter('total_impugnados');
+        $cantVotosBlancos = $route->getParameter('total_blancos');
 
         $votos->total = $cantVotos;
         $votos->operativos_id = $idOperativos;
         $votos->listas_id = $idListas;
         $votos->mesas_id = $idMesas;
+        $votos->total_blancos = $cantVotosBlancos;
+        $votos->total_impugnados = $cantVotosImpugnados;
+        $votos->total_nulos = $cantVotosNulos;
+        $votos->total_recurridos = $cantVotosRecurridos;
+
 
         $votos->save();
 
