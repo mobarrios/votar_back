@@ -22,7 +22,7 @@ class CreateVotosTable extends Migration
             $table->integer('operativos_id')->unsigned();
             $table->foreign('operativos_id')->references('id')->on('operativos');
 
-            $table->integer('listas_id')->unsigned();
+            $table->integer('listas_id')->nullable()->unsigned();
             $table->foreign('listas_id')->references('id')->on('listas');
 
             $table->integer('mesas_id')->unsigned();

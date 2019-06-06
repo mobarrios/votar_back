@@ -123,7 +123,7 @@ class OperativosController extends Controller
             $op  = $operativosMesasUsers->where('operativos_id',$this->request->operativos_id)->where('mesas_id',$mesa)->where('users_id',$user)->get();
 
             if($op->count() == 0 )
-                    $operativosMesasUsers->create(['operativos_id'=>$this->request->operativos_id ,'mesas_id'=>$mesa,'users_id'=>$user])->save();
+            $operativosMesasUsers->create(['operativos_id'=>$this->request->operativos_id ,'mesas_id'=>$mesa,'users_id'=>$user])->save();
 
 
         }

@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
 
-                                 @foreach($models->Listas as $lista)
+                                 @foreach($models->Listas->sortBy('tipo_operativos_id') as $lista)
 
                                      <div class="col-xs-1 ">
                                         <img width="100px" src="{{$lista->Partidos->Images->first()->path or ''}}">
@@ -32,9 +32,22 @@
                                                 <h1><strong>0</strong>%</h1>
                                             @endif
                                             <h3>{{$lista->VotosOperativos($models->id)->sum('total')}} votos</h3>
-                                    </div>
+                                    </div>    
                                     
                                 @endforeach
+
+                                       <div>
+                                         <h1>{{$models->Votos->sum('total_blancos') }}</h1>
+                                         <h1>{{$models->Votos->sum('total_nulos') }}</h1>
+                                         <h1>{{$models->Votos->sum('total_impugnados') }}</h1>
+                                         <h1>{{$models->Votos->sum('total_recurridos') }}</h1>
+
+                                         {{-- <h1>{{$lista->VotosOperativos($models->id)->sum('total_nulos') }}</h1>
+                                         <h1>{{$lista->VotosOperativos($models->id)->sum('total_impugnados') }}</h1>
+                                         <h1>{{$lista->VotosOperativos($models->id)->sum('total_recurridos') }}</h1>
+ --}}
+
+                                    </div>
                         </div>
                     </div>
                 </div>

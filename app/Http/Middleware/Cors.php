@@ -46,8 +46,8 @@ class Cors
         // if($request->server('HTTP_HOST') == 'localhost')
         return $next($request)
             ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Credentials', 'true')
-            //->header('Acces-Control-Allow-Headers: Origin, Content-Type ')
+            //->header('Access-Control-Allow-Credentials', 'true')
+            ->header('Acces-Control-Allow-Headers: Origin, Content-Type ')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
 
