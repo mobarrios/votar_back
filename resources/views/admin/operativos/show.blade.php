@@ -36,18 +36,41 @@
                                     
                                 @endforeach
 
-                                       <div>
-                                         <h1>{{$models->Votos->sum('total_blancos') }}</h1>
-                                         <h1>{{$models->Votos->sum('total_nulos') }}</h1>
-                                         <h1>{{$models->Votos->sum('total_impugnados') }}</h1>
-                                         <h1>{{$models->Votos->sum('total_recurridos') }}</h1>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos en Blanco</h2>
+                                </div>
+                                <div class="col-xs-3 ">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_blancos') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Nulos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_nulos') }}</strong></h1>
+                                </div>
+                                 <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Impugnados</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_impugnados') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Recurridos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_recurridos') }}</strong></h1>
+                                </div>
+                                
 
-                                         {{-- <h1>{{$lista->VotosOperativos($models->id)->sum('total_nulos') }}</h1>
-                                         <h1>{{$lista->VotosOperativos($models->id)->sum('total_impugnados') }}</h1>
-                                         <h1>{{$lista->VotosOperativos($models->id)->sum('total_recurridos') }}</h1>
- --}}
-
-                                    </div>
+                 
                         </div>
                     </div>
                 </div>
