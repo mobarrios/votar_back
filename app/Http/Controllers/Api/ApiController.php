@@ -15,6 +15,9 @@ use App\Entities\Configs\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+use App\Entities\Admin\Imgs;
+
+
 
 
 
@@ -152,8 +155,11 @@ class ApiController extends Controller
 
      public function getListas( OperativosRepo $operativosRepo, Route $route)
     {
-       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')->find($route->getParameter('id'));
-    
+       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
+       ->whereHas('Listas',function($q){
+        $q->orderBy('tipo_operativos_id','ASC');
+       })->find($route->getParameter('id'));
+
        return response()->json(['results'=>$res],200);
     } 
 
@@ -187,5 +193,20 @@ class ApiController extends Controller
        return response()->json(true,200);
     }
 
+   public function postImagen(Route $route)
+   {
+    
+    return response()->json(true,200);
+
+    //     $img = new Imgs;
+    //     $img->operativos_id = $route->getParameter('idOperativos');
+    //     $img->mesas_id = $route->getParameter('idMesas');
+    //     $img->img =  $route->getParameter('imagen');
+    //     $img->save();
+
+
+    // return response()->json(true,200);
+
+   }
 
 }

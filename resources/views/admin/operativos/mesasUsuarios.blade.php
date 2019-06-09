@@ -28,7 +28,7 @@
                                         @foreach($escuela->Mesas as $mesa)
                                         <tr>
                                             <td>{{$escuela->nombre}}</td>
-                                            <td>{{$mesa->numero}}</td>
+                                            <td><a href="{{route('admin.mesas.show',[$escuela->id,$mesa->id,$models->id])}}" >{{$mesa->numero}}</a></td>
                                             <td class="col-xs-8">
                                                 <select name="mesas[]" class="form-control select2" multiple="multiple">
                                                     @foreach($usuarios as $usuario)

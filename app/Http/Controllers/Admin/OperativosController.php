@@ -13,6 +13,7 @@ use App\Http\Repositories\Admin\EscuelasRepo as Escuelas;
 use App\Http\Repositories\Admin\ListasRepo as Listas;
 use App\Http\Repositories\Configs\UsersRepo as Usuarios;
 use App\Entities\Admin\OperativosMesasUsers ;
+use DB;
 
 
 
@@ -87,6 +88,18 @@ class OperativosController extends Controller
 
         $this->data['models'] = $this->repo->find($id);
         $this->data['total'] = $this->repo->find($id)->Votos->sum('total') ;
+
+        $this->data['municipios']= DB::table('operativos')
+        ->join('operativos_mesas_users','operativos_mesas_users.operativos_id','=','operativos.id')
+        ->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')
+        ->join('escuelas','escuelas.id','=','mesas.escuelas_id')
+        ->join('votos','votos.operativos_id','=','operativos.id')
+        ->where('operativos.id',$id)
+        ->select(DB::raw('sum(DISTINCT votos.total) as total'),'escuelas.municipios_id')
+        ->groupBy('escuelas.municipios_id')
+        ->get();
+
+//        dd($this->data['municipios']);
 
 
         return view(config('models.'.$this->section.'.showView'))->with($this->data);

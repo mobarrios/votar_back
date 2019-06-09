@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\EscuelasRepo as EscuelasRepo;
 
+use App\Entities\Admin\Votos;
+
 
 class MesasController extends Controller
 {
@@ -73,6 +75,67 @@ class MesasController extends Controller
         $model = $this->repo->update($id,$this->request);
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),[$this->data['escuelas_id'], $model->id])->withErrors(['Regitro Editado Correctamente']);
+    }
+
+
+    public function show()
+    {
+
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Detalle';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+        $this->data['opId'] = $this->route->getParameter('operativos_id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+        return view('admin.mesas.mesasOperativosForm')->with($this->data);
+    }
+
+    public function votosEdit()
+    {
+        $votos = new Votos;
+
+        foreach ($this->request->votos as $voto => $valor )
+        {
+            $v = $votos->where('id',$voto)->first();
+            $v->total = $valor;
+            $v->save();
+        }
+
+        foreach ($this->request->blancos as $voto => $valor )
+        {
+            $v = $votos->where('id',$voto)->first();
+            $v->total_blancos = $valor;
+            $v->save();
+        }
+
+        foreach ($this->request->nulos as $voto => $valor )
+        {
+            $v = $votos->where('id',$voto)->first();
+            $v->total_nulos = $valor;
+            $v->save();
+        }
+
+
+        foreach ($this->request->recurridos as $voto => $valor )
+        {
+            $v = $votos->where('id',$voto)->first();
+            $v->total_recurridos = $valor;
+            $v->save();
+        }
+
+        foreach ($this->request->impugnados as $voto => $valor )
+        {
+            $v = $votos->where('id',$voto)->first();
+            $v->total_impugnados = $valor;
+            $v->save();
+        }
+
+
+
+        return redirect()->back()->withErrors(['Votos Editados Correctamente']);
     }
 
 

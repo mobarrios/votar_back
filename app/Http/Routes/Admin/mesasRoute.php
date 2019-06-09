@@ -12,9 +12,13 @@ Route::group(['prefix'=>'mesas'],function(){
 
             Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.mesas.create','uses'=>'Admin\MesasController@create']);
             Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'admin.mesas.store','uses'=>'Admin\MesasController@store']);
-            Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'admin.mesas.show','uses'=>'Admin\MesasController@show']);
+            Route::get('/show/{id?}/{operativos_id?}',             ['as'=>'admin.mesas.show','uses'=>'Admin\MesasController@show']);
             Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.mesas.index','uses'=>'Admin\MesasController@index']);
 
             Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.mesas.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+
+            //editar votos
+            Route::post('/edit/{id?}',       ['as'=>'admin.mesas.votos.edit','uses'=>'Admin\MesasController@votosEdit']);
+
         });
 });

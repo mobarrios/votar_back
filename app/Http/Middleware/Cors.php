@@ -45,9 +45,11 @@ class Cors
 
         // if($request->server('HTTP_HOST') == 'localhost')
         return $next($request)
+            // ->header("Content-Type: application/json; charset=UTF-8");
+            // ->header("Access-Control-Allow-Headers: Accept-Encoding, X-Requested-With, Content-Type, Origin, Accept, Authenticationtoken");
             ->header('Access-Control-Allow-Origin', '*')
             //->header('Access-Control-Allow-Credentials', 'true')
-            //->header('Acces-Control-Allow-Headers: Origin, Content-Type ')
+            // ->header('Acces-Control-Allow-Headers: Origin, Content-Type ')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
 

@@ -68,13 +68,32 @@
                                 <div class="col-xs-3">
                                       <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_recurridos') }}</strong></h1>
                                 </div>
-                                
 
-                 
                         </div>
                     </div>
                 </div>
 
+
+                    <div class="box">
+                        <div class="box-body">
+                            <table>
+                                <thead>
+                                    <th>Municipio</th>
+                                    <th>Votos</th>
+                                </thead>
+                                <tbody>
+                                    @foreach($municipios as $municipio)
+                                    <tr>
+                                        <td>{{$municipio->municipios_id}}</td>
+                                        <td>{{$municipio->total}}</td>
+                                    </tr> 
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
             </div>
 
         </div>

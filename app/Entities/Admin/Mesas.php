@@ -33,6 +33,17 @@
      	return $this->belongsToMany(User::class,'operativos_mesas_users','mesas_id','operativos_id');						
      }
 
+     public function Votos()
+     {
+          return $this->hasMany(Votos::class);
+     }
+
+     public function VotosOperativos($operativos_id)
+     {
+          return $this->hasMany(Votos::class)->where('operativos_id',$operativos_id)->get();
+     }
+   
+     
  }
 
 

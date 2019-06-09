@@ -13,4 +13,7 @@ class OperativosRepo extends BaseRepo {
     }
 
 
+    
+
+
 }

@@ -12,6 +12,9 @@ Route::get('getListas/{id?}', 'Api\ApiController@getListas');
 
 Route::get('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}/{total_recurridos?}/{total_nulos?}/{total_impugnados?}/{total_blancos?}', 'Api\ApiController@postVotos');
 
+//Route::get('postImagen/{idOperativos?}/{idMesas?}/{imagen?}', 'Api\ApiController@postImagen');
+Route::post('postImagen','Api\ApiController@postImagen');
+
 
 
 
