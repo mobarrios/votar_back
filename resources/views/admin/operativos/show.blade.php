@@ -76,7 +76,7 @@
 
                     <div class="box">
                         <div class="box-body">
-                            <table>
+                            <table class="table">
                                 <thead>
                                     <th>Municipio</th>
                                     <th>Votos</th>
@@ -84,7 +84,7 @@
                                 <tbody>
                                     @foreach($municipios as $municipio)
                                     <tr>
-                                        <td>{{$municipio->municipios_id}}</td>
+                                        <td><span class="muni" data="{{$municipio->municipios_id}}"></span></td>
                                         <td>{{$municipio->total}}</td>
                                     </tr> 
                                     @endforeach
@@ -101,6 +101,37 @@
 
 
     @endsection
+
+    @section('js')
+
+    <script type="text/javascript">
+
+
+        $('.muni').each(function(){
+            var id = $(this).attr('data');
+
+            var input = $(this);
+
+
+            $.ajax({
+             url: "https://apis.datos.gob.ar/georef/api/municipios?id="+id+"&aplanar",
+                    }).done(function(data) {
+                        //$.each(data.provincias, function(i, item) 
+                        //{                         
+                            input.text(data['municipios'][0]['nombre']);
+                            //$('#provincias').append('<option value="'+item.id+'" >'+item.nombre+'</option>')
+                        //});
+            });
+        });
+        
+           
+
+            
+            
+
+    </script>
+
+@endsection
       
 
 

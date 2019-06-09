@@ -89,7 +89,7 @@ class OperativosController extends Controller
         $this->data['models'] = $this->repo->find($id);
         $this->data['total'] = $this->repo->find($id)->Votos->sum('total') ;
 
-        $this->data['municipios']= DB::table('operativos')
+        $muni = DB::table('operativos')
         ->join('operativos_mesas_users','operativos_mesas_users.operativos_id','=','operativos.id')
         ->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')
         ->join('escuelas','escuelas.id','=','mesas.escuelas_id')
@@ -99,7 +99,17 @@ class OperativosController extends Controller
         ->groupBy('escuelas.municipios_id')
         ->get();
 
-//        dd($this->data['municipios']);
+        $d =[];
+
+        foreach ($muni as $key) {
+
+            $muniNombre = 
+           array_push($d, ['total'=>$key->total, 'municipio'=>'mm']);
+        }
+
+     
+
+        $this->data['municipios'] = $muni;
 
 
         return view(config('models.'.$this->section.'.showView'))->with($this->data);
