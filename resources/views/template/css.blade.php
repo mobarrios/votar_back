@@ -46,3 +46,7 @@
 
 <link href="vendors/bootstrap-checkbox-x/css/theme-krajee-flatblue.min.css" media="all" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/preloader.css">
+
+
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" media="all" rel="stylesheet" type="text/css" />
+

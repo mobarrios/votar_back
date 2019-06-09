@@ -18,7 +18,7 @@
 
 
             <div class="col-xs-6">
-                <table class="table">
+                <table id="dataTable" class="table" >
                     <thead>
                     <th>
                         Tipo
@@ -80,8 +80,22 @@
             </table>
             </div>
 
-           
 
+        
 @endsection
+
+@section('js')
+
+    <script type="text/javascript">
+        
+    $('#dataTable').DataTable();
+
+    </script>
+
+@endsection    
+
+
+
+
 
 

@@ -22,7 +22,6 @@
                                     <div class="col-xs-8">
                                             <h2>{{$lista->nombre}}</h2>
                                             <h3>{{$lista->TipoOperativos->nombre}}</h3>
-
                                     </div>
                                     <div class="col-xs-3">
 

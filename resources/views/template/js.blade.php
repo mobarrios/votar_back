@@ -66,7 +66,7 @@
 
 <script src="vendors/bootstrap-checkbox-x/js/checkbox-x.min.js" type="text/javascript"></script>
 
-
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
 
 @if(Auth::user())
 <script>
