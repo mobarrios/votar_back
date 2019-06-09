@@ -91,15 +91,52 @@ class OperativosController extends Controller
 
 
         $totales = DB::table('votos')
-        ->select(DB::raw('sum(votos.total) as total'),'tipo_operativos.id')
         ->join('listas','listas.id','=','votos.listas_id')
-        ->join('tipo_operativos','tipo_operativos.id','=','listas.tipo_operativos_id')
         ->where('votos.operativos_id','=',$id)
-        ->groupBy('listas.tipo_operativos_id')
+        ->where('listas.id','!=',99)
+        ->select('listas.nombre as nombre','votos.total as total')
         ->get();
 
-        $this->data['totales'] = $totales;
 
+        $this->data['tipo2']  = DB::table('votos')
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->where('votos.operativos_id','=',$id)
+        ->where('listas.id','!=',99)
+        ->where('listas.tipo_operativos_id' ,'=',2)
+        ->select('listas.nombre as nombre',DB::raw('sum( votos.total) as total'))
+        ->groupBy('listas.id')
+        ->get();
+
+        $this->data['tipo3']  = DB::table('votos')
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->where('votos.operativos_id','=',$id)
+        ->where('listas.id','!=',99)
+        ->where('listas.tipo_operativos_id' ,'=',3)
+        ->select('listas.nombre as nombre',DB::raw('sum( votos.total) as total'))
+        ->groupBy('listas.id')
+        ->get();
+
+        $this->data['tipo4']  = DB::table('votos')
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->where('votos.operativos_id','=',$id)
+        ->where('listas.id','!=',99)
+        ->where('listas.tipo_operativos_id' ,'=',4)
+       ->select('listas.nombre as nombre',DB::raw('sum( votos.total) as total'))
+        ->groupBy('listas.id')
+        ->get();
+
+        $this->data['tipo5']  = DB::table('votos')
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->where('votos.operativos_id','=',$id)
+        ->where('listas.id','!=',99)
+        ->where('listas.tipo_operativos_id' ,'=',5)
+        ->select('listas.nombre as nombre',DB::raw('sum( votos.total) as total'))
+        ->groupBy('listas.id')
+        ->get();
+
+
+
+        $this->data['totales'] = $totales;
 
         $muni = DB::table('operativos')
         ->join('operativos_mesas_users','operativos_mesas_users.operativos_id','=','operativos.id')
