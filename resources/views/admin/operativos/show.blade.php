@@ -27,7 +27,10 @@
                                     <div class="col-xs-3">
 
                                             @if($total > 0)
-                                                <h1><strong class="text-danger">{{ number_format((($lista->VotosOperativos($models->id)->sum('total')*100)/ $total),2) }} %</strong></h1>
+                                              {{--   <h1><strong class="text-danger">{{ number_format((($lista->VotosOperativos($models->id)->sum('total')*100)/ $total),2) }} %</strong></h1> --}}
+
+  <h1><strong class="text-danger">{{ number_format(( (($lista->VotosOperativos($models->id)->sum('total'))*100 ) / $lista->VotosTipoOperativos($models->id,$lista->tipo_operativos_id)->total),2) }} %</strong></h1>
+                                                   
                                             @else
                                                 <h1><strong>0</strong>%</h1>
                                             @endif

@@ -89,6 +89,18 @@ class OperativosController extends Controller
         $this->data['models'] = $this->repo->find($id);
         $this->data['total'] = $this->repo->find($id)->Votos->sum('total') ;
 
+
+        $totales = DB::table('votos')
+        ->select(DB::raw('sum(votos.total) as total'),'tipo_operativos.id')
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->join('tipo_operativos','tipo_operativos.id','=','listas.tipo_operativos_id')
+        ->where('votos.operativos_id','=',$id)
+        ->groupBy('listas.tipo_operativos_id')
+        ->get();
+
+        $this->data['totales'] = $totales;
+
+
         $muni = DB::table('operativos')
         ->join('operativos_mesas_users','operativos_mesas_users.operativos_id','=','operativos.id')
         ->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')

@@ -4,6 +4,8 @@
 
  
  use App\Entities\Entity;
+ use DB;
+
 
  class Listas extends Entity
  {
@@ -31,7 +33,19 @@
     public function VotosOperativos($operativosId)
     {
         return $this->votos->where('operativos_id',$operativosId);
-    }    
+    }  
+
+    public function VotosTipoOperativos($id,$tipoOPerativoId)
+    {
+        return DB::table('votos')
+        ->select(DB::raw('sum(votos.total) as total'))
+        ->join('listas','listas.id','=','votos.listas_id')
+        ->join('tipo_operativos','tipo_operativos.id','=','listas.tipo_operativos_id')
+        ->where('votos.operativos_id','=',$id)
+        ->where('tipo_operativos.id','=',$tipoOPerativoId)
+        ->groupBy('listas.tipo_operativos_id')
+        ->first();   
+     }    
  }
 
 
