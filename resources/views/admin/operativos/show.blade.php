@@ -107,15 +107,15 @@
                          </div>
                         <canvas id="t4" ></canvas>
                     </div>
-                </div>
-                 <div class="box">  
+                </div> --}}
+                 {{-- <div class="box">  
                     <div class="box-body">
                          <div class="box-title">
                             <h3>Intendentes</h3>
                          </div>
                         <canvas id="t5" ></canvas>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
 
                     <div class="box">
                         <div class="box-body">
@@ -179,7 +179,7 @@
                             @endforeach],
                 datasets: [{
                     label: 'Total de Votos',
-                    data: [@foreach($tipo2 as $t1)
+                    data: [@foreach($tipo1 as $t1)
                             {{$t1->total}},
                             @endforeach],
                     backgroundColor: [
