@@ -174,13 +174,13 @@
             var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [@foreach($tipo2 as $t2)
+                labels: [@foreach($tipo1 as $t1)
                             '{{$t1->nombre}}',
                             @endforeach],
                 datasets: [{
                     label: 'Total de Votos',
-                    data: [@foreach($tipo2 as $t2)
-                            {{$t2->total}},
+                    data: [@foreach($tipo2 as $t1)
+                            {{$t1->total}},
                             @endforeach],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
