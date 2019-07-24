@@ -34,6 +34,13 @@
         font-size:12px !important;
     }
 
+    .skin-blue-light .main-header .logo{
+        background-color:  #FDB813 !important
+    }
+
+    .skin-blue-light .main-header .navbar {
+        background-color:  #FFD400 !important
+    }
     .content-wrapper, .right-side{
         min-height: 84vh;
     }

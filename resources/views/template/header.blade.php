@@ -4,15 +4,15 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
             <span class="fa-stack fa-xs">
-                <i class="fa  fa-envelope "></i>
+                <i class="fa fa-check-square"></i>
             </span>
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
             <span class="fa-stack fa-lg">
-                    <i class="fa  fa-envelope "></i>
+                    <i class="fa fa-check-square "></i>
             </span>
-                <span>VotAR</span>
+                <strong>Fiscales</strong>
         </span>
 
     </a>

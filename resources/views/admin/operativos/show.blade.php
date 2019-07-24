@@ -163,7 +163,7 @@
             
             var ctx = document.getElementById('t2').getContext('2d');
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [@foreach($tipo2 as $t2)
                             '{{$t2->nombre}}',
