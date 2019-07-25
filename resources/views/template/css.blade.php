@@ -35,7 +35,8 @@
     }
 
     .skin-blue-light .main-header .logo{
-        background-color:  #FDB813 !important
+        background-color:  #FDB813 !important;
+        height: 67px;
     }
 
     .skin-blue-light .main-header .navbar {
