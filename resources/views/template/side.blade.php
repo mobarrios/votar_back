@@ -4,6 +4,9 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
+
+
+        <img src="images/cambio.png" width="100%" style="padding:10px">
             <li class="header">MENU PRINCIPAL</li>
 
             <li>
