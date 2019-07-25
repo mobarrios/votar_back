@@ -87,11 +87,11 @@
                                     <div class="col-xs-8">
                                         <h2>{{$lista->nombre}}</h2>
                                         {{-- <h3>{{$lista->TipoOperativos->nombre}}</h3> --}}
-                                    </div>
+                                    {{-- </div>
                                     <div class="col-xs-3">
-                                        @if($total > 0)
+                                        @if($total > 0) --}}
                                         {{--   <h1><strong class="text-danger">{{ number_format((($lista->VotosOperativos($models->id)->sum('total')*100)/ $total),2) }} %</strong></h1> --}}
-                                            <h1><strong class="text-danger">{{ number_format(( (($lista->VotosOperativos($models->id)->sum('total'))*100 ) / $lista->VotosTipoOperativos($models->id,$lista->tipo_operativos_id)->total),2) }} %</strong></h1>
+                                            {{-- <h1><strong class="text-danger">{{ number_format(( (($lista->VotosOperativos($models->id)->sum('total'))*100 ) / $lista->VotosTipoOperativos($models->id,$lista->tipo_operativos_id)->total),2) }} %</strong></h1>
                                         @else
                                             <h1><strong>0</strong>%</h1>
                                         @endif
@@ -101,7 +101,7 @@
                             @endforeach
                             <canvas id="t3"></canvas>
                         </div>
-                    </div> --}}
+                    </div> --}} 
 
                     <div class="box">
                             <div class="box-body"> 
