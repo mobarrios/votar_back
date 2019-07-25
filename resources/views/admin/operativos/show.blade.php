@@ -48,7 +48,7 @@
                         <h1 class="text-center">Gobernadores</h1>
                     </div>
                     <div class="box-body">
-                        @foreach($models->Listas->sortBy('tipo_operativos_id') as $lista)
+                        @foreach($models->Listas as $lista)
                             @if($lista->tipo_operativos_id == 2)
                                 <div class="col-xs-1 ">
                                     <img width="100px" src="{{$lista->Partidos->Images->first()->path or ''}}">
