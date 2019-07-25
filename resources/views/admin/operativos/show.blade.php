@@ -74,7 +74,7 @@
 
 
 
-                <div class="box">
+                {{-- <div class="box">
                         <div class="box-header">
                             <h1 class="text-center">Legisladores</h1>
                         </div>
@@ -101,7 +101,7 @@
                             @endforeach
                             <canvas id="t3"></canvas>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="box">
                             <div class="box-body"> 
