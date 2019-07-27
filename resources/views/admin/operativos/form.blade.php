@@ -61,9 +61,9 @@
                                             @endif
 
                                     </td>
-                                        <td>{{$lista->Partidos->nombre}}</td>
-                                        <td>{{$lista->nombre}}</td>
-                                        <td>{{$lista->TipoOperativos->nombre}}</td>
+                                        <td>{{$lista->Partidos->nombre or ''}}</td>
+                                        <td>{{$lista->nombre or '' }}</td>
+                                        <td>{{$lista->TipoOperativos->nombre or ''}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
