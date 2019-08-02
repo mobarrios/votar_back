@@ -76,6 +76,9 @@
      {
         return $this->belongsToMany(Mesas::class,'operativos_mesas_users','operativos_id','mesas_id');
      }
+
+
+    
  }
 
 

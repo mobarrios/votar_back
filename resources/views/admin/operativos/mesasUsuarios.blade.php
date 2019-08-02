@@ -22,9 +22,8 @@
 
                             </thead>
                             <tbody>
-                                @foreach($models->Escuelas as $escuela)
+                                @foreach($escuelasPaginate as $escuela)
 
-                                    
                                         @foreach($escuela->Mesas as $mesa)
                                         <tr>
                                             <td>{{$escuela->nombre}}</td>
@@ -45,7 +44,10 @@
                                         @endforeach
                                 @endforeach
                             </tbody>
+                           
                         </table>
+                        {!! $escuelasPaginate->render() !!}
+
                 </div>
             </div>
 

@@ -39,6 +39,8 @@ class OperativosController extends Controller
         $this->data['usuarios'] = $usuarios->getModel()->all();
 
 
+        $this->data['escuelasPaginate'] =  $escuelas->getModel()->paginate('50');
+
     }
 
 
@@ -97,14 +99,6 @@ class OperativosController extends Controller
         ->select('listas.nombre as nombre','votos.total as total')
         ->get();
 
-        $this->data['tipo1']  = DB::table('votos')
-        ->join('listas','listas.id','=','votos.listas_id')
-        ->where('votos.operativos_id','=',$id)
-        ->where('listas.id','!=',99)
-        ->where('listas.tipo_operativos_id' ,'=',1)
-        ->select('listas.nombre as nombre',DB::raw('sum( votos.total) as total'))
-        ->groupBy('listas.id')
-        ->get();
 
         $this->data['tipo2']  = DB::table('votos')
         ->join('listas','listas.id','=','votos.listas_id')
