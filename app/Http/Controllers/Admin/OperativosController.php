@@ -39,7 +39,7 @@ class OperativosController extends Controller
         $this->data['usuarios'] = $usuarios->getModel()->all();
 
 
-        $this->data['escuelasPaginate'] =  $escuelas->getModel()->paginate('50');
+        $this->data['escuelasPaginate'] =  $escuelas->getModel()->paginate('25');
 
     }
 
