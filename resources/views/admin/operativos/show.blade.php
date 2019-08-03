@@ -163,7 +163,7 @@
             
             var ctx = document.getElementById('t2').getContext('2d');
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [@foreach($tipo2 as $t2)
                             '{{$t2->nombre}}',
@@ -209,7 +209,7 @@
 
             var ctx = document.getElementById('t3').getContext('2d');
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [@foreach($tipo3 as $t3)
                             '{{$t3->nombre}}',
@@ -254,7 +254,7 @@
 
             var ctx = document.getElementById('t4').getContext('2d');
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [@foreach($tipo4 as $t4)
                             '{{$t4->nombre}}',
@@ -300,7 +300,7 @@
 
             var ctx = document.getElementById('t5').getContext('2d');
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [@foreach($tipo5 as $t5)
                             '{{$t5->nombre}}',
