@@ -213,6 +213,21 @@ class ApiController extends Controller
        return response()->json(true,200);
     }
 
+    public function postUrl(Route $route)
+   {
+    
+    
+        $img = new Imgs;
+        $img->operativos_id = $route->getParameter('idOperativos');
+        $img->mesas_id = $route->getParameter('idMesas');
+        $img->img =  $route->getParameter('imagen');
+        $img->save();
+
+
+     return response()->json(true,200);
+
+   }
+
    public function postImagen(Route $route)
    {
     
