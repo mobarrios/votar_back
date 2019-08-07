@@ -39,6 +39,39 @@
                         @endif
                     @endforeach
                     <canvas id="t1"></canvas>
+
+
+                    <div class="col-xs-8 ">
+                                    <h2>Votos en Blanco</h2>
+                                </div>
+                                <div class="col-xs-3 ">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_blancos') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Nulos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_nulos') }}</strong></h1>
+                                </div>
+                                 <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Impugnados</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_impugnados') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Recurridos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_recurridos') }}</strong></h1>
+                                </div>
+
                 </div>
             </div>
 
@@ -69,6 +102,37 @@
                             @endif
                         @endforeach
                         <canvas id="t2"></canvas>
+
+                        <div class="col-xs-8 ">
+                                    <h2>Votos en Blanco</h2>
+                                </div>
+                                <div class="col-xs-3 ">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_blancos1') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Nulos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_nulos1') }}</strong></h1>
+                                </div>
+                                 <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Impugnados</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_impugnados1') }}</strong></h1>
+                                </div>
+                                <div class="col-xs-1 ">       
+                                </div>
+                                <div class="col-xs-8 ">
+                                    <h2>Votos Recurridos</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                      <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_recurridos1') }}</strong></h1>
+                                </div>
                     </div>
                 </div>
 
@@ -103,7 +167,7 @@
                         </div>
                     </div> --}} 
 
-                    <div class="box">
+                    {{-- <div class="box">
                             <div class="box-body"> 
                                 <div class="col-xs-1 ">       
                                 </div>
@@ -138,7 +202,7 @@
                                       <h1 class="text-danger" ><strong>{{$models->Votos->sum('total_recurridos') }}</strong></h1>
                                 </div>
                             </div>
-                    </div>
+                    </div> --}}
                         {{-- </div>
                     </div>
                 </div> --}}
