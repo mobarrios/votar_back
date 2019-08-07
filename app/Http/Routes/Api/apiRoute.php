@@ -10,7 +10,7 @@ Route::get('getMesas/{id?}', 'Api\ApiController@getMesas');
 Route::get('getCandidatos/{id?}', 'Api\ApiController@getCandidatos');
 Route::get('getListas/{id?}', 'Api\ApiController@getListas');
 
-Route::get('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}/{total_recurridos?}/{total_nulos?}/{total_impugnados?}/{total_blancos?}', 'Api\ApiController@postVotos');
+Route::get('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}/{total_recurridos?}/{total_nulos?}/{total_impugnados?}/{total_blancos?}/{total_recurridos1?}/{total_nulos1?}/{total_impugnados1?}/{total_blancos1?}', 'Api\ApiController@postVotos');
 
 //Route::get('postImagen/{idOperativos?}/{idMesas?}/{imagen?}', 'Api\ApiController@postImagen');
 Route::post('postImagen','Api\ApiController@postImagen');

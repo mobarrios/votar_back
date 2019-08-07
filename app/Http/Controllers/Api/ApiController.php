@@ -177,17 +177,29 @@ class ApiController extends Controller
         $cantVotosNulos = $route->getParameter('total_nulos');
         $cantVotosImpugnados = $route->getParameter('total_impugnados');
         $cantVotosBlancos = $route->getParameter('total_blancos');
+
+
+        $cantVotosRecurridos1 = $route->getParameter('total_recurridos1');
+        $cantVotosNulos1 = $route->getParameter('total_nulos1');
+        $cantVotosImpugnados1= $route->getParameter('total_impugnados1');
+        $cantVotosBlancos1 = $route->getParameter('total_blancos1');
         // $url = $route->getParameter('url');
 
         $votos->total = $cantVotos;
         $votos->operativos_id = $idOperativos;
         $votos->listas_id = $idListas;
         $votos->mesas_id = $idMesas;
+
         $votos->total_blancos = $cantVotosBlancos;
         $votos->total_impugnados = $cantVotosImpugnados;
         $votos->total_nulos = $cantVotosNulos;
         $votos->total_recurridos = $cantVotosRecurridos;
 
+
+        $votos->total_blancos1 = $cantVotosBlancos1;
+        $votos->total_impugnados1 = $cantVotosImpugnados1;
+        $votos->total_nulos1 = $cantVotosNulos1;
+        $votos->total_recurridos1 = $cantVotosRecurridos1;
 
             // $img = new Imgs;
             // $img->operativos_id = $idOperativos;
