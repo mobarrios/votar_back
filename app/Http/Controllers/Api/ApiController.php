@@ -216,7 +216,7 @@ class ApiController extends Controller
     public function postUrl(Route $route)
    {
     
-        $img = new Imgs;
+        $img = new Imgs();
         $img->operativos_id = $route->getParameter('idOperativos');
         $img->mesas_id = $route->getParameter('idMesas');
         $img->img =  $route->getParameter('imagen');
