@@ -220,7 +220,7 @@ class ApiController extends Controller
         $img->operativos_id = $route->getParameter('idOperativos');
         $img->mesas_id = $route->getParameter('idMesas');
         $img->img =  $route->getParameter('imagen');
-        $img->save();
+        //$img->save();
 
 
      return response()->json(true,200);
