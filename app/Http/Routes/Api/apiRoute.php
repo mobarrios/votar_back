@@ -1,6 +1,6 @@
 <?php
 
-Route::get('postUrl/{idOperativos?}/{idMesas?}', 'Api\ApiController@postUrl');
+Route::get('postUrl','Api\ApiController@postUrl');
 
 Route::get('getUsers/{user_name?}/{password?}', 'Api\ApiController@getUsers');
 Route::get('getMesasByUsers/{user_name?}', 'Api\ApiController@getMesasByUsers');
