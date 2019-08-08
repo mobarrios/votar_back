@@ -1,5 +1,6 @@
 <?php
 
+Route::get('postUrl/{idOperativos?}/{idMesas?}', 'Api\ApiController@postUrl');
 
 Route::get('getUsers/{user_name?}/{password?}', 'Api\ApiController@getUsers');
 Route::get('getMesasByUsers/{user_name?}', 'Api\ApiController@getMesasByUsers');
@@ -12,7 +13,6 @@ Route::get('getListas/{id?}', 'Api\ApiController@getListas');
 
 Route::get('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}/{total_recurridos?}/{total_nulos?}/{total_impugnados?}/{total_blancos?}/{total_recurridos1?}/{total_nulos1?}/{total_impugnados1?}/{total_blancos1?}', 'Api\ApiController@postVotos');
 
-Route::get('postUrl/{idOperativos?}/{idMesas?}/{imagen?}', 'Api\ApiController@postUrl');
 //Route::post('postImagen','Api\ApiController@postImagen');
 
 
