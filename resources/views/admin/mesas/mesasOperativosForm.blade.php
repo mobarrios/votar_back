@@ -80,6 +80,11 @@
             </table>
             </div>
 
+            <div class="col-xs-12 text-center">
+
+                <img src="https://fiscales.s3.amazonaws.com/fiscales/{{$opId}}_{{$models->id}}.jpeg">
+            </div>
+
 
         
 @endsection
