@@ -56,7 +56,7 @@ class OperativosController extends Controller
         $model->escuelas()->attach($this->request->escuelas_id);
         //asigna los listas
         $model->listas()->attach($this->request->listas_id);
-        
+
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
@@ -154,19 +154,19 @@ class OperativosController extends Controller
         ->join('escuelas','escuelas.id','=','mesas.escuelas_id')
         ->join('votos','votos.operativos_id','=','operativos.id')
         ->where('operativos.id',$id)
-        ->select(DB::raw('sum(DISTINCT votos.total) as total'),'escuelas.municipios_id')
-        ->groupBy('escuelas.municipios_id')
+        ->select(DB::raw('sum(DISTINCT votos.total) as total'),'escuelas.id as municipios_id')
+        //->groupBy('escuelas.municipios_id')
         ->get();
 
         $d =[];
 
         foreach ($muni as $key) {
 
-            $muniNombre = 
+            $muniNombre =
            array_push($d, ['total'=>$key->total, 'municipio'=>'mm']);
         }
 
-     
+
 
         $this->data['municipios'] = $muni;
 
@@ -191,11 +191,11 @@ class OperativosController extends Controller
 
      public function postMesasUsuarios(OperativosMesasUsers $operativosMesasUsers)
     {
-        
+
         // id desde route
         $id = $this->route->getParameter('id');
 
-         
+
         foreach($this->request->mesas as $mesa)
         {
             $a =  explode('_', $mesa);
