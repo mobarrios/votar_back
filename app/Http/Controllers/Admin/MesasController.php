@@ -7,14 +7,17 @@ use App\Http\Repositories\Admin\MesasRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\EscuelasRepo as EscuelasRepo;
-
+use App\Http\Repositories\Admin\OperativosMesasPadronRepo;
+use App\Http\Repositories\Admin\OperativosMesasRepo;
+use App\Entities\Admin\OperativosMesasUsers;
+use App\Entities\Admin\OperativosMesas;
 use App\Entities\Admin\Votos;
 
 
 class MesasController extends Controller
 {
 
-    public function  __construct(Request $request, Repo $repo, Route $route, EscuelasRepo $escuelasRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, EscuelasRepo $escuelasRepo, OperativosMesasPadronRepo $operativosMesasPadron, OperativosMesasRepo $operativosMesasRepo)
     {
 
         $this->request  = $request;
@@ -25,6 +28,8 @@ class MesasController extends Controller
         $this->data['section']  = $this->section;
         $this->data['escuelas_id']  = $this->route->getParameter('escuelasId');
         $this->data['escuela'] = $escuelasRepo->find($this->route->getParameter('escuelasId'));
+        $this->operativosMesasPadron = $operativosMesasPadron;
+        $this->operativosMesasRepo   = $operativosMesasRepo;
     }
 
     public function index()
@@ -48,7 +53,7 @@ class MesasController extends Controller
     
         //pagina el query
         $this->data['models'] = $model->where('escuelas_id', $this->data['escuelas_id'] )->paginate(config('models.'.$this->section.'.paginate'));
-
+        
         //return view($this->getConfig()->indexRoute)->with($this->data);
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
@@ -57,7 +62,7 @@ class MesasController extends Controller
     {
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
-
+        
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
@@ -80,7 +85,7 @@ class MesasController extends Controller
 
     public function show()
     {
-
+        //dd($this->operativosMesasPadron->getModel()->all());
         //breadcrumb activo
         $this->data['activeBread'] = 'Detalle';
 
@@ -89,7 +94,11 @@ class MesasController extends Controller
         $this->data['opId'] = $this->route->getParameter('operativos_id');
 
         $this->data['models'] = $this->repo->find($id);
-
+       
+        $this->data['operativosMesas'] = $this->operativosMesasRepo->getModel()->where('operativos_id', $this->route->getParameter('operativos_id'))
+                                                ->where('mesas_id', $id)
+                                                ->first();
+        
         return view('admin.mesas.mesasOperativosForm')->with($this->data);
     }
 

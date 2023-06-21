@@ -18,17 +18,17 @@
                             <thead>
                                 <td>Escuela</td>
                                 <td>Mesa</td>      
+                                <td>Estado</td>
                                 <td>Tipo</td>
 
                             </thead>
                             <tbody>
                                 @foreach($models->Escuelas as $escuela)
-
-                                    
                                         @foreach($escuela->Mesas as $mesa)
                                         <tr>
                                             <td>{{$escuela->nombre}}</td>
                                             <td><a href="{{route('admin.mesas.show',[$escuela->id,$mesa->id,$models->id])}}" >{{$mesa->numero}}</a></td>
+                                            <td>{{ $mesa->Operativo($models->id)->estado }}</td>
                                             <td class="col-xs-8">
                                                 <select name="mesas[]" class="form-control select2" multiple="multiple">
                                                     @foreach($usuarios as $usuario)

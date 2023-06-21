@@ -9,7 +9,7 @@
  {
 
      protected $table = 'operativos';
-     protected $fillable = ['nombre','fecha','tipo_operativos_id','niveles_operativos_id'];
+     protected $fillable = ['nombre','fecha','tipo_operativos_id','niveles_operativos_id','empresas_id'];
 
      protected $section = 'operativos';
 

@@ -16,9 +16,6 @@ Route::get('postVotos/{cantVotos?}/{idOperativos?}/{idMesas?}/{idListas?}/{total
 Route::post('postImagen','Api\ApiController@postImagen');
 
 
-
-
-
 // // sucursales
 // Route::group(['prefix' => 'branches'], function () {
 

@@ -8,7 +8,7 @@
  {
 
      protected $table = 'votos';
-     protected $fillable = ['total','operativos_id','listas_id','mesas_id','total_blancos','total_recurridos','total_nulos','total_impugnados'];
+     protected $fillable = ['total','operativos_id','listas_id','mesas_id','total_blancos','total_recurridos','total_nulos','total_impugnados','operativos_mesas_id'];
 
      protected $section = 'votos';
 

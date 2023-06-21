@@ -13,7 +13,8 @@
 
 // API para ecommerce
 Route::group(['middleware'=>'cors','prefix'=>'api'],function(){
-    require(__DIR__ . '/Routes/Api/apiRoute.php');
+    //require(__DIR__ . '/Routes/Api/apiRoute.php');
+    require(__DIR__ . '/Routes/Api/apiV2Route.php');
 });
 
 

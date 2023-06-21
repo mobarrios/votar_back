@@ -21,7 +21,7 @@
 
 
         @yield('sectionContent')
-
+        @yield('secondContent')
         <!-- /.box -->
     </section>
     <!-- /.content -->

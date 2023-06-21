@@ -1033,6 +1033,22 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'listas.destroy',
                     'model' => '',
                 ],
+                // operativos show 
+
+                [
+                    'id'    => 160,
+                    'name' => 'Operativos Show',
+                    'slug' => 'operativos.show',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 161,
+                    'name' => 'Operativos Mesas',
+                    'slug' => 'operativos.mesasUsuarios',
+                    'model' => '',
+                ],
+
+
             ]);
     }
 }

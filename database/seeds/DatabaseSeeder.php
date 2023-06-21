@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         //configuracion
+        //$this->call(EmpresasSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
@@ -42,7 +43,8 @@ class DatabaseSeeder extends Seeder
 
         //brancheables
         $this->call(BrancheablesSeeders::class);
-
+        $this->call(EstadosMesasSeeders::class);
+        $this->call(NivelesOperativosSeeders::class);
         //providers
         //$this->call(ProvidersTableSeeder::class);
 

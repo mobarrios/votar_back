@@ -13,17 +13,12 @@ use App\Http\Repositories\Admin\EscuelasRepo as Escuelas;
 use App\Http\Repositories\Admin\ListasRepo as Listas;
 use App\Http\Repositories\Configs\UsersRepo as Usuarios;
 use App\Entities\Admin\OperativosMesasUsers ;
+use App\Http\Repositories\Admin\OperativosMesasRepo;
 use DB;
-
-
-
-
-
-
 
 class OperativosController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas, Listas $listas, Usuarios $usuarios)
+    public function  __construct(Request $request, Repo $repo, Route $route, Tipo $tipo, Niveles $niveles, Escuelas $escuelas, Listas $listas, Usuarios $usuarios, OperativosMesasRepo $operativosMesasRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -37,6 +32,7 @@ class OperativosController extends Controller
         $this->data['escuelas'] = $escuelas->ListsData('nombre','id');
         $this->data['listas'] = $listas->getModel()->all();
         $this->data['usuarios'] = $usuarios->getModel()->all();
+        $this->operativosMesasRepo = $operativosMesasRepo;
 
 
     }
@@ -48,12 +44,24 @@ class OperativosController extends Controller
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
         //crea a traves del repo con el request
-        $model = $this->repo->create($this->request);
+        $data = $this->request;
+        $model = $this->repo->create($data);
 
         //asigna los escuelas
         $model->escuelas()->attach($this->request->escuelas_id);
+
         //asigna los listas
         $model->listas()->attach($this->request->listas_id);
+        
+        // mesas operativs
+        foreach($model->escuelas as $escuela){
+
+            foreach($escuela->Mesas as $mesas){
+                
+                $this->operativosMesasRepo->create(['mesas_id' => $mesas->id, 'operativos_id' => $model->id, 'estados_mesas_id' => 1 ]);
+            }
+
+        }
         
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
@@ -184,7 +192,7 @@ class OperativosController extends Controller
         
         // id desde route
         $id = $this->route->getParameter('id');
-
+        //dd($id, $this->request->all());
          
         foreach($this->request->mesas as $mesa)
         {

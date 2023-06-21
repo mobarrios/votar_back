@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
                 'email'=>'root@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('yuna'),
                 'branches_active_id' => 1
-
+          
             ],[
                 'id'    => 2,
                 'user_name'=>'admin',
@@ -27,6 +27,7 @@ class UserTableSeeder extends Seeder
                 'email'=>'admin@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('1234'),
                 'branches_active_id' => 1
+               
             ]]);
     }
 }
