@@ -14,15 +14,15 @@ class NivelesOperativosSeeder extends Seeder
         DB::table('niveles_operativos')->insert([
             [
                 'id'   => 1,
-                'descripcion' => 'Nacional',
+                'nombre' => 'Nacional',
             ],
             [
                 'id'   => 2,
-                'descripcion' => 'Provincial',
+                'nombre' => 'Provincial',
             ],
             [
                 'id'   => 3,
-                'descripcion' => 'Municipal',
+                'nombre' => 'Municipal',
             ],
 
         ]);

@@ -43,8 +43,8 @@ class DatabaseSeeder extends Seeder
 
         //brancheables
         $this->call(BrancheablesSeeders::class);
-        $this->call(EstadosMesasSeeders::class);
-        $this->call(NivelesOperativosSeeders::class);
+        $this->call(EstadosMesasSeeder::class);
+        $this->call(NivelesOperativosSeeder::class);
         //providers
         //$this->call(ProvidersTableSeeder::class);
 
