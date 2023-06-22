@@ -32,6 +32,9 @@ class ApiV2Controller extends Controller{
         if (Auth::once(['user_name' => $username, 'password' => $pass ]))
         {
             $user = User::find(Auth::id());
+            $user->remember_token = Str::random(60);
+            $user->save();
+            
             return response()->json($user,200);
         
         }else{
