@@ -34,7 +34,7 @@ class ApiV2Controller extends Controller{
             $user = User::find(Auth::id());
             $user->remember_token = Str::random(60);
             $user->save();
-            
+
             return response()->json($user,200);
         
         }else{
@@ -118,6 +118,11 @@ class ApiV2Controller extends Controller{
 
     public function voto(Request $request)
     {
+        $idOperativos = $request->idOperativos;
+        
+        if (! $idOperativos)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+
         $votos = new Votos();
         
         $cantVotos = $request->cantVotos;

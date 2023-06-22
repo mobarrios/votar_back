@@ -21,8 +21,8 @@ class CreateOperativosMesasPadronTable extends Migration
             $table->integer('padrones_id')->unsigned();
             $table->foreign('padrones_id')->references('id')->on('padrones');
 
-            $table->integer('referentes_id')->unsigned();
-            $table->foreign('referentes_id')->references('id')->on('referentes');
+            $table->integer('referentes_id')->unsigned()->nullable();
+            //$table->foreign('referentes_id')->references('id')->on('referentes');
 
             $table->boolean('voto')->nullable();
 
