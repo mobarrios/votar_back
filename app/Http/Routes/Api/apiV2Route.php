@@ -1,6 +1,6 @@
 <?php
 
-Route::get('v2/getUsers/{user_name?}/{password?}', 'Api\ApiV2Controller@getUsers');
+Route::post('v2/getUsers', 'Api\ApiV2Controller@getUsers');
 Route::get('v2/getEscuelas', 'Api\ApiV2Controller@getEscuelas');
 Route::get('v2/getMesas/{id?}', 'Api\ApiV2Controller@getMesas');
 Route::get('v2/getCandidatos/{id?}', 'Api\ApiV2Controller@getCandidatos');

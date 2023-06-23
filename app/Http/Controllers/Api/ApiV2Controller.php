@@ -72,45 +72,57 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
             $operativos = DB::table('users')
+            ->select('operativos.id','operativos.nombre')
             ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
-            //->join('mesas','mesas.id','=','operativos_mesas_users.mesas_id')
-            //->join('escuelas','escuelas.id','=','mesas.escuelas_id')
             ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
-            //->join('niveles_operativos','niveles_operativos.id','=','operativos.niveles_operativos_id')
             ->where('users.id','=',$userId)
             ->groupBy('operativos.id')
-            /*
-            ->select('operativos.id as operativos_id',
-                'operativos.nombre as operativos_nombre',
-                'mesas.id as mesas_id',
-                'mesas.numero as mesas_numero',
-                'escuelas.id as escuelas_id',
-                'escuelas.nombre as escuelas_nombre',
-                'niveles_operativos.id as niveles_operativos_id',
-                'niveles_operativos.nombre as niveles_operativos_nombre'
-            )
-            */
-
             ->get();
-
-          
+        
+            //dd($operativos);
         $resultado['results']['operativos'] = [];
 
         foreach ($operativos as $o){
+            
+            
+            $escuelas = DB::table('operativos_escuelas')
+            ->select('escuelas.nombre','escuelas.id')
+            ->join('escuelas', 'operativos_escuelas.escuelas_id', '=', 'escuelas.id')
+            ->where('operativos_escuelas.operativos_id', '=', $o->id)
+            ->get();
+            //dd($escuelas);
+            $result= [];
+           
+            foreach($escuelas as $escuela){
+                
+                $mesas = DB::table('mesas')
+                ->select('mesas.id','mesas.numero')
+                ->join('operativos_mesas_users', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
+                ->where('mesas.escuelas_id', $escuela->id)
+                ->where('operativos_mesas_users.users_id', $userId)
+                ->where('operativos_mesas_users.operativos_id', $o->id)
+                ->get();
+                
+                array_push($result, [
+                    'nombre' => $escuela->nombre,
+                    'mesas'  => $mesas,
+                ]); 
 
-            $mesas = DB::table('operativos_mesas')
-                    ->join('mesas', 'operativos_mesas.mesas_id', '=', 'mesas.id')
-                    ->where('operativos_id', '=', $o->id)->get();
+            }
+            
 
             array_push($resultado['results']['operativos'], [
 
                 'id'        => $o->id,
                 'nombre'    => $o->nombre,
-                'mesas'     => $mesas
+                'escuelas'  => $result
+                
                
             ]);
+            
 
         }
+    
 
         return response()->json($resultado,200);
 
