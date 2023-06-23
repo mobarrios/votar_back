@@ -103,10 +103,12 @@ class ApiV2Controller extends Controller{
                 ->where('operativos_mesas_users.operativos_id', $o->id)
                 ->get();
                 
-                array_push($result, [
-                    'nombre' => $escuela->nombre,
-                    'mesas'  => $mesas,
-                ]); 
+                if(count($mesas) > 0){
+                    array_push($result, [
+                        'nombre' => $escuela->nombre,
+                        'mesas'  => $mesas,
+                    ]); 
+                }
 
             }
             
