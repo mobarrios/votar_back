@@ -14,7 +14,7 @@ class PadronFakeSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
        
-        for ($i = 1; $i < 65; $i++){
+        for ($i = 1; $i < 200; $i++){
             DB::table('padrones')->insert([
                 [
                     'id' => $i,
@@ -29,7 +29,7 @@ class PadronFakeSeeder extends Seeder
             ]);
         }
 
-        for ($i = 1; $i < 65; $i++){
+        for ($i = 1; $i < 200; $i++){
             DB::table('referentes')->insert([
                 [
                     'id' => $i,

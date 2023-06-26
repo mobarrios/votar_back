@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\Admin\EscuelasRepo;
 use App\Http\Repositories\Admin\MesasRepo;
 use App\Http\Repositories\Admin\OperativosRepo;
+use App\Entities\Admin\OperativosMesasPadron;
 use Illuminate\Routing\Route;
 use App\Entities\Admin\Votos;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,7 @@ class ApiV2Controller extends Controller{
        
         $username  = $request->user_name;
         $pass   = $request->password;
-
+       
         if (! $username || ! $pass)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
@@ -79,7 +80,6 @@ class ApiV2Controller extends Controller{
             ->groupBy('operativos.id')
             ->get();
         
-            //dd($operativos);
         $resultado['results']['operativos'] = [];
 
         foreach ($operativos as $o){
@@ -165,6 +165,18 @@ class ApiV2Controller extends Controller{
        return response()->json(true,200);
     }
 
+    public function votoPadron(Request $request){
+
+        $id = $request->operativos_mesas_padron_id;
+        
+        $op = OperativosMesasPadron::find($id);
+        $op->voto = $request->voto;
+        $op->save();
+        
+        return response()->json(true,200);
+     
+    }
+
     public function getEscuelas( EscuelasRepo $escuelasRepo)
     {
        $res =  $escuelasRepo->getModel()->with('Mesas')->get();
@@ -187,12 +199,17 @@ class ApiV2Controller extends Controller{
        return response()->json(['results'=>$res],200);
     } 
 
-     public function getListas( OperativosRepo $operativosRepo, Route $route)
+     public function getListas( OperativosRepo $operativosRepo, Request $request)
     {
-       $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
-       ->whereHas('Listas',function($q){
-        $q->orderBy('tipo_operativos_id','ASC');
-       })->find($route->getParameter('id'));
+        $idOperativos = $request->operativos_id;
+        
+        if (! $idOperativos)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+
+        $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
+            ->whereHas('Listas',function($q){
+            $q->orderBy('tipo_operativos_id','ASC');
+        })->find($idOperativos);
 
        return response()->json(['results'=>$res],200);
     } 
