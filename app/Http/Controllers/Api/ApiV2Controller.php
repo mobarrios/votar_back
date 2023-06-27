@@ -86,10 +86,9 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
             $operativos = DB::table('users')
-            ->select('operativos.id','operativos.nombre','referentes.nombre')
+            ->select('operativos.id','operativos.nombre')
             ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
             ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
-            ->join('referentes','operativos.id','=','operativos_mesas_users.referentes_id')
             ->where('users.id','=',$userId)
             ->groupBy('operativos.id')
             ->get();
