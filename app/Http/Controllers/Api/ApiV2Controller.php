@@ -46,15 +46,28 @@ class ApiV2Controller extends Controller{
 
     public function getPadronByMesa(Request $request){
         
-        $mesaId         = $request->mesa_id;
-        $operativoId    = $request->operativo_id;
+        $mesaId         = $request->mesas_id;
+        $operativoId    = $request->operativos_id;
         
         if (! $mesaId || ! $operativoId)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
         $res = DB::table('operativos_mesas')
+            
+            ->select( 
+                'operativos_mesas_padron.id',
+                'padrones.nombre',
+                'padrones.apellido',
+                'padrones.dni',
+                'padrones.nro_afiliado',
+                'padrones.domicilio',
+                'padrones.nro_orden',
+                'operativos_mesas_padron.voto',
+                DB::raw("CONCAT(referentes.nombre, ' ', referentes.apellido) AS referente")
+            )
             ->join('operativos_mesas_padron','operativos_mesas_padron.operativos_mesas_id','=','operativos_mesas.id')
             ->join('padrones', 'operativos_mesas_padron.padrones_id', '=', 'padrones.id' )
+            ->join('referentes','operativos_mesas_padron.referentes_id','=','referentes.id')
             ->where('operativos_mesas.mesas_id','=', $mesaId)
             ->where('operativos_mesas.operativos_id','=', $operativoId)
             ->get();
@@ -67,15 +80,16 @@ class ApiV2Controller extends Controller{
 
     public function getOperativosByUser(Request $request){
       
-        $userId = $request->user_id;
+        $userId = $request->users_id;
 
         if (! $userId)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
             $operativos = DB::table('users')
-            ->select('operativos.id','operativos.nombre')
+            ->select('operativos.id','operativos.nombre','referentes.nombre')
             ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
             ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
+            ->join('referentes','operativos.id','=','operativos_mesas_users.referentes_id')
             ->where('users.id','=',$userId)
             ->groupBy('operativos.id')
             ->get();
@@ -90,7 +104,7 @@ class ApiV2Controller extends Controller{
             ->join('escuelas', 'operativos_escuelas.escuelas_id', '=', 'escuelas.id')
             ->where('operativos_escuelas.operativos_id', '=', $o->id)
             ->get();
-            //dd($escuelas);
+            
             $result= [];
            
             foreach($escuelas as $escuela){
@@ -199,18 +213,19 @@ class ApiV2Controller extends Controller{
        return response()->json(['results'=>$res],200);
     } 
 
-     public function getListas( OperativosRepo $operativosRepo, Request $request)
+    public function getListas( OperativosRepo $operativosRepo, Request $request)
     {
-    
+        
         $idOperativos = $request->operativos_id;
         
         if (! $idOperativos)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
         $partidos = DB::table('operativos_listas')
-        ->select('partidos.nombre', 'partidos.id')
+        ->select('partidos.nombre', 'partidos.id', 'images.path')
         ->join('listas', 'operativos_listas.listas_id', '=', 'listas.id')
         ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
+        ->join('images', 'images.imageable_id', '=', 'partidos.id')
         ->groupBy('listas.partidos_id')
         ->where('operativos_listas.operativos_id', $idOperativos)
         ->get();
@@ -225,11 +240,12 @@ class ApiV2Controller extends Controller{
             ->where('listas.partidos_id', '=', $partido->id)
             ->where('operativos_listas.operativos_id', '=', $idOperativos)
             ->get();
-         
+            
             array_push($resultado['results']['partidos'], [
 
                 'id'        => $partido->id,
                 'nombre'    => $partido->nombre,
+                'url' => $partido->path,
                 'listas'    => $listas
                 
             ]);
