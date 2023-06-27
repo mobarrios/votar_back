@@ -201,6 +201,7 @@ class ApiV2Controller extends Controller{
 
      public function getListas( OperativosRepo $operativosRepo, Request $request)
     {
+    
         $idOperativos = $request->operativos_id;
         
         if (! $idOperativos)
