@@ -70,6 +70,7 @@ class ApiV2Controller extends Controller{
             ->join('referentes','operativos_mesas_padron.referentes_id','=','referentes.id')
             ->where('operativos_mesas.mesas_id','=', $mesaId)
             ->where('operativos_mesas.operativos_id','=', $operativoId)
+            ->orderBy('padrones.apellido', 'asc')
             ->get();
 
         
