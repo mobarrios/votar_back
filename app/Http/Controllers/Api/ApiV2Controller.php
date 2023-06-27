@@ -206,12 +206,44 @@ class ApiV2Controller extends Controller{
         if (! $idOperativos)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
-        $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
-            ->whereHas('Listas',function($q){
-            $q->orderBy('tipo_operativos_id','ASC');
-        })->find($idOperativos);
+        $partidos = DB::table('operativos_listas')
+        ->select('partidos.nombre', 'partidos.id')
+        ->join('listas', 'operativos_listas.listas_id', '=', 'listas.id')
+        ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
+        ->groupBy('listas.partidos_id')
+        ->where('operativos_listas.operativos_id', $idOperativos)
+        ->get();
 
-       return response()->json(['results'=>$res],200);
+        $resultado['results']['partidos'] = [];
+
+        foreach ($partidos as $partido){
+
+            $listas = DB::table('listas')
+            ->join('operativos_listas', 'operativos_listas.listas_id', '=', 'listas.id' )
+            ->select('listas.nombre','listas.id')
+            ->where('listas.partidos_id', '=', $partido->id)
+            ->where('operativos_listas.operativos_id', '=', $idOperativos)
+            ->get();
+         
+            array_push($resultado['results']['partidos'], [
+
+                'id'        => $partido->id,
+                'nombre'    => $partido->nombre,
+                'listas'    => $listas
+                
+            ]);
+
+           
+        }
+
+        
+
+        // $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
+        //     ->whereHas('Listas',function($q){
+        //     $q->orderBy('tipo_operativos_id','ASC');
+        // })->find($idOperativos);
+
+       return response()->json($resultado,200);
     } 
 
     
