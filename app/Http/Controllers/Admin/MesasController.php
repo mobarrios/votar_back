@@ -98,7 +98,7 @@ class MesasController extends Controller
         $this->data['operativosMesas'] = $this->operativosMesasRepo->getModel()->where('operativos_id', $this->route->getParameter('operativos_id'))
                                                 ->where('mesas_id', $id)
                                                 ->first();
-        
+        //dd($this->data['operativosMesas']);
         return view('admin.mesas.mesasOperativosForm')->with($this->data);
     }
 

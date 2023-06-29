@@ -25,6 +25,7 @@
                             <tbody>
                                 @foreach($models->Escuelas as $escuela)
                                         @foreach($escuela->Mesas as $mesa)
+                                        
                                         <tr>
                                             <td>{{$escuela->nombre}}</td>
                                             <td><a href="{{route('admin.mesas.show',[$escuela->id,$mesa->id,$models->id])}}" >{{$mesa->numero}}</a></td>

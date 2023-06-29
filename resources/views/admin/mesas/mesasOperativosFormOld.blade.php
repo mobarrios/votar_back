@@ -32,12 +32,12 @@ Mesas Operativo
             </thead>
             
             <tbody>
-                @foreach($operativosMesas->VotosListas as $votos)
+                @foreach( $models->VotosOperativos($opId) as $votos)
                     @if($votos->Listas->id != 99)
                         <tr>
                             <td> {{$votos->Listas->TipoOperativos->nombre}} </td>
                             <td> {{$votos->Listas->nombre}} </td>
-                            <td> <input  name="votos[{{$votos->id}}]" value="{{$votos->cantidad_votos}}"></td>
+                            <td> <input  name="votos[{{$votos->id}}]" value="{{$votos->total}}"></td>
                         </tr>
                     @endif
                 @endforeach
@@ -65,16 +65,7 @@ Mesas Operativo
             </thead>
             
             <tbody>
-                @foreach($operativosMesas->VotosMesas as $votos)
-                    <tr>
-                        <td> </td>
-                        <td><input  name="blancos[{{$votos->id}}]" value="{{$votos->total_blancos}}"></td>
-                        <td><input  name="nulos[{{$votos->id}}]" value="{{$votos->total_nulos}}"></td>
-                        <td><input  name="recurridos[{{$votos->id}}]" value="{{$votos->total_recurridos}}"></td>
-                        <td><input  name="impugnados[{{$votos->id}}]" value="{{$votos->total_impugnados}}"></td>
-                    </tr>
-                @endforeach
-                {{-- @foreach( $models->VotosOperativos($opId) as $votos)
+                @foreach( $models->VotosOperativos($opId) as $votos)
                     @if($votos->Listas->id == 99)
                         <tr>
                             <td> </td>
@@ -83,8 +74,8 @@ Mesas Operativo
                             <td><input  name="recurridos[{{$votos->id}}]" value="{{$votos->total_recurridos}}"></td>
                             <td><input  name="impugnados[{{$votos->id}}]" value="{{$votos->total_impugnados}}"></td>
                         </tr>
-                    @endif
-                @endforeach --}}
+                @endif
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -9,6 +9,7 @@ use App\Http\Repositories\Admin\OperativosRepo;
 use App\Entities\Admin\OperativosMesasPadron;
 use Illuminate\Routing\Route;
 use App\Entities\Admin\Votos;
+use App\Entities\Admin\VotosListas;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Entities\Configs\User;
@@ -144,15 +145,34 @@ class ApiV2Controller extends Controller{
 
     }
 
-    public function voto(Request $request)
+    public function votoByLista(Request $request)
     {
-        $idOperativos = $request->idOperativos;
+        $idOperativos = $request->operativos_mesas_id;
+        //dd($request->cantidad_total);
+        if (! $idOperativos)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+
+        $voto = new VotosListas();
+
+        $voto->listas_id = $request->listas_id;
+        $voto->cantidad_votos = $request->cantidad_votos;
+        $voto->operativos_mesas_id = $request->operativos_mesas_id;
+        
+        $voto->save();
+
+        return response()->json(true,200);
+    }
+
+    public function votoByMesa(Request $request)
+    {
+        $idOperativos = $request->operativos_mesas_id;
         
         if (! $idOperativos)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
-        $votos = new Votos();
+        $voto = new Votos();
         
+        /*
         $cantVotos = $request->cantVotos;
         $idOperativos = $request->idOperativos;
         $idMesas = $request->idMesas;
@@ -172,9 +192,16 @@ class ApiV2Controller extends Controller{
         $votos->total_nulos = $cantVotosNulos;
         $votos->total_recurridos = $cantVotosRecurridos;
         $votos->operativos_mesas_id = $operativosMesasId;
+        */
 
+        $voto->operativos_mesas_id = $request->operativos_mesas_id;
+        $voto->total_blancos = $request->total_blancos;
+        $voto->total_impugnados = $request->total_impugnados;
+        $voto->total_nulos = $request->total_nulos;
+        $voto->total_recurridos = $request->total_recurridos;
+        $voto->total = $request->total;
 
-        $votos->save();
+        $voto->save();
 
        return response()->json(true,200);
     }
