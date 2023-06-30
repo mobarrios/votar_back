@@ -11,7 +11,7 @@
                     </div>
                 </td> --}}
                 <td>{{$model->fecha }}</td>
-                {{-- <td><a href="{{route('admin.operativos.show',$model->id)}}">{{$model->nombre}}</a></td> --}}
+                <td>{{$model->nombre}}</td>
                 <td>{{$model->Niveles->nombre}}</td>
                 <td><a  class="btn btn-xs btn-primary" href="{{route('admin.operativos.mesasUsuarios',$model->id)}}">Mesas</a></td>
 

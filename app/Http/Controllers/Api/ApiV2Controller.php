@@ -10,6 +10,7 @@ use App\Entities\Admin\OperativosMesasPadron;
 use Illuminate\Routing\Route;
 use App\Entities\Admin\Votos;
 use App\Entities\Admin\VotosListas;
+use App\Entities\Admin\OperativosMesas;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Entities\Configs\User;
@@ -147,16 +148,18 @@ class ApiV2Controller extends Controller{
 
     public function votoByLista(Request $request)
     {
-        $idOperativos = $request->operativos_mesas_id;
-        //dd($request->cantidad_total);
-        if (! $idOperativos)
+        $idOperativos = $request->operativos_id;
+        $idMesa = $request->mesas_id;
+     
+        if (! $idOperativos || !$idMesa)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
-
+        
+        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
         $voto = new VotosListas();
 
         $voto->listas_id = $request->listas_id;
         $voto->cantidad_votos = $request->cantidad_votos;
-        $voto->operativos_mesas_id = $request->operativos_mesas_id;
+        $voto->operativos_mesas_id = $operativoMesa->id;
         
         $voto->save();
 
@@ -164,12 +167,15 @@ class ApiV2Controller extends Controller{
     }
 
     public function votoByMesa(Request $request)
-    {
-        $idOperativos = $request->operativos_mesas_id;
-        
-        if (! $idOperativos)
+    {   
+        $idOperativos = $request->operativos_id;
+        $idMesa = $request->mesas_id;
+     
+        if (! $idOperativos || !$idMesa)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
-
+        
+        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
+        
         $voto = new Votos();
         
         /*
@@ -194,7 +200,7 @@ class ApiV2Controller extends Controller{
         $votos->operativos_mesas_id = $operativosMesasId;
         */
 
-        $voto->operativos_mesas_id = $request->operativos_mesas_id;
+        $voto->operativos_mesas_id = $operativoMesa->id;
         $voto->total_blancos = $request->total_blancos;
         $voto->total_impugnados = $request->total_impugnados;
         $voto->total_nulos = $request->total_nulos;
