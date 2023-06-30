@@ -157,12 +157,8 @@ class ApiV2Controller extends Controller{
         if(!$operativoMesa)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
 
-        if($operativoMesa->VotoLista){
-            $voto = $operativoMesa->VotoLista;
-        }else{
-            $voto = new VotosListas();
-        }  
-
+        
+        $voto = new VotosListas();
         $voto->listas_id = $request->listas_id;
         $voto->cantidad_votos = $request->cantidad_votos;
         $voto->operativos_mesas_id = $operativoMesa->id;

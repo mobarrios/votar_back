@@ -32,13 +32,13 @@ Mesas Operativo
             </thead>
             
             <tbody>
-                @if($operativosMesas->VotoLista)
+                @foreach($operativosMesas->VotoLista as $voto)
                     <tr>
-                        <td> {{ $operativosMesas->VotoLista->Listas->TipoOperativos->nombre }} </td>
-                        <td> {{ $operativosMesas->VotoLista->Listas->nombre }} </td>
-                        <td> <input value="{{ $operativosMesas->VotoLista->cantidad_votos }}"></td>
+                        <td> {{ $voto->Listas->TipoOperativos->nombre }} </td>
+                        <td> {{ $voto->Listas->nombre }} </td>
+                        <td> <input value="{{ $voto->cantidad_votos }}"></td>
                     </tr>
-                @endif
+                @endforeach
             </tbody>
         </table>
     </div>

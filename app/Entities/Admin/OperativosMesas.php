@@ -27,7 +27,7 @@ class OperativosMesas extends Entity
     }
 
     public function VotoLista(){
-        return $this->hasOne(VotosListas::class);
+        return $this->hasMany(VotosListas::class);
     }
 
      public function getEstadoAttribute()
