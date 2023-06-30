@@ -128,7 +128,6 @@ class ApiV2Controller extends Controller{
 
             }
             
-
             array_push($resultado['results']['operativos'], [
 
                 'id'        => $o->id,
@@ -138,7 +137,6 @@ class ApiV2Controller extends Controller{
                
             ]);
             
-
         }
     
 
@@ -155,7 +153,15 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
         
         $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
-        $voto = new VotosListas();
+        
+        if(!$operativoMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+
+        if($operativoMesa->VotoLista){
+            $voto = $operativoMesa->VotoLista;
+        }else{
+            $voto = new VotosListas();
+        }  
 
         $voto->listas_id = $request->listas_id;
         $voto->cantidad_votos = $request->cantidad_votos;
@@ -175,38 +181,23 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
         
         $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
-        
-        $voto = new Votos();
-        
-        /*
-        $cantVotos = $request->cantVotos;
-        $idOperativos = $request->idOperativos;
-        $idMesas = $request->idMesas;
-        $idListas = $request->idListas;
-        $cantVotosRecurridos = $request->total_recurridos;
-        $cantVotosNulos = $request->total_nulos;
-        $cantVotosImpugnados = $request->total_impugnados;
-        $cantVotosBlancos = $request->total_blancos;
-        $operativosMesasId = $request->operativos_mesas_id;
-  
-        $votos->total = $cantVotos;
-        $votos->operativos_id = $idOperativos;
-        $votos->listas_id = $idListas;
-        $votos->mesas_id = $idMesas;
-        $votos->total_blancos = $cantVotosBlancos;
-        $votos->total_impugnados = $cantVotosImpugnados;
-        $votos->total_nulos = $cantVotosNulos;
-        $votos->total_recurridos = $cantVotosRecurridos;
-        $votos->operativos_mesas_id = $operativosMesasId;
-        */
+       
+        if(!$operativoMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
 
+        if($operativoMesa->VotoMesa){
+            $voto = $operativoMesa->VotoMesa;
+        }else{
+            $voto = new Votos();
+        }   
+        
         $voto->operativos_mesas_id = $operativoMesa->id;
         $voto->total_blancos = $request->total_blancos;
         $voto->total_impugnados = $request->total_impugnados;
         $voto->total_nulos = $request->total_nulos;
         $voto->total_recurridos = $request->total_recurridos;
         $voto->total = $request->total;
-
+     
         $voto->save();
 
        return response()->json(true,200);
@@ -262,7 +253,7 @@ class ApiV2Controller extends Controller{
         ->groupBy('listas.partidos_id')
         ->where('operativos_listas.operativos_id', $idOperativos)
         ->get();
-
+       
         $resultado['results']['partidos'] = [];
 
         foreach ($partidos as $partido){

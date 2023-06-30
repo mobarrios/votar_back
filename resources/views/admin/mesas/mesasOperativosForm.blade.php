@@ -32,15 +32,13 @@ Mesas Operativo
             </thead>
             
             <tbody>
-                @foreach($operativosMesas->VotosListas as $votos)
-                    @if($votos->Listas->id != 99)
-                        <tr>
-                            <td> {{$votos->Listas->TipoOperativos->nombre}} </td>
-                            <td> {{$votos->Listas->nombre}} </td>
-                            <td> <input  name="votos[{{$votos->id}}]" value="{{$votos->cantidad_votos}}"></td>
-                        </tr>
-                    @endif
-                @endforeach
+                @if($operativosMesas->VotoLista)
+                    <tr>
+                        <td> {{ $operativosMesas->VotoLista->Listas->TipoOperativos->nombre }} </td>
+                        <td> {{ $operativosMesas->VotoLista->Listas->nombre }} </td>
+                        <td> <input value="{{ $operativosMesas->VotoLista->cantidad_votos }}"></td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>
@@ -65,26 +63,14 @@ Mesas Operativo
             </thead>
             
             <tbody>
-                @foreach($operativosMesas->VotosMesas as $votos)
+                @if($operativosMesas->VotoMesa)
                     <tr>
-                        <td> </td>
-                        <td><input  name="blancos[{{$votos->id}}]" value="{{$votos->total_blancos}}"></td>
-                        <td><input  name="nulos[{{$votos->id}}]" value="{{$votos->total_nulos}}"></td>
-                        <td><input  name="recurridos[{{$votos->id}}]" value="{{$votos->total_recurridos}}"></td>
-                        <td><input  name="impugnados[{{$votos->id}}]" value="{{$votos->total_impugnados}}"></td>
+                        <td><input value="{{$operativosMesas->VotoMesa->total_blancos}}"></td>
+                        <td><input value="{{$operativosMesas->VotoMesa->total_nulos}}"></td>
+                        <td><input value="{{$operativosMesas->VotoMesa->total_recurridos}}"></td>
+                        <td><input value="{{$operativosMesas->VotoMesa->total_impugnados}}"></td>
                     </tr>
-                @endforeach
-                {{-- @foreach( $models->VotosOperativos($opId) as $votos)
-                    @if($votos->Listas->id == 99)
-                        <tr>
-                            <td> </td>
-                            <td><input  name="blancos[{{$votos->id}}]" value="{{$votos->total_blancos}}"></td>
-                            <td><input  name="nulos[{{$votos->id}}]" value="{{$votos->total_nulos}}"></td>
-                            <td><input  name="recurridos[{{$votos->id}}]" value="{{$votos->total_recurridos}}"></td>
-                            <td><input  name="impugnados[{{$votos->id}}]" value="{{$votos->total_impugnados}}"></td>
-                        </tr>
-                    @endif
-                @endforeach --}}
+                @endif
             </tbody>
         </table>
     </div>
@@ -97,25 +83,6 @@ Mesas Operativo
     <!-- Default box -->
     <div class="col-xs-12">
         <div class="box">
-
-            {{-- <div class="box-header">
-                <div class="col-xs-8">
-                </div>
-                <div class="col-xs-4 ">
-                    <form method="GET" action="http://localhost:8888/votar_back/public/admin/escuelas/index" accept-charset="UTF-8">
-
-                    <div class="input-group input-group-sm">
-                        <input type="text" name="search" class="form-control pull-right" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtros <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right"></ul>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div> --}}
-
             <div class="box-body">
                 <div class="col-xs-12">
                     <table id="padronTable" class="table" >

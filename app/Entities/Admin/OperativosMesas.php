@@ -22,12 +22,12 @@ class OperativosMesas extends Entity
          return $this->belongsTo(Mesas::class, 'mesas_id');
      }
     
-    public function VotosMesas(){
-        return $this->hasMany(Votos::class);
+    public function VotoMesa(){
+        return $this->hasOne(Votos::class);
     }
 
-    public function VotosListas(){
-        return $this->hasMany(VotosListas::class);
+    public function VotoLista(){
+        return $this->hasOne(VotosListas::class);
     }
 
      public function getEstadoAttribute()
