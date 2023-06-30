@@ -245,7 +245,7 @@ class ApiV2Controller extends Controller{
         ->select('partidos.nombre', 'partidos.id', 'images.path')
         ->join('listas', 'operativos_listas.listas_id', '=', 'listas.id')
         ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
-        ->join('images', 'images.imageable_id', '=', 'partidos.id')
+        ->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
         ->groupBy('listas.partidos_id')
         ->where('operativos_listas.operativos_id', $idOperativos)
         ->get();

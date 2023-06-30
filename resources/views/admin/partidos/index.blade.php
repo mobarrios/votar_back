@@ -4,11 +4,13 @@
         @foreach($models as $model)
        
             <tr>
-
+               
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td class="col-xs-1">
                     <div class="image">
-                        <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
+                        @if($model->images()->first())
+                            <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
+                        @endif
                     </div>
                 </td>
                 <td>{{$model->nombre }}</td>
