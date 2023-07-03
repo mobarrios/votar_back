@@ -112,13 +112,16 @@ class ApiV2Controller extends Controller{
             foreach($escuelas as $escuela){
                 
                 $mesas = DB::table('mesas')
-                ->select('mesas.id','mesas.numero')
+                ->select('mesas.id','mesas.numero','votos.total','votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados')
                 ->join('operativos_mesas_users', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
+                ->join('operativos_mesas','operativos_mesas.mesas_id','=','mesas.id')
+                ->leftJoin('votos','votos.operativos_mesas_id','=','operativos_mesas.id')
+                ->where('operativos_mesas.operativos_id', $o->id)
                 ->where('mesas.escuelas_id', $escuela->id)
                 ->where('operativos_mesas_users.users_id', $userId)
                 ->where('operativos_mesas_users.operativos_id', $o->id)
                 ->get();
-                
+               
                 if(count($mesas) > 0){
                     array_push($result, [
                         'nombre' => $escuela->nombre,
@@ -263,8 +266,9 @@ class ApiV2Controller extends Controller{
         foreach ($partidos as $partido){
 
             $listas = DB::table('listas')
+            ->select('listas.nombre','listas.id','votos_listas.cantidad_votos')
             ->join('operativos_listas', 'operativos_listas.listas_id', '=', 'listas.id' )
-            ->select('listas.nombre','listas.id')
+            ->leftJoin('votos_listas', 'votos_listas.listas_id', '=', 'listas.id')
             ->where('listas.partidos_id', '=', $partido->id)
             ->where('operativos_listas.operativos_id', '=', $idOperativos)
             ->get();
