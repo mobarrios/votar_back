@@ -158,7 +158,14 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
 
         
-        $voto = new VotosListas();
+        $votoLista = VotosListas::where('operativos_mesas_id', $operativoMesa->id)->where('listas_id', $request->listas_id)->first();
+        
+        if($votoLista){
+            $voto = $votoLista;
+        }else{
+            $voto = new VotosListas();
+        }
+        
         $voto->listas_id = $request->listas_id;
         $voto->cantidad_votos = $request->cantidad_votos;
         $voto->operativos_mesas_id = $operativoMesa->id;
@@ -241,6 +248,7 @@ class ApiV2Controller extends Controller{
         if (! $idOperativos)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
+        // agrupo por partidos
         $partidos = DB::table('operativos_listas')
         ->select('partidos.nombre', 'partidos.id', 'images.path')
         ->join('listas', 'operativos_listas.listas_id', '=', 'listas.id')
@@ -249,7 +257,7 @@ class ApiV2Controller extends Controller{
         ->groupBy('listas.partidos_id')
         ->where('operativos_listas.operativos_id', $idOperativos)
         ->get();
-       
+        
         $resultado['results']['partidos'] = [];
 
         foreach ($partidos as $partido){

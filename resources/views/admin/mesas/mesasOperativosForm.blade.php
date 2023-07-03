@@ -47,8 +47,6 @@ Mesas Operativo
         <table class="table">
             <thead>
                 <th>
-                </th>
-                <th>
                     Votos Blancos
                 </th>
                 <th>
@@ -60,6 +58,9 @@ Mesas Operativo
                 <th>
                     Votos Impugnados
                 </th>
+                <th>
+                    Total
+                </th>
             </thead>
             
             <tbody>
@@ -69,6 +70,7 @@ Mesas Operativo
                         <td><input value="{{$operativosMesas->VotoMesa->total_nulos}}"></td>
                         <td><input value="{{$operativosMesas->VotoMesa->total_recurridos}}"></td>
                         <td><input value="{{$operativosMesas->VotoMesa->total_impugnados}}"></td>
+                        <td><input value="{{$operativosMesas->VotoMesa->total}}"></td>
                     </tr>
                 @endif
             </tbody>
