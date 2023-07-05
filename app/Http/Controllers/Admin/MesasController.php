@@ -12,7 +12,7 @@ use App\Http\Repositories\Admin\OperativosMesasRepo;
 use App\Entities\Admin\OperativosMesasUsers;
 use App\Entities\Admin\OperativosMesas;
 use App\Entities\Admin\Votos;
-
+use App\Entities\Admin\VotosListas;
 
 class MesasController extends Controller
 {
@@ -104,6 +104,28 @@ class MesasController extends Controller
 
     public function votosEdit()
     {
+        
+        // cantidad de votos por lista
+        foreach($this->request->votos as $voto => $valor){
+            
+            $votoLista = VotosListas::find($voto);
+            $votoLista->cantidad_votos = $valor;
+            $votoLista->save();
+        }
+
+        // cantidad de votos por mesa
+        $votoMesa = Votos::where('operativos_mesas_id',$this->request->operativos_mesas_id)->first();
+        
+        if($votoMesa){
+            $voto = $votoMesa;
+            $voto->total_blancos = $this->request->total_blancos;
+            $voto->total_nulos = $this->request->total_nulos;
+            $voto->total_recurridos = $this->request->total_recurridos;
+            $voto->total_impugnados = $this->request->total_impugnados;
+            $voto->total = $this->request->total;
+            $voto->save();
+        }
+        /*
         $votos = new Votos;
 
         foreach ($this->request->votos as $voto => $valor )
@@ -141,6 +163,7 @@ class MesasController extends Controller
             $v->total_impugnados = $valor;
             $v->save();
         }
+        */
 
 
 

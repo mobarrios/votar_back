@@ -13,7 +13,7 @@ Mesas Operativo
     {!! Form::label('Número') !!}
     {!! Form::text('numero', null, ['class'=>'form-control']) !!}
     </div>
-    {!! Form::hidden('escuelas_id', $escuela->id) !!}
+    {!! Form::hidden('operativos_mesas_id', $operativosMesas->id) !!}
     {!! Form::hidden('users_id', 1) !!}
 
     
@@ -36,7 +36,7 @@ Mesas Operativo
                     <tr>
                         <td> {{ $voto->Listas->TipoOperativos->nombre }} </td>
                         <td> {{ $voto->Listas->nombre }} </td>
-                        <td> <input value="{{ $voto->cantidad_votos }}"></td>
+                        <td> <input value="{{ $voto->cantidad_votos }}" name="votos[{{ $voto->id }}]"></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -66,11 +66,11 @@ Mesas Operativo
             <tbody>
                 @if($operativosMesas->VotoMesa)
                     <tr>
-                        <td><input value="{{$operativosMesas->VotoMesa->total_blancos}}"></td>
-                        <td><input value="{{$operativosMesas->VotoMesa->total_nulos}}"></td>
-                        <td><input value="{{$operativosMesas->VotoMesa->total_recurridos}}"></td>
-                        <td><input value="{{$operativosMesas->VotoMesa->total_impugnados}}"></td>
-                        <td><input value="{{$operativosMesas->VotoMesa->total}}"></td>
+                        <td><input name="total_blancos" value="{{$operativosMesas->VotoMesa->total_blancos}}"></td>
+                        <td><input name="total_nulos" value="{{$operativosMesas->VotoMesa->total_nulos}}"></td>
+                        <td><input name="total_recurridos" value="{{$operativosMesas->VotoMesa->total_recurridos}}"></td>
+                        <td><input name="total_impugnados" value="{{$operativosMesas->VotoMesa->total_impugnados}}"></td>
+                        <td><input name="total" value="{{$operativosMesas->VotoMesa->total}}"></td>
                     </tr>
                 @endif
             </tbody>
