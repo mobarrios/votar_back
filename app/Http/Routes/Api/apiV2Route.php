@@ -15,5 +15,8 @@ Route::group(['prefix' => 'v2', 'middleware' => 'token'], function () {
     Route::post('votoByLista', 'Api\ApiV2Controller@votoByLista');
     Route::post('votoPadron', 'Api\ApiV2Controller@votoPadron');
     
+    Route::post('getVotosByMesa', 'Api\ApiV2Controller@getVotosByMesa');
+    Route::post('getVotosByLista', 'Api\ApiV2Controller@getVotosByLista');
+    
    
 });

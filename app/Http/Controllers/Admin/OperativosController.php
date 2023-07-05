@@ -54,16 +54,8 @@ class OperativosController extends Controller
         $model->listas()->attach($this->request->listas_id);
         
         // mesas operativs
-        foreach($model->escuelas as $escuela){
-
-            foreach($escuela->Mesas as $mesas){
-                
-                $this->operativosMesasRepo->create(['mesas_id' => $mesas->id, 'operativos_id' => $model->id, 'estados_mesas_id' => 1 ]);
-            }
-
-        }
+        $this->repo->crearOperavosMesas($model);
         
-
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 

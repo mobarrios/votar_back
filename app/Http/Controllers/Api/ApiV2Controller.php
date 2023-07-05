@@ -112,16 +112,13 @@ class ApiV2Controller extends Controller{
             foreach($escuelas as $escuela){
                 
                 $mesas = DB::table('mesas')
-                ->select('mesas.id','mesas.numero','votos.total','votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados')
+                ->select('mesas.id','mesas.numero')
                 ->join('operativos_mesas_users', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
-                ->join('operativos_mesas','operativos_mesas.mesas_id','=','mesas.id')
-                ->leftJoin('votos','votos.operativos_mesas_id','=','operativos_mesas.id')
-                ->where('operativos_mesas.operativos_id', $o->id)
                 ->where('mesas.escuelas_id', $escuela->id)
                 ->where('operativos_mesas_users.users_id', $userId)
                 ->where('operativos_mesas_users.operativos_id', $o->id)
                 ->get();
-               
+                
                 if(count($mesas) > 0){
                     array_push($result, [
                         'nombre' => $escuela->nombre,
@@ -162,12 +159,12 @@ class ApiV2Controller extends Controller{
 
         
         $votoLista = VotosListas::where('operativos_mesas_id', $operativoMesa->id)->where('listas_id', $request->listas_id)->first();
-        
         if($votoLista){
             $voto = $votoLista;
         }else{
             $voto = new VotosListas();
         }
+
         
         $voto->listas_id = $request->listas_id;
         $voto->cantidad_votos = $request->cantidad_votos;
@@ -247,7 +244,9 @@ class ApiV2Controller extends Controller{
     {
         
         $idOperativos = $request->operativos_id;
+        $idMesas = $request->mesas_id;
         
+
         if (! $idOperativos)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
@@ -266,13 +265,18 @@ class ApiV2Controller extends Controller{
         foreach ($partidos as $partido){
 
             $listas = DB::table('listas')
-            ->select('listas.nombre','listas.id','votos_listas.cantidad_votos')
             ->join('operativos_listas', 'operativos_listas.listas_id', '=', 'listas.id' )
-            ->leftJoin('votos_listas', 'votos_listas.listas_id', '=', 'listas.id')
+            //->join('operativos_mesas', 'operativos_listas.operativos_id','=','operativos_mesas.operativos_id')
+            //->join('votos_listas', 'votos_listas.operativos_mesas_id','=','operativos_mesas.id')
+            ->select('listas.nombre','listas.id')
             ->where('listas.partidos_id', '=', $partido->id)
             ->where('operativos_listas.operativos_id', '=', $idOperativos)
+            //->where('operativos_mesas.mesas_id', '=', $idMesas)
+            //->groupBy('votos_listas.listas_id')
             ->get();
             
+
+
             array_push($resultado['results']['partidos'], [
 
                 'id'        => $partido->id,
@@ -281,19 +285,47 @@ class ApiV2Controller extends Controller{
                 'listas'    => $listas
                 
             ]);
-
-           
+  
         }
-
-        
-
-        // $res =  $operativosRepo->getModel()->with('Listas')->with('Listas.Partidos')->with('Listas.Partidos.Images')->with('Listas.TipoOperativos')
-        //     ->whereHas('Listas',function($q){
-        //     $q->orderBy('tipo_operativos_id','ASC');
-        // })->find($idOperativos);
 
        return response()->json($resultado,200);
     } 
+
+    public function getVotosByMesa(Request $request){
+
+        $idOperativos = $request->operativos_id;
+        $idMesa = $request->mesas_id;
+     
+        if (! $idOperativos || !$idMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+        
+        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
+       
+        if(!$operativoMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+
+        $cantidad = DB::table('votos')
+        ->where('votos.operativos_mesas_id', $operativoMesa->id)
+        ->get();    
+
+        return response()->json(['results'=>$cantidad],200);
+        
+    }
+
+    public function getVotosByLista(){
+
+        $idOperativos = $request->operativos_id;
+        $idMesa = $request->mesas_id;
+     
+        if (! $idOperativos || !$idMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+
+        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
+        
+        if(!$operativoMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+
+    }
 
     
 
