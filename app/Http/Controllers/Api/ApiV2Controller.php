@@ -146,31 +146,18 @@ class ApiV2Controller extends Controller{
 
     public function votoByLista(Request $request)
     {
-        $idOperativos = $request->operativos_id;
-        $idMesa = $request->mesas_id;
+        $idVotoLista = $request->votos_listas_id;
      
-        if (! $idOperativos || !$idMesa)
+        if (! $idVotoLista )
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
         
-        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
-        
-        if(!$operativoMesa)
-            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+        $votoLista = VotosListas::find($idVotoLista);
 
+        if(!$votoLista)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El voto lista no existe'], 403);
         
-        $votoLista = VotosListas::where('operativos_mesas_id', $operativoMesa->id)->where('listas_id', $request->listas_id)->first();
-        if($votoLista){
-            $voto = $votoLista;
-        }else{
-            $voto = new VotosListas();
-        }
-
-        
-        $voto->listas_id = $request->listas_id;
-        $voto->cantidad_votos = $request->cantidad_votos;
-        $voto->operativos_mesas_id = $operativoMesa->id;
-        
-        $voto->save();
+        $votoLista->cantidad_votos = $request->cantidad_votos;
+        $votoLista->save();
 
         return response()->json(true,200);
     }
