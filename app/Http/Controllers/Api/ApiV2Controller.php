@@ -252,9 +252,10 @@ class ApiV2Controller extends Controller{
         $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesas)->first(); 
         
         $result = $partidos = DB::table('votos_listas')
-            ->select('partidos.nombre as partido', 'listas.nombre as lista', 'votos_listas.cantidad_votos', 'listas.id as listas_id', 'votos_listas.operativos_mesas_id as operativos_mesas_id' )
+            ->select('partidos.nombre as partido', 'listas.nombre as lista', 'votos_listas.cantidad_votos', 'listas.id as listas_id', 'votos_listas.operativos_mesas_id as operativos_mesas_id', 'images.path as url' )
             ->join('listas', 'votos_listas.listas_id', '=', 'listas.id')
             ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
+            ->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
             ->where('operativos_mesas_id', $operativoMesa->id)
             ->get();
 
