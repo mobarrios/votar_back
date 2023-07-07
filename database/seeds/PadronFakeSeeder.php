@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Entities\Admin\Padron as Padrones;
+use App\Entities\Admin\OperativosMesasPadron;
+use App\Entities\Admin\OperativosMesas;
 
 class PadronFakeSeeder extends Seeder
 {
@@ -44,19 +46,25 @@ class PadronFakeSeeder extends Seeder
         }
         
         $padron = Padrones::all();
+        $mesas = OperativosMesas::all();
        
         foreach($padron as $p){
-            DB::table('operativos_mesas_padron')->insert([
-                [
-                 
-                    'padrones_id' => $p->id,
-                    'referentes_id' => 1,
-                    'voto' => '',
-                    'operativos_mesas_id' => 1
-                   
-                ]
 
-            ]);
+            foreach($mesas as $m){
+
+                DB::table('operativos_mesas_padron')->insert([
+                    [
+                    
+                        'padrones_id' => $p->id,
+                        'referentes_id' => 1,
+                        'voto' => '',
+                        'operativos_mesas_id' => $m->id
+                    
+                    ]
+
+                ]);
+
+            }
         }
     }
 }
