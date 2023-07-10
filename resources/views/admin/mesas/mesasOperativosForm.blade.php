@@ -132,7 +132,12 @@ Mesas Operativo
     <script type="text/javascript">
         
     $('#dataTable').DataTable();
-    $('#padronTable').DataTable();
+    $('#padronTable').DataTable({
+        "order": [[ 1, 'asc' ]],
+        "pageLength": 20 
+    });
+
+
 
     </script>
 

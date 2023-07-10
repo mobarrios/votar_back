@@ -36,6 +36,7 @@ class MesasController extends Controller
     {   
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
+        
 
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
@@ -88,6 +89,7 @@ class MesasController extends Controller
         //dd($this->operativosMesasPadron->getModel()->all());
         //breadcrumb activo
         $this->data['activeBread'] = 'Detalle';
+        $this->data['newBread'] = ['route' => 'admin.operativos.mesasUsuarios', 'routeId' => $this->route->getParameter('operativos_id') ];
 
         // id desde route
         $id = $this->route->getParameter('id');

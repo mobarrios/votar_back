@@ -6,6 +6,7 @@
         </h1>
 
     </section>
+
     <!-- Main content -->
     <section class="content">
         <ol class="breadcrumb " style="background-color: white">
@@ -13,7 +14,11 @@
                 <a href="{{route('home')}}"><span class="fa fa-home"></span></a>
             </li>
             <li>
-                <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
+                @if(isset($newBread))
+                 <a href="{{ route($newBread['route'], $newBread['routeId']) }}">{{config('models.'.$section.'.sectionName')}}</a>
+                @else
+                    <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
+                @endif
             </li>
             <li class="active">{{$activeBread or ''}}</li>
         </ol>
