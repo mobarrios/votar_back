@@ -247,7 +247,7 @@ class ApiV2Controller extends Controller{
             ->join('listas', 'votos_listas.listas_id', '=', 'listas.id')
             ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
             ->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
-            ->where('operativos_mesas_id', $operativoMesa->id)
+            ->where('votos_listas.operativos_mesas_id', $operativoMesa->id)
             ->get();
 
         return response()->json(['results'=>$result],200);
