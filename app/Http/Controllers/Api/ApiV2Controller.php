@@ -102,8 +102,9 @@ class ApiV2Controller extends Controller{
             
             
             $escuelas = DB::table('operativos_escuelas')
-            ->select('escuelas.nombre','escuelas.id')
+            ->select('escuelas.nombre','escuelas.id','escuelas.direccion','escuelas.latitud','escuelas.longitud')
             ->join('escuelas', 'operativos_escuelas.escuelas_id', '=', 'escuelas.id')
+            ->join('')
             ->where('operativos_escuelas.operativos_id', '=', $o->id)
             ->get();
             
@@ -122,6 +123,9 @@ class ApiV2Controller extends Controller{
                 if(count($mesas) > 0){
                     array_push($result, [
                         'nombre' => $escuela->nombre,
+                        'direccion' => $escuela->direccion,
+                        'latitud' => $escuela->latitud,
+                        'longitud' => $escuela->longitud,
                         'mesas'  => $mesas,
                     ]); 
                 }
@@ -248,48 +252,6 @@ class ApiV2Controller extends Controller{
 
         return response()->json(['results'=>$result],200);
         
-        
-        // agrupo por partidos
-        /*
-        $partidos = DB::table('operativos_listas')
-        ->select('partidos.nombre', 'partidos.id', 'images.path')
-        ->join('listas', 'operativos_listas.listas_id', '=', 'listas.id')
-        ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
-        ->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
-        ->groupBy('listas.partidos_id')
-        ->where('operativos_listas.operativos_id', $idOperativos)
-        ->get();
-        
-        $resultado['results']['partidos'] = [];
-
-        foreach ($partidos as $partido){
-
-            $listas = DB::table('listas')
-            ->join('operativos_listas', 'operativos_listas.listas_id', '=', 'listas.id' )
-            //->join('operativos_mesas', 'operativos_listas.operativos_id','=','operativos_mesas.operativos_id')
-            //->join('votos_listas', 'votos_listas.operativos_mesas_id','=','operativos_mesas.id')
-            ->select('listas.nombre','listas.id')
-            ->where('listas.partidos_id', '=', $partido->id)
-            ->where('operativos_listas.operativos_id', '=', $idOperativos)
-            //->where('operativos_mesas.mesas_id', '=', $idMesas)
-            //->groupBy('votos_listas.listas_id')
-            ->get();
-            
-
-
-            array_push($resultado['results']['partidos'], [
-
-                'id'        => $partido->id,
-                'nombre'    => $partido->nombre,
-                'url' => $partido->path,
-                'listas'    => $listas
-                
-            ]);
-           
-        }
-         */
-  
-       
     } 
 
     public function getVotosByMesa(Request $request){
