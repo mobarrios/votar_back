@@ -104,7 +104,6 @@ class ApiV2Controller extends Controller{
             $escuelas = DB::table('operativos_escuelas')
             ->select('escuelas.nombre','escuelas.id','escuelas.direccion','escuelas.latitud','escuelas.longitud')
             ->join('escuelas', 'operativos_escuelas.escuelas_id', '=', 'escuelas.id')
-            ->join('')
             ->where('operativos_escuelas.operativos_id', '=', $o->id)
             ->get();
             
