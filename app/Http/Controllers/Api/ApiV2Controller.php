@@ -246,7 +246,11 @@ class ApiV2Controller extends Controller{
             ->select('partidos.nombre as partido', 'listas.nombre as lista', 'votos_listas.cantidad_votos', 'listas.id as listas_id', 'votos_listas.operativos_mesas_id as operativos_mesas_id', 'images.path as url', 'votos_listas.id as votos_listas_id' )
             ->join('listas', 'votos_listas.listas_id', '=', 'listas.id')
             ->join('partidos', 'listas.partidos_id', '=', 'partidos.id')
-            ->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
+            //->leftJoin('images', 'images.imageable_id', '=', 'partidos.id')
+            ->leftJoin('images', function ($q) {
+                $q->on('images.imageable_id', '=', 'partidos.id')
+                    ->where('images.imageable_type', 'like', '%Partidos%');
+            })
             ->where('votos_listas.operativos_mesas_id', $operativoMesa->id)
             ->get();
 
