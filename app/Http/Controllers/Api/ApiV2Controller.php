@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\DB;
 use App\Entities\Admin\Imgs;
 use Illuminate\Http\Request;
 use JWTAuth;
+use App\Http\Helpers\ImagesHelper;
 
 class ApiV2Controller extends Controller{
 
 
     public function getUsers(Request $request){
-       
+        
         $username  = $request->user_name;
         $pass   = $request->password;
        
@@ -169,7 +170,7 @@ class ApiV2Controller extends Controller{
     {   
         $idOperativos = $request->operativos_id;
         $idMesa = $request->mesas_id;
-     
+        
         if (! $idOperativos || !$idMesa)
             return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
         
@@ -190,7 +191,11 @@ class ApiV2Controller extends Controller{
         $voto->total_nulos = $request->total_nulos;
         $voto->total_recurridos = $request->total_recurridos;
         $voto->total = $request->total;
-     
+        
+        if($request->image){
+            $voto->images()->create(['path' => $request->image]);
+        }
+
         $voto->save();
 
        return response()->json(true,200);
@@ -272,26 +277,42 @@ class ApiV2Controller extends Controller{
 
         $cantidad = DB::table('votos')
         ->where('votos.operativos_mesas_id', $operativoMesa->id)
-        ->get();    
+        ->first();    
+        
+        /*
+        if(count($cantidad) == 0){
+            
+            $cantidad = [
+                'total' => 0, 
+                'total_blancos' => 0,
+                'total_nulos' => 0,
+                'total_recurridos' => 0,
+                'total_impugnados' => 0,
 
+            ];    
+            
+            
+        }
+        */
         return response()->json(['results'=>$cantidad],200);
         
     }
 
-    public function getVotosByLista(){
+    // public function getVotosByLista(Request $request){
 
-        $idOperativos = $request->operativos_id;
-        $idMesa = $request->mesas_id;
+    //     $idOperativos = $request->operativos_id;
+    //     $idMesa = $request->mesas_id;
      
-        if (! $idOperativos || !$idMesa)
-            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+    //     if (! $idOperativos || !$idMesa)
+    //         return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
 
-        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
+    //     $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
         
-        if(!$operativoMesa)
-            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+    //     if(!$operativoMesa)
+    //         return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
 
-    }
+    // }
+
 
     
 
