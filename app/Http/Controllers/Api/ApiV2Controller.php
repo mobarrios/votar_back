@@ -425,7 +425,7 @@ class ApiV2Controller extends Controller{
     public function resultado(){
 
         $votos = DB::table('votos')
-            ->select('votos.total', 'votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados', 'votos.created_at as fecha', 'votos.updated_at as update', 'operativos_mesas.mesas_id', 'operativos_mesas.operativos_id')
+            ->select('votos.total', 'votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados', 'votos.created_at as fecha_creado', 'votos.updated_at as fecha_update', 'operativos_mesas.mesas_id', 'operativos_mesas.operativos_id')
             ->join('operativos_mesas', 'votos.operativos_mesas_id', '=', 'operativos_mesas.id')
             ->get();
 
