@@ -11,8 +11,10 @@ Route::get('v2/escuelas', 'Api\ApiV2Controller@escuelas');
 Route::get('v2/mesas', 'Api\ApiV2Controller@mesas');
 Route::get('v2/fiscal', 'Api\ApiV2Controller@fiscal');
 Route::get('v2/padron', 'Api\ApiV2Controller@padron');
-//Route::get('v2/listas', 'Api\ApiV2Controller@listas');
-//Route::get('v2/resultado', 'Api\ApiV2Controller@resultado');
+Route::get('v2/candidatos', 'Api\ApiV2Controller@candidatos');
+Route::get('v2/listas', 'Api\ApiV2Controller@listas');
+Route::get('v2/voto', 'Api\ApiV2Controller@voto');
+Route::get('v2/resultado', 'Api\ApiV2Controller@resultado');
 
 
 Route::group(['prefix' => 'v2', 'middleware' => 'token'], function () {

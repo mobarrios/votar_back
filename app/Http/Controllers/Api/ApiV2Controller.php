@@ -328,7 +328,7 @@ class ApiV2Controller extends Controller{
     public function mesas(){
 
         $mesas = DB::table('operativos_mesas_users')
-            ->select('mesas.id', 'mesas.numero')
+            ->select('mesas.id', 'mesas.numero', 'mesas.escuelas_id')
             ->join('mesas', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
             ->groupBy('operativos_mesas_users.mesas_id')
             ->get();
@@ -344,9 +344,10 @@ class ApiV2Controller extends Controller{
                     ->get();
           
             array_push($resultado['results']['mesas'], [
-                
+
                 'id'        => $mesa->id,
                 'numero'    => $mesa->numero,
+                'escuelas_id' => $mesa->escuelas_id,
                 'fiscales'  => $mesas
                
             ]);
@@ -367,8 +368,22 @@ class ApiV2Controller extends Controller{
 
     }
 
+    public function candidatos(){
+
+        $candidatos = DB::table('partidos')
+        ->select('id', 'nombre')
+        ->get();
+
+        return response()->json(['results'=>$candidatos],200);
+    }
+
     public function padron(){
 
+        $padron = DB::table('padrones')
+            ->select('id', 'nombre', 'apellido', 'domicilio', 'dni', 'nro_orden', 'nro_afiliado')
+            ->get();
+
+        /*
         $padron = DB::table('operativos_mesas_padron')
             ->select( 
                 'operativos_mesas_padron.id',
@@ -381,6 +396,7 @@ class ApiV2Controller extends Controller{
             ->join('padrones', 'operativos_mesas_padron.padrones_id', '=', 'padrones.id' )
             ->join('referentes','operativos_mesas_padron.referentes_id','=','referentes.id')
             ->get();
+        */
 
         return response()->json(['results'=>$padron],200);
     }
@@ -388,17 +404,29 @@ class ApiV2Controller extends Controller{
     public function listas(){
 
         $listas = DB::table('listas')
-            ->select('listas.id', 'listas.nombre')
+            ->select('listas.id', 'listas.nombre', 'listas.partidos_id')
             ->get();
 
         return response()->json(['results'=>$listas],200);
         
     }
+
+    public function voto(){
+
+        $voto = DB::table('operativos_mesas_padron')
+            ->select('padrones_id', 'voto', 'operativos_mesas.mesas_id')
+            ->join('operativos_mesas', 'operativos_mesas_padron.operativos_mesas_id', '=', 'operativos_mesas.id')
+            ->get();
+
+        return response()->json(['results'=>$voto],200);
+
+    }
     
     public function resultado(){
 
         $votos = DB::table('votos')
-            ->select('votos.total', 'votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados', 'votos.created_at as fecha', 'votos.updated_at as update')
+            ->select('votos.total', 'votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados', 'votos.created_at as fecha', 'votos.updated_at as update', 'operativos_mesas.mesas_id', 'operativos_mesas.operativos_id')
+            ->join('operativos_mesas', 'votos.operativos_mesas_id', '=', 'operativos_mesas.id')
             ->get();
 
         return response()->json(['results'=>$votos],200);
