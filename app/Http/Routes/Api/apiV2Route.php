@@ -15,7 +15,8 @@ Route::get('v2/candidatos', 'Api\ApiV2Controller@candidatos');
 Route::get('v2/listas', 'Api\ApiV2Controller@listas');
 Route::get('v2/voto', 'Api\ApiV2Controller@voto');
 Route::get('v2/resultado', 'Api\ApiV2Controller@resultado');
-
+Route::get('v2/resultadosListas', 'Api\ApiV2Controller@resultadosListas');
+Route::get('v2/operativos', 'Api\ApiV2Controller@operativos');
 
 Route::group(['prefix' => 'v2', 'middleware' => 'token'], function () {
 

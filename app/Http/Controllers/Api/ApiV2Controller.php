@@ -316,9 +316,16 @@ class ApiV2Controller extends Controller{
     public function escuelas(){
 
         $escuelas = DB::table('escuelas')
-            ->select('escuelas.id','escuelas.nombre', 'escuelas.direccion', 'escuelas.latitud','escuelas.longitud', 'escuelas.provincias_id', 'escuelas.municipios_id','escuelas.localidades_id' ,DB::raw("count(mesas.escuelas_id) as cantidad_mesas"))
-            ->join('mesas', 'mesas.escuelas_id', '=', 'escuelas.id')
-            ->groupBy('mesas.escuelas_id')
+            ->select('escuelas.id','escuelas.nombre', 'escuelas.direccion', 'escuelas.latitud','escuelas.longitud', 
+            'escuelas.provincias_id', 
+            'escuelas.municipios_id',
+            'escuelas.localidades_id', 
+            //'escuelas.provincia', 
+            //'escuelas.localidad', 
+            DB::raw("COUNT(mesas.id) as cantidad_mesas")
+            )
+            ->leftJoin('mesas', 'escuelas.id', '=', 'mesas.escuelas_id')
+            ->groupBy('escuelas.id')
             ->get();
 
         return response()->json(['results'=>$escuelas],200);
@@ -338,8 +345,13 @@ class ApiV2Controller extends Controller{
         foreach ($mesas as $mesa){
             
             $mesas = DB::table('operativos_mesas_users')
-                    ->select('users.user_name as user_name', 'users.name as nombre', 'users.last_name as apellido', 'operativos_mesas_users.operativos_id')
+                    ->select('users.user_name as user_name', 'users.name as nombre', 
+                    'users.last_name as apellido', 
+                    'operativos_mesas_users.operativos_id',
+                    'operativos.nombre as nombre_operativo'
+                    )
                     ->join('users', 'operativos_mesas_users.users_id', '=', 'users.id')
+                    ->join('operativos', 'operativos.id', '=', 'operativos_mesas_users.operativos_id')
                     ->where('operativos_mesas_users.mesas_id', $mesa->id)
                     ->get();
           
@@ -414,7 +426,7 @@ class ApiV2Controller extends Controller{
     public function voto(){
 
         $voto = DB::table('operativos_mesas_padron')
-            ->select('padrones_id', 'voto', 'operativos_mesas.mesas_id')
+            ->select('padrones_id', 'voto', 'operativos_mesas.mesas_id', 'operativos_mesas_padron.created_at as fecha_creado', 'operativos_mesas_padron.updated_at as fecha_update',)
             ->join('operativos_mesas', 'operativos_mesas_padron.operativos_mesas_id', '=', 'operativos_mesas.id')
             ->get();
 
@@ -430,6 +442,27 @@ class ApiV2Controller extends Controller{
             ->get();
 
         return response()->json(['results'=>$votos],200);
+
+    }
+
+    public function resultadosListas(){
+
+        $listas = DB::table('votos_listas')
+            ->select('operativos_mesas.mesas_id', 'operativos_mesas.operativos_id', 'votos_listas.cantidad_votos', 'votos_listas.listas_id', 'votos_listas.created_at as fecha_creado', 'votos_listas.updated_at as fecha_update')
+            ->join('operativos_mesas', 'votos_listas.operativos_mesas_id', '=', 'operativos_mesas.id')
+            ->get();
+
+        return response()->json(['results'=>$listas],200);
+
+    }
+
+    public function operativos(){
+
+        $operativos = DB::table('operativos')
+            ->select('id', 'nombre', 'fecha')
+            ->get();
+
+        return response()->json(['results'=>$operativos],200);
 
     }
     
