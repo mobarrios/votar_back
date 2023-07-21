@@ -5,51 +5,28 @@
     @endsection
 
     @section('form_inputs')
-{{--         @if(isset($models))--}} 
-            {!! Form::model($models,['route'=> ['admin.operativos.post.mesasUsuarios', $models->id] ]) !!}
-            {!! Form::hidden('operativos_id',$models->id) !!}
-        {{-- @else
-            {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
-        @endif --}}
+    @if(Auth::user()->is('root'))
+        {!! Form::model($models,['route'=> ['admin.operativos.post.mesasUsuarios', $models->id] ]) !!}
+        {!! Form::hidden('operativos_id',$models->id) !!}
+    @endif
 
-            <div class="col-xs-12">
-                <div class="table-responsive">
-                        <table class="table" >
-                            <thead>
-                                <td>Escuela</td>
-                                <td>Mesa</td>      
-                                <td>Estado</td>
-                                <td>Tipo</td>
-
-                            </thead>
-                            <tbody>
-                                @foreach($models->Escuelas as $escuela)
-                                        @foreach($escuela->Mesas as $mesa)
-                                        
-                                        <tr>
-                                            <td>{{$escuela->nombre}}</td>
-                                            <td><a href="{{route('admin.mesas.show',[$escuela->id,$mesa->id,$models->id])}}" >{{$mesa->numero}}</a></td>
-                                            <td>{{ $mesa->Operativo($models->id) ? $mesa->Operativo($models->id)->estado : '' }}</td>
-                                            <td class="col-xs-8">
-                                                <select name="mesas[]" class="form-control select2" multiple="multiple">
-                                                    @foreach($usuarios as $usuario)
-
-                                                        @if($usuario->OperativosMesasUsers($models->id,$mesa->id,$usuario->id) )
-                                                            <option selected="selected" value="{{$mesa->id}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
-                                                        @else
-                                                            <option  value="{{$mesa->id}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        </tr>           
-                                        @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
-                </div>
-            </div>
-
-    
-
+    <div class="col-xs-12">
+        <div class="table-responsive">
+                <table class="table" >
+                    <thead>
+                        <td>Escuela</td>
+                        <td>Mesa</td>      
+                        <td>Estado</td>
+                        <td>Usuarios</td>
+                    </thead>
+                    <tbody>
+                        @if(Auth::user()->is('root'))
+                            @include('admin.operativos.partials.rootmesas')
+                        @else
+                            @include('admin.operativos.partials.adminmesas')
+                        @endif
+                    </tbody>
+                </table>
+        </div>
+    </div>
 @endsection

@@ -9,7 +9,7 @@
  {
 
      protected $table = 'escuelas';
-     protected $fillable = ['nombre','direccion','observaciones','provincias_id','municipios_id','localidades_id','latitud','longitud'];
+     protected $fillable = ['nombre','direccion','observaciones','provincias_id','municipios_id','localidades_id','latitud','longitud','provincia','localidad','municipio'];
 
      protected $section = 'escuelas';
 

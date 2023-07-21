@@ -15,6 +15,7 @@ use App\Http\Repositories\Admin\FinancialsRepo;
 use App\Http\Repositories\Admin\ModelsRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use App\Http\Repositories\Admin\OperativosMesasPadronRepo;
 
 
 class AjaxController extends Controller
@@ -182,6 +183,20 @@ class AjaxController extends Controller
         }
 
 
+    }
+
+    public function updatePadron(OperativosMesasPadronRepo $operativosMesasPadron){
+        
+        $padron = $operativosMesasPadron->find($this->request->id);
+
+        if($padron->voto == 0)
+            $padron->voto = 1;
+        else
+            $padron->voto = 0;
+        
+        $padron->save();
+        
+        return response()->json([],200);
     }
 
 }

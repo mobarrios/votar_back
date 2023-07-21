@@ -57,6 +57,8 @@ Route::get('/findLocalidades', 'Admin\AjaxController@findLocalidades');
 //FinancialDues
 Route::get('/findDues/{id?}','Admin\AjaxController@findDues');
 
+Route::post('/update-padron/{id?}','Admin\AjaxController@updatePadron');
+
 
 
 

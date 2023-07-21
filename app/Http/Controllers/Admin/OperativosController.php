@@ -13,6 +13,7 @@ use App\Http\Repositories\Admin\EscuelasRepo as Escuelas;
 use App\Http\Repositories\Admin\ListasRepo as Listas;
 use App\Http\Repositories\Configs\UsersRepo as Usuarios;
 use App\Entities\Admin\OperativosMesasUsers ;
+use Auth;
 use App\Http\Repositories\Admin\OperativosMesasRepo;
 use DB;
 
@@ -35,6 +36,46 @@ class OperativosController extends Controller
         $this->operativosMesasRepo = $operativosMesasRepo;
 
 
+    }
+
+    public function index()
+    {   
+        
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Listar';
+
+        //si request de busqueda
+        if( isset($this->request->search) && !is_null($this->request->filter))
+        {
+            $model = $this->repo->search($this->request);
+
+            if(is_null($model) || $model->count() == 0)
+                //si paso la seccion
+                $model = $this->repo->listAll($this->section);
+        }
+        else
+        {
+            $model  = $this->repo->listAll($this->section);
+        }
+        
+        //pagina el query
+        $user = Auth::user();
+        
+        if($user->is('admin')){
+
+            $this->data['models'] = OperativosMesasUsers::select('operativos.id', 'operativos.nombre', 'niveles_operativos.nombre as nivel')
+            ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
+            ->join('niveles_operativos','operativos.niveles_operativos_id','=','niveles_operativos.id')
+            ->where('operativos_mesas_users.users_id','=',$user->id)
+            ->groupBy('operativos.id')
+            ->paginate(config('models.'.$this->section.'.paginate'));
+          
+        }else{
+            $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
+        }
+        
+       
+        return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
 
 
@@ -171,15 +212,20 @@ class OperativosController extends Controller
 
         // id desde route
         $id = $this->route->getParameter('id');
+        
+        $user = Auth::user();
 
-        $this->data['models'] = $this->repo->find($id);
-
-
+        if($user->is('root')){
+            $this->data['models'] = $this->repo->find($id);
+        }else{
+            $this->data['models'] = OperativosMesasUsers::where('operativos_id', $id)->where('users_id',$user->id)->get();
+        }
+        
         return view('admin.operativos.mesasUsuarios')->with($this->data);
     }
 
 
-     public function postMesasUsuarios(OperativosMesasUsers $operativosMesasUsers)
+    public function postMesasUsuarios(OperativosMesasUsers $operativosMesasUsers)
     {
         
         // id desde route

@@ -13,6 +13,7 @@ use App\Entities\Admin\OperativosMesasUsers;
 use App\Entities\Admin\OperativosMesas;
 use App\Entities\Admin\Votos;
 use App\Entities\Admin\VotosListas;
+use App\Entities\Admin\EstadosMesas;
 
 class MesasController extends Controller
 {
@@ -36,7 +37,11 @@ class MesasController extends Controller
     {   
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
-        
+        $this->data['newBread'] = [
+            'route' => 'admin.escuelas.index', 
+            'routeId' => '',
+            'model' => 'Escuelas'
+        ];
 
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
@@ -89,7 +94,11 @@ class MesasController extends Controller
         //dd($this->operativosMesasPadron->getModel()->all());
         //breadcrumb activo
         $this->data['activeBread'] = 'Detalle';
-        $this->data['newBread'] = ['route' => 'admin.operativos.mesasUsuarios', 'routeId' => $this->route->getParameter('operativos_id') ];
+        $this->data['newBread'] = [
+            'route' => 'admin.operativos.mesasUsuarios', 
+            'routeId' => $this->route->getParameter('operativos_id'),
+            'model' => 'Mesas Operativos'
+        ];
 
         // id desde route
         $id = $this->route->getParameter('id');
@@ -100,13 +109,22 @@ class MesasController extends Controller
         $this->data['operativosMesas'] = $this->operativosMesasRepo->getModel()->where('operativos_id', $this->route->getParameter('operativos_id'))
                                                 ->where('mesas_id', $id)
                                                 ->first();
-        //dd($this->data['operativosMesas']);
+        $this->data['estados'] = EstadosMesas::lists('descripcion','id');
+ 
         return view('admin.mesas.mesasOperativosForm')->with($this->data);
     }
+
 
     public function votosEdit()
     {
         
+        //estado de la mesa
+        if($this->request->estados_id){
+            $mesa = $this->operativosMesasRepo->find($this->request->operativos_mesas_id);
+            $mesa->estados_mesas_id = $this->request->estados_id;
+            $mesa->save(); 
+        }
+
         // cantidad de votos por lista
         foreach($this->request->votos as $voto => $valor){
             

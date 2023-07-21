@@ -1,5 +1,6 @@
 @extends('template.model_index')
     @section('table')
+        
         @foreach($models as $model)
             <tr>
 
@@ -12,7 +13,7 @@
                 </td> --}}
                 <td>{{$model->fecha }}</td>
                 <td>{{$model->nombre}}</td>
-                <td>{{$model->Niveles->nombre}}</td>
+                <td>{{$model->Niveles ? $model->Niveles->nombre : $model->nivel }}</td>
                 <td><a  class="btn btn-xs btn-primary" href="{{route('admin.operativos.mesasUsuarios',$model->id)}}">Mesas</a></td>
 
             </tr>

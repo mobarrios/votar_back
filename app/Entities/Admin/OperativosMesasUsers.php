@@ -4,6 +4,7 @@
 
  
  use App\Entities\Entity;
+ use App\Entities\Configs\User;
 
  class OperativosMesasUsers extends Entity
  {
@@ -12,9 +13,16 @@
     protected $fillable = ['operativos_id','mesas_id','users_id'];
     protected $section = 'operativos_mesas_users';
 
-    public function Padrones()
-    {
+    public function Padrones(){
         return $this->hasMany(OperativosMesasPadron::class);
+    }
+
+    public function Mesa(){
+        return $this->belongsTo(Mesas::class, 'mesas_id');
+    }
+
+    public function User(){
+        return $this->belongsTo(User::class, 'users_id');
     }
 
  }

@@ -6,19 +6,23 @@ Mesas Operativo
 
 @section('form_inputs')
     
-
     {!! Form::model($models,['route'=> ['admin.mesas.votos.edit', $escuela->id,$models->id] , 'files' =>'true']) !!}
 
-    <div class="col-xs-12 form-group">
-    {!! Form::label('Número') !!}
-    {!! Form::text('numero', null, ['class'=>'form-control']) !!}
+    <div class="col-xs-6 form-group">
+        {!! Form::label('Estado') !!}
+        {!! Form::select('estados_id', $estados, $operativosMesas->estados_mesas_id,['class'=>'form-control']) !!}
+    </div>
+    <div class="col-xs-6 form-group">
+        {!! Form::label('Número') !!}
+        {!! Form::text('numero', null, ['class'=>'form-control', 'disabled']) !!}
     </div>
     {!! Form::hidden('operativos_mesas_id', $operativosMesas->id) !!}
     {!! Form::hidden('users_id', 1) !!}
 
+    <br>
     
     <div class="col-xs-6">
-        <table id="dataTable" class="table" >
+        <table class="table" >
             <thead>
             <th>
                 Tipo
@@ -143,37 +147,36 @@ Mesas Operativo
 
     <script>
 
-    $(".btn-cancel").on('click',function(ev){
-        ev.preventDefault();
-        ev.stopPropagation();
-        var id = $(this).attr('data-id');
+    $('.btn-cancel').on('click',function(){
         var btn = $(this);
+        //$(btn).prop("disabled",true);
+        var id = $(this).attr('data-id');
+        var url = 'admin/update-padron';
+
         swal({
-            title: "Confirma que esta persona votó?",
+            title: "Desea modificar el registro?",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "No",
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Si",
             closeOnConfirm: false
-        }, function (isConfirm) {
-            if (!isConfirm) return;
+        }).then(function () {
+            swal(
+                    'Ok!',
+                    'Su Registro ha modificado correctamento.',
+                    'success'
+            )
             $.ajax({
-                url: "turno-cancel",
-                type: "POST",
-                data: "id=" + id,
-                success: function (data) {
-                    console.log(data)
-                    $('.statusTxt').text('Cancelado')
-                    btn.hide();
-                    swal("Ok!", "Su turno se ha cancelado correctamente!", "success");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    swal("Error!", "Por favor intento de nuevo", "error");
-                }
+                'url': url,
+                'data':{'id':id, '_token': '{{ csrf_token() }}'},
+                'method': 'POST',
+              
             });
-        });
+        })
     });
+
+
     </script>
 
 @endsection    

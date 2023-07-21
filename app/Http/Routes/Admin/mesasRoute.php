@@ -19,6 +19,6 @@ Route::group(['prefix'=>'mesas'],function(){
 
             //editar votos
             Route::post('/edit/{id?}',       ['as'=>'admin.mesas.votos.edit','uses'=>'Admin\MesasController@votosEdit']);
-
+            
         });
 });

@@ -15,9 +15,9 @@
             </li>
             <li>
                 @if(isset($newBread))
-                 <a href="{{ route($newBread['route'], $newBread['routeId']) }}">{{config('models.'.$section.'.sectionName')}}</a>
+                    <a href="{{ route($newBread['route'], $newBread['routeId']) }}">{{ $newBread['model'] }}</a>
                 @else
-                    <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
+                    <a href="{{ route(config('models.'.$section.'.indexRoute')) }}">{{config('models.'.$section.'.sectionName')}}</a>
                 @endif
             </li>
             <li class="active">{{$activeBread or ''}}</li>

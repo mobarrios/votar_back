@@ -10,9 +10,6 @@ use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\PartidosRepo;
 use App\Http\Repositories\Admin\TipoOperativosRepo;
 
-
-
-
 class ListasController extends Controller
 {
     public function  __construct(Request $request, Repo $repo, Route $route, PartidosRepo $partidosRepo, TipoOperativosRepo $tipoOperativosRepo)
@@ -38,6 +35,11 @@ class ListasController extends Controller
         
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
+        $this->data['newBread'] = [
+            'route' => 'admin.partidos.index', 
+            'routeId' => $this->route->getParameter('operativos_id'),
+            'model' => 'Partidos'
+        ];
 
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))

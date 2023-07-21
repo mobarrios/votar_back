@@ -13,6 +13,7 @@ use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Illuminate\Support\Facades\Hash;
 
 use  App\Entities\Admin\Mesas;
+use  App\Entities\Admin\OperativosMesasUsers;
 use Illuminate\Support\Facades\DB;
 
 
@@ -116,6 +117,10 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
             return false;
 
 
+    }
+
+    public function Operativos(){
+        return $this->hasMany(OperativosMesasUsers::class,'users_id');
     }
 
 }

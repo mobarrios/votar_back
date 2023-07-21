@@ -14,7 +14,7 @@ class PadronFakeSeeder extends Seeder
      */
     public function run()
     {
-        /*
+        
         $faker = Faker\Factory::create();
        
         for ($i = 1; $i < 200; $i++){
@@ -67,20 +67,7 @@ class PadronFakeSeeder extends Seeder
 
             }
         }
-        */
+     
 
-        $padron = Padrones::all();
-        $operativosMesas = OperativosMesas::where('operativos_id', 3)->where('mesas_id', 10)->first();
-
-        foreach($padron as $p){
-            DB::table('operativos_mesas_padron')->insert([
-                [
-                    'padrones_id' => $p->id,
-                    'referentes_id' => 1,
-                    'voto' => '',
-                    'operativos_mesas_id' => $operativosMesas->id
-                ]
-            ]);
-        }
     }
 }
