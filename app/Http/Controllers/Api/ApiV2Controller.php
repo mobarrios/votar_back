@@ -392,7 +392,16 @@ class ApiV2Controller extends Controller{
     public function padron(){
 
         $padron = DB::table('padrones')
-            ->select('id', 'nombre', 'apellido', 'domicilio', 'dni', 'nro_orden', 'nro_afiliado')
+            ->select('padrones.id', 'padrones.nombre', 'padrones.apellido', 
+                'padrones.domicilio', 
+                'padrones.dni', 
+                'padrones.nro_orden', 
+                'padrones.nro_afiliado',
+                'operativos_mesas.mesas_id',
+                'operativos_mesas.operativos_id'
+            )
+            ->join('operativos_mesas_padron', 'operativos_mesas_padron.padrones_id', '=', 'padrones.id')
+            ->join('operativos_mesas', 'operativos_mesas_padron.operativos_mesas_id', '=', 'operativos_mesas.id' )
             ->get();
 
         /*
