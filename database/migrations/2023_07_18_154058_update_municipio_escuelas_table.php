@@ -13,7 +13,7 @@ class UpdateMunicipioEscuelasTable extends Migration
     public function up()
     {
         Schema::table('escuelas', function (Blueprint $table) {
-            $table->string('municipio');
+            $table->string('municipio')->nullable();
         });
     }
 
