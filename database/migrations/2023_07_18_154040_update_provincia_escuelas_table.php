@@ -13,7 +13,7 @@ class UpdateProvinciaEscuelasTable extends Migration
     public function up()
     {
         Schema::table('escuelas', function (Blueprint $table) {
-            $table->string('provincia')->nullable();
+            DB::statement(" ALTER TABLE `escuelas` ADD `provincia` VARCHAR(100) NULL");
         });
     }
 
