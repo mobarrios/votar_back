@@ -25,7 +25,7 @@ class UpdateMunicipioEscuelasTable extends Migration
     public function down()
     {
         Schema::table('escuelas', function (Blueprint $table) {
-            $table->string('municipio');  
-         });
+            $table->dropColumn('municipio');  
+        });
     }
 }

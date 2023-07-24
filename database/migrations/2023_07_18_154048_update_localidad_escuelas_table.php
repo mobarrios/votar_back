@@ -25,7 +25,7 @@ class UpdateLocalidadEscuelasTable extends Migration
     public function down()
     {
         Schema::table('escuelas', function (Blueprint $table) {
-            $table->string('localidad');  
+            $table->dropColumn('localidad');
          });
     }
 }
