@@ -192,10 +192,11 @@ class ApiV2Controller extends Controller{
         $voto->total_recurridos = $request->total_recurridos;
         $voto->total = $request->total;
         
+        /*
         if($request->image){
             $voto->images()->create(['path' => $request->image]);
         }
-
+        */
         $voto->save();
 
        return response()->json(true,200);
@@ -320,20 +321,80 @@ class ApiV2Controller extends Controller{
             'escuelas.provincias_id', 
             'escuelas.municipios_id',
             'escuelas.localidades_id', 
-            //'escuelas.provincia', 
-            //'escuelas.localidad', 
+            'escuelas.provincia', 
+            'escuelas.localidad', 
+            'escuelas.municipio',
             DB::raw("COUNT(mesas.id) as cantidad_mesas")
             )
             ->leftJoin('mesas', 'escuelas.id', '=', 'mesas.escuelas_id')
             ->groupBy('escuelas.id')
             ->get();
 
-        return response()->json(['results'=>$escuelas],200);
+            $resultado['results']['escuelas'] = [];
+
+            foreach($escuelas as $escuela){
+
+                $operativo = DB::table('operativos_escuelas')
+                        ->select('operativos_escuelas.operativos_id')
+                        ->where('escuelas_id', $escuela->id)
+                        ->get();
+                
+                array_push($resultado['results']['escuelas'], [
+
+                    'id'        => $escuela->id,
+                    'nombre'    => $escuela->nombre,
+                    'direccion' => $escuela->direccion,
+                    'latitud' => $escuela->latitud,
+                    'longitud' => $escuela->longitud,
+                    'provincias_id' => $escuela->provincias_id,
+                    'municipios_id' => $escuela->municipios_id,
+                    'localidades_id' => $escuela->localidades_id,
+                    'provincia' => $escuela->provincia,
+                    'localidad' => $escuela->localidad,
+                    'municipio' => $escuela->municipio,
+                    'cantidad_mesas' => $escuela->cantidad_mesas,
+                    'operativos'  => $operativo
+                   
+                ]);
+            }
+
+        return response()->json(['results'=>$resultado],200);
         
     }
 
     public function mesas(){
+        /*
+        $mesas = DB::table('operativos_mesas_users')
+            ->select('mesas.id', 'mesas.numero', 'mesas.escuelas_id',
+                    DB::raw('GROUP_CONCAT(users.user_name SEPARATOR ", ") as user_name'),
+                    DB::raw('GROUP_CONCAT(users.name SEPARATOR ", ") as nombre'),
+                    DB::raw('GROUP_CONCAT(users.last_name SEPARATOR ", ") as apellido'),
+                    'operativos_mesas_users.operativos_id',
+                    'operativos.nombre as nombre_operativo')
+            ->join('mesas', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
+            ->join('users', 'operativos_mesas_users.users_id', '=', 'users.id')
+            ->join('operativos', 'operativos.id', '=', 'operativos_mesas_users.operativos_id')
+            ->groupBy('operativos_mesas_users.mesas_id')
+            ->get();
 
+        $resultado['results']['mesas'] = [];
+
+        foreach ($mesas as $mesa) {
+            array_push($resultado['results']['mesas'], [
+                'id'              => $mesa->id,
+                'numero'          => $mesa->numero,
+                'escuelas_id'     => $mesa->escuelas_id,
+                'fiscales'        => [
+                    'user_name'        => $mesa->user_name,
+                    'nombre'           => $mesa->nombre,
+                    'apellido'         => $mesa->apellido,
+                    'operativos_id'    => $mesa->operativos_id,
+                    'nombre_operativo' => $mesa->nombre_operativo,
+                ],
+            ]);
+        }
+        */
+        
         $mesas = DB::table('operativos_mesas_users')
             ->select('mesas.id', 'mesas.numero', 'mesas.escuelas_id')
             ->join('mesas', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
@@ -365,7 +426,7 @@ class ApiV2Controller extends Controller{
             ]);
 
         }
-
+        
         return response()->json($resultado,200);
         
     }
@@ -446,7 +507,23 @@ class ApiV2Controller extends Controller{
     public function resultado(){
 
         $votos = DB::table('votos')
-            ->select('votos.total', 'votos.total_blancos','votos.total_nulos','votos.total_recurridos','votos.total_impugnados', 'votos.created_at as fecha_creado', 'votos.updated_at as fecha_update', 'operativos_mesas.mesas_id', 'operativos_mesas.operativos_id')
+            ->select('votos.total', 
+                'votos.total_blancos',
+                'votos.total_nulos',
+                'votos.total_recurridos',
+                'votos.total_impugnados', 
+                'votos.created_at as fecha_creado', 
+                'votos.updated_at as fecha_update', 
+                'operativos_mesas.mesas_id', 
+                'operativos_mesas.operativos_id',
+                //'operativos_mesas.estados_mesas_id as estado_mesa',
+                DB::raw('CASE 
+                    WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
+                    WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
+                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado" 
+                    END AS estado_mesa'
+                )
+            )
             ->join('operativos_mesas', 'votos.operativos_mesas_id', '=', 'operativos_mesas.id')
             ->get();
 
@@ -457,7 +534,19 @@ class ApiV2Controller extends Controller{
     public function resultadosListas(){
 
         $listas = DB::table('votos_listas')
-            ->select('operativos_mesas.mesas_id', 'operativos_mesas.operativos_id', 'votos_listas.cantidad_votos', 'votos_listas.listas_id', 'votos_listas.created_at as fecha_creado', 'votos_listas.updated_at as fecha_update')
+            ->select('operativos_mesas.mesas_id', 
+                'operativos_mesas.operativos_id', 
+                'votos_listas.cantidad_votos', 
+                'votos_listas.listas_id', 
+                'votos_listas.created_at as fecha_creado', 
+                'votos_listas.updated_at as fecha_update',
+                DB::raw('CASE 
+                    WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
+                    WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
+                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado" 
+                    END AS estado_mesa'
+                )
+            )
             ->join('operativos_mesas', 'votos_listas.operativos_mesas_id', '=', 'operativos_mesas.id')
             ->get();
 
