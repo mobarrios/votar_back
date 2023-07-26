@@ -8,11 +8,11 @@ Mesas Operativo
     
     {!! Form::model($models,['route'=> ['admin.mesas.votos.edit', $escuela->id,$models->id] , 'files' =>'true']) !!}
 
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-4 form-group">
         {!! Form::label('Estado') !!}
         {!! Form::select('estados_id', $estados, $operativosMesas->estados_mesas_id,['class'=>'form-control']) !!}
     </div>
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-8 form-group">
         {!! Form::label('Número') !!}
         {!! Form::text('numero', null, ['class'=>'form-control', 'disabled']) !!}
     </div>
@@ -21,7 +21,7 @@ Mesas Operativo
 
     <br>
     
-    <div class="col-xs-6">
+    <div class="col-xs-4">
         <table class="table" >
             <thead>
             <th>
@@ -49,7 +49,7 @@ Mesas Operativo
         
     </div>
     
-    <div class="col-xs-6">
+    <div class="col-xs-8">
         <table class="table">
             <thead>
                 <th>
