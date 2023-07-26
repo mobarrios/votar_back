@@ -18,6 +18,7 @@ Route::get('v2/resultado', 'Api\ApiV2Controller@resultado');
 Route::get('v2/resultadosListas', 'Api\ApiV2Controller@resultadosListas');
 Route::get('v2/operativos', 'Api\ApiV2Controller@operativos');
 
+// app
 Route::group(['prefix' => 'v2', 'middleware' => 'token'], function () {
 
     Route::post('getPadronByMesa','Api\ApiV2Controller@getPadronByMesa');
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'v2', 'middleware' => 'token'], function () {
     Route::post('getVotosByMesa', 'Api\ApiV2Controller@getVotosByMesa');
     Route::post('getVotosByLista', 'Api\ApiV2Controller@getVotosByLista');
     Route::post('searchPersona', 'Api\ApiV2Controller@searchPersona');
+    Route::post('sendImage', 'Api\ApiV2Controller@sendImage');
     
 });
 

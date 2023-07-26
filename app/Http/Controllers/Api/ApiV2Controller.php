@@ -191,15 +191,37 @@ class ApiV2Controller extends Controller{
         $voto->total_nulos = $request->total_nulos;
         $voto->total_recurridos = $request->total_recurridos;
         $voto->total = $request->total;
-        
-        /*
-        if($request->image){
-            $voto->images()->create(['path' => $request->image]);
-        }
-        */
+       
         $voto->save();
 
        return response()->json(true,200);
+    }
+
+    public function sendImage(Request $request){
+
+        $idOperativos = $request->operativos_id;
+        $idMesa = $request->mesas_id;
+        
+        if (! $idOperativos || !$idMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'Datos vacios'], 403);
+        
+        $operativoMesa = OperativosMesas::where('operativos_id',$idOperativos)->where('mesas_id',$idMesa)->first(); 
+       
+        if(!$operativoMesa)
+            return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
+
+        if($operativoMesa->VotoMesa){
+            $voto = $operativoMesa->VotoMesa;
+
+            if(count($voto->images) > 0)
+                $voto->images()->update(['path' => $request->imagen]);
+            else
+                $voto->images()->create(['path' => $request->imagen]);
+            
+        }  
+
+        return response()->json(true,200);
+
     }
 
     public function votoPadron(Request $request){
@@ -277,24 +299,23 @@ class ApiV2Controller extends Controller{
             return response()->json(['resp' => 'ERROR' ,'msg' => 'El operativo mesa no existe'], 403);
 
         $cantidad = DB::table('votos')
+        ->select(
+            'votos.id',
+            'votos.total',
+            'votos.total_blancos',
+            'votos.total_nulos',
+            'votos.total_recurridos',
+            'votos.total_impugnados',
+            'votos.operativos_mesas_id',
+            'images.path as url'
+        )
+        ->leftJoin('images', function ($q) {
+            $q->on('images.imageable_id', '=', 'votos.id')
+                ->where('images.imageable_type', 'like', '%Votos%');
+        })
         ->where('votos.operativos_mesas_id', $operativoMesa->id)
         ->first();    
         
-        /*
-        if(count($cantidad) == 0){
-            
-            $cantidad = [
-                'total' => 0, 
-                'total_blancos' => 0,
-                'total_nulos' => 0,
-                'total_recurridos' => 0,
-                'total_impugnados' => 0,
-
-            ];    
-            
-            
-        }
-        */
         return response()->json(['results'=>$cantidad],200);
         
     }
