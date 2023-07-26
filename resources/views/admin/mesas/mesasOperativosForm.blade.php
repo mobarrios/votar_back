@@ -45,7 +45,15 @@ Mesas Operativo
                 @endforeach
             </tbody>
         </table>
-
+        @if(isset($operativosMesas->VotoMesa))
+            @if(count($operativosMesas->VotoMesa->images) > 0)
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $operativosMesas->VotoMesa->images->first()->path}}">
+                    <img src="{{ $operativosMesas->VotoMesa->images->first()->path }}" class="img-responsive">
+                </a>
+            </div>
+            @endif
+        @endif
         
     </div>
     
@@ -82,15 +90,7 @@ Mesas Operativo
             </tbody>
         </table>
 
-        @if(isset($operativosMesas->VotoMesa))
-            @if(count($operativosMesas->VotoMesa->images) > 0)
-            <div class="col-md-4 col-sm-4 col-xs-6">
-                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $operativosMesas->VotoMesa->images->first()->path}}">
-                    <img src="{{ $operativosMesas->VotoMesa->images->first()->path }}" class="img-responsive">
-                </a>
-            </div>
-            @endif
-        @endif
+        
     </div>
 
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
