@@ -45,6 +45,8 @@ Mesas Operativo
                 @endforeach
             </tbody>
         </table>
+
+        
     </div>
     
     <div class="col-xs-6">
@@ -79,6 +81,26 @@ Mesas Operativo
                 @endif
             </tbody>
         </table>
+
+        @if(isset($operativosMesas->VotoMesa))
+            @if(count($operativosMesas->VotoMesa->images) > 0)
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="" class="btn_imagen" data-toggle="modal" data-target="#myModal" data-img="{{ $operativosMesas->VotoMesa->images->first()->path}}">
+                    <img src="{{ $operativosMesas->VotoMesa->images->first()->path }}" class="img-responsive">
+                </a>
+            </div>
+            @endif
+        @endif
+    </div>
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+      
+              </div>
+          </div>
+        </div>
     </div>
 @endsection
     
@@ -177,6 +199,16 @@ Mesas Operativo
     });
 
 
+    </script>
+    <script type="text/javascript">
+        $(".btn_imagen" ).click(function() {       
+        $('div.modal-body > img').remove();
+   
+        var imagen  = $(this).data('img')
+       
+        $('.modal-body').append('<img src="'+imagen+'" class="img-responsive">');
+      });
+    
     </script>
 
 @endsection    
