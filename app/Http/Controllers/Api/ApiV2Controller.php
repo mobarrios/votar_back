@@ -342,9 +342,9 @@ class ApiV2Controller extends Controller{
             'escuelas.provincias_id', 
             'escuelas.municipios_id',
             'escuelas.localidades_id', 
-            //'escuelas.provincia', 
-            //'escuelas.localidad', 
-            //'escuelas.municipio',
+            'escuelas.provincia', 
+            'escuelas.localidad', 
+            'escuelas.municipio',
             DB::raw("COUNT(mesas.id) as cantidad_mesas")
             )
             ->leftJoin('mesas', 'escuelas.id', '=', 'mesas.escuelas_id')
@@ -370,9 +370,9 @@ class ApiV2Controller extends Controller{
                     'provincias_id' => $escuela->provincias_id,
                     'municipios_id' => $escuela->municipios_id,
                     'localidades_id' => $escuela->localidades_id,
-                    //'provincia' => $escuela->provincia,
-                    //'localidad' => $escuela->localidad,
-                    //'municipio' => $escuela->municipio,
+                    'provincia' => $escuela->provincia,
+                    'localidad' => $escuela->localidad,
+                    'municipio' => $escuela->municipio,
                     'cantidad_mesas' => $escuela->cantidad_mesas,
                     'operativos'  => $operativo
                    

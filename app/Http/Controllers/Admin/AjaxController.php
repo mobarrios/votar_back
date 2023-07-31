@@ -16,7 +16,7 @@ use App\Http\Repositories\Admin\ModelsRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Http\Repositories\Admin\OperativosMesasPadronRepo;
-
+use App\Entities\Admin\OperativosMesasUsers;
 
 class AjaxController extends Controller
 {
@@ -197,6 +197,26 @@ class AjaxController extends Controller
         $padron->save();
         
         return response()->json([],200);
+    }
+
+    public function postMesasUsuarios(OperativosMesasUsers $operativosMesasUsers)
+    {
+        $a =  explode('_', $this->request->id);
+        $mesa = $a[0];
+        $user = $a[1];
+        $opId = $this->request->opId;
+        $op   = $operativosMesasUsers->where('operativos_id',$opId)
+                    ->where('mesas_id',$mesa)
+                    ->where('users_id',$user)
+                    ->first();
+        
+        if(isset($op)){
+            $op->delete();
+        }
+
+        return response()->json(true,200);
+
+
     }
 
 }

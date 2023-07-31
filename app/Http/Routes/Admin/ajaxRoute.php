@@ -58,6 +58,7 @@ Route::get('/findLocalidades', 'Admin\AjaxController@findLocalidades');
 Route::get('/findDues/{id?}','Admin\AjaxController@findDues');
 
 Route::post('/update-padron/{id?}','Admin\AjaxController@updatePadron');
+Route::post('/update-mesa-user','Admin\AjaxController@postMesasUsuarios');
 
 
 

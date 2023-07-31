@@ -46,20 +46,11 @@ Mesas Operativo
             </tbody>
         </table>
         
-        @if(isset($operativosMesas->VotoMesa))
-            @if(count($operativosMesas->VotoMesa->images) > 0)
-            <div class="col-md-4 col-sm-4 col-xs-6">
-                <a href="{{ $operativosMesas->VotoMesa->images->first()->path }}" target="_blank">
-                    <img src="{{ $operativosMesas->VotoMesa->images->first()->path }}" class="img-responsive">
-                </a>
-            </div>
-            @endif
-        @endif
         
     </div>
     
     <div class="col-xs-8">
-        <table class="table">
+        <table class="table table-responsive">
             <thead>
                 <th>
                     Votos Blancos
@@ -89,8 +80,17 @@ Mesas Operativo
                     </tr>
                 @endif
             </tbody>
+            
         </table>
-
+        @if(isset($operativosMesas->VotoMesa))
+            @if(count($operativosMesas->VotoMesa->images) > 0)
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <a href="{{ $operativosMesas->VotoMesa->images->first()->path }}" target="_blank">
+                    <img src="{{ $operativosMesas->VotoMesa->images->first()->path }}" class="img-responsive">
+                </a>
+            </div>
+            @endif
+        @endif
     </div>
 
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

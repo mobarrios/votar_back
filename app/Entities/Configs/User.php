@@ -108,6 +108,7 @@ class User extends EntityUser implements AuthenticatableContract,  CanResetPassw
         ->where('operativos_id',$operativosId)
         ->where('mesas_id',$mesasId)
         ->where('users_id',$usersId)
+        ->whereNull('deleted_at')
         ->count();
 
 
