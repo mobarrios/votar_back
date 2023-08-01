@@ -12,7 +12,7 @@ class EstadosMesasSeeder extends Seeder
     public function run()
     {
         DB::table('estados_mesas')->insert([
-            /*
+            
             [
                 'id'   => 1,
                 'descripcion' => 'Pendiente',
@@ -25,7 +25,7 @@ class EstadosMesasSeeder extends Seeder
                 'id'   => 3,
                 'descripcion' => 'Impugnado',
             ],
-            */
+         
             [
                 'id'   => 4,
                 'descripcion' => 'Estimado',

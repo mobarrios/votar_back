@@ -94,6 +94,7 @@ class ApiV2Controller extends Controller{
             ->join('operativos_mesas_users','operativos_mesas_users.users_id','=','users.id')
             ->join('operativos','operativos.id','=','operativos_mesas_users.operativos_id')
             ->where('users.id','=',$userId)
+            ->whereNull('operativos_mesas_users.deleted_at') 
             ->groupBy('operativos.id')
             ->get();
         

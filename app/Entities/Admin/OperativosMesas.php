@@ -40,6 +40,9 @@ class OperativosMesas extends Entity
 
         if ($this->attributes['estados_mesas_id'] == 3)
             return 'Impugnado';
+
+        if ($this->attributes['estados_mesas_id'] == 4)
+            return 'Estimado';
         
     }
 
