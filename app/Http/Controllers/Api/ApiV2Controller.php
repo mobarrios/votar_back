@@ -119,6 +119,7 @@ class ApiV2Controller extends Controller{
                 ->where('mesas.escuelas_id', $escuela->id)
                 ->where('operativos_mesas_users.users_id', $userId)
                 ->where('operativos_mesas_users.operativos_id', $o->id)
+                ->whereNull('operativos_mesas_users.deleted_at') 
                 ->get();
                 
                 if(count($mesas) > 0){
@@ -420,6 +421,7 @@ class ApiV2Controller extends Controller{
         $mesas = DB::table('operativos_mesas_users')
             ->select('mesas.id', 'mesas.numero', 'mesas.escuelas_id')
             ->join('mesas', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
+            ->whereNull('operativos_mesas_users.deleted_at')
             ->groupBy('operativos_mesas_users.mesas_id')
             ->get();
 
@@ -436,6 +438,7 @@ class ApiV2Controller extends Controller{
                     ->join('users', 'operativos_mesas_users.users_id', '=', 'users.id')
                     ->join('operativos', 'operativos.id', '=', 'operativos_mesas_users.operativos_id')
                     ->where('operativos_mesas_users.mesas_id', $mesa->id)
+                    ->whereNull('operativos_mesas_users.deleted_at')
                     ->get();
           
             array_push($resultado['results']['mesas'], [
