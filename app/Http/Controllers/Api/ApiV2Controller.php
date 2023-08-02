@@ -100,6 +100,16 @@ class ApiV2Controller extends Controller{
         
         $resultado['results']['operativos'] = [];
 
+        /*
+         DB::raw('CASE 
+                    WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
+                    WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
+                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado" 
+                    END AS estado_mesa'
+                )
+            )
+            ->join('operativos_mesas', 'votos.operativos_mesas_id', '=', 'operativos_mesas.id')
+            */
         foreach ($operativos as $o){
             
             
@@ -114,12 +124,27 @@ class ApiV2Controller extends Controller{
             foreach($escuelas as $escuela){
                 
                 $mesas = DB::table('mesas')
-                ->select('mesas.id','mesas.numero')
+                ->select(
+                    'mesas.id',
+                    'mesas.numero',
+                    DB::raw('SUM(IF(operativos_mesas_padron.voto = 1, 1, 0)) as votados'),
+                    DB::raw('SUM(IF(operativos_mesas_padron.voto = 0, 1, 0)) as no_votados'),
+                    DB::raw('CASE 
+                    WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
+                    WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
+                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado"
+                    WHEN operativos_mesas.estados_mesas_id = 4 THEN "Estimado" 
+                    END AS estado_mesa'),
+                )
                 ->join('operativos_mesas_users', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
+                ->join('operativos_mesas', 'operativos_mesas_users.mesas_id', '=', 'operativos_mesas.mesas_id')
+                ->leftJoin('operativos_mesas_padron', 'operativos_mesas_padron.operativos_mesas_id', '=', 'operativos_mesas.id')
                 ->where('mesas.escuelas_id', $escuela->id)
                 ->where('operativos_mesas_users.users_id', $userId)
                 ->where('operativos_mesas_users.operativos_id', $o->id)
+                ->where('operativos_mesas.operativos_id', $o->id)
                 ->whereNull('operativos_mesas_users.deleted_at') 
+                ->groupBy('operativos_mesas_padron.operativos_mesas_id')
                 ->get();
                 
                 if(count($mesas) > 0){
@@ -545,7 +570,8 @@ class ApiV2Controller extends Controller{
                 DB::raw('CASE 
                     WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
                     WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
-                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado" 
+                    WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado"
+                    WHEN operativos_mesas.estados_mesas_id = 4 THEN "Estimado" 
                     END AS estado_mesa'
                 )
             )
@@ -569,6 +595,7 @@ class ApiV2Controller extends Controller{
                     WHEN operativos_mesas.estados_mesas_id = 1 THEN "Pendiente"
                     WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
                     WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado" 
+                    WHEN operativos_mesas.estados_mesas_id = 4 THEN "Estimado"
                     END AS estado_mesa'
                 )
             )
