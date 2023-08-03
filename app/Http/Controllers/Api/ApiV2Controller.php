@@ -134,7 +134,7 @@ class ApiV2Controller extends Controller{
                     WHEN operativos_mesas.estados_mesas_id = 2 THEN "Validado"
                     WHEN operativos_mesas.estados_mesas_id = 3 THEN "Impugnado"
                     WHEN operativos_mesas.estados_mesas_id = 4 THEN "Estimado" 
-                    END AS estado_mesa'),
+                    END AS estado_mesa')
                 )
                 ->join('operativos_mesas_users', 'operativos_mesas_users.mesas_id', '=', 'mesas.id')
                 ->join('operativos_mesas', 'operativos_mesas_users.mesas_id', '=', 'operativos_mesas.mesas_id')
