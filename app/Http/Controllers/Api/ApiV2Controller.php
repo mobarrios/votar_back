@@ -247,6 +247,10 @@ class ApiV2Controller extends Controller{
             
         }  
 
+        // estado cerrado
+        $operativoMesa->estado = true;
+        $operativoMesa->save();
+
         return response()->json(true,200);
 
     }

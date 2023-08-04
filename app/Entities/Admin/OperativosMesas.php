@@ -9,7 +9,7 @@ class OperativosMesas extends Entity
 {
 
      protected $table = 'operativos_mesas';
-     protected $fillable = ['operativos_id','mesas_id','estados_mesas_id'];
+     protected $fillable = ['operativos_id','mesas_id','estados_mesas_id','estado'];
      protected $section = 'operativos_mesas';
 
      public function Padrones()
@@ -30,7 +30,7 @@ class OperativosMesas extends Entity
         return $this->hasMany(VotosListas::class);
     }
 
-     public function getEstadoAttribute()
+    public function getEstadoAttribute()
     {
         if ($this->attributes['estados_mesas_id'] == 1)
             return 'Pendiente';
@@ -43,6 +43,16 @@ class OperativosMesas extends Entity
 
         if ($this->attributes['estados_mesas_id'] == 4)
             return 'Estimado';
+        
+    }
+
+    public function getEstadoFinalAttribute()
+    {
+        if ($this->attributes['estado'] == 0)
+            return 'Abierto';
+
+        if ($this->attributes['estado'] == 1)
+            return 'Cerrado';
         
     }
 

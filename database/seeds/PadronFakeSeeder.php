@@ -16,7 +16,7 @@ class PadronFakeSeeder extends Seeder
     {
         
         $faker = Faker\Factory::create();
-       
+        
         for ($i = 1; $i < 200; $i++){
             DB::table('padrones')->insert([
                 [
@@ -67,7 +67,7 @@ class PadronFakeSeeder extends Seeder
 
             }
         }
-     
+        
 
     }
 }
