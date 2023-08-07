@@ -4,12 +4,14 @@
             <td>{{$escuela->nombre}}</td>
             <td><a href="{{route('admin.mesas.show',[$escuela->id,$mesa->id,$models->id])}}" >{{$mesa->numero}}</a></td>
             <td>{{ 
-                $mesa->Operativo($models->id) ? 
-                $mesa->Operativo($models->id)->estado : '' 
+                    $mesa->Operativo($models->id) ? 
+                    $mesa->Operativo($models->id)->estado : '' 
                 }}
                 - 
-                {{ $mesa->Operativo($models->id) ? 
-                $mesa->Operativo($models->id)->estadoFinal : '' }}
+                {{  
+                    $mesa->Operativo($models->id) ? 
+                    $mesa->Operativo($models->id)->estadoFinal : '' 
+                }}
                
             </td>
            
