@@ -8,7 +8,8 @@
                 $mesa->Operativo($models->id)->estado : '' 
                 }}
                 - 
-                {{ $mesa->Operativo($models->id)->estadoFinal }}
+                {{ $mesa->Operativo($models->id) ? 
+                $mesa->Operativo($models->id)->estadoFinal : '' }}
                
             </td>
            
