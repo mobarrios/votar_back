@@ -220,7 +220,7 @@ class OperativosController extends Controller
         }else{
             $this->data['models'] = OperativosMesasUsers::where('operativos_id', $id)->where('users_id',$user->id)->get();
         }
-        
+
         return view('admin.operativos.mesasUsuarios')->with($this->data);
     }
 
@@ -260,6 +260,25 @@ class OperativosController extends Controller
 
         return redirect()->back();
 
+
+    }
+
+    public function mesasUsuariosEdit(OperativosMesasUsers $operativosMesasUsers, Usuarios $usersRepo){
+
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Mesas Usuarios';
+
+        // id desde route
+        $this->data['operativoId'] = $this->route->getParameter('id');
+        $this->data['mesaId'] = $this->route->getParameter('mesaId');
+       
+        $user = Auth::user();
+
+        //$this->data['usuarios'] = $operativosMesasUsers->where('operativos_id', $id)->where('mesas_id',$mesaId)->get();
+        $this->data['usuarios'] = $usersRepo->getModel()->get();
+        
+
+        return view('admin.operativos.mesasUsuariosEdit')->with($this->data);
 
     }
 

@@ -14,7 +14,13 @@
                 }}
                
             </td>
-           
+            <td>
+                <a class="btn btn-xs btn-primary" href="{{ route('admin.operativos.mesasUsuarios.edit',[$models->id,$mesa->id]) }}">
+                    Editar Usuario
+                </a>
+            </td>
+
+            {{--
             <td class="col-xs-8">
                 <select name="mesas[]" class="form-control select2" multiple="multiple">
                     @foreach($usuarios as $usuario)
@@ -27,6 +33,7 @@
                     @endforeach
                 </select>
             </td>
+            --}}
         </tr>           
     @endforeach
 @endforeach

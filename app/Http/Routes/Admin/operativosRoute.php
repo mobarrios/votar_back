@@ -13,6 +13,7 @@ Route::group(['prefix'=>'operativos'],function(){
         Route::get('/show/{id?}',       ['middleware'=>'permission:'.$section.'.show','as'=>'admin.operativos.show','uses'=>'Admin\OperativosController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'admin.operativos.index','uses'=>'Admin\OperativosController@index']);
         Route::get('/mesasUsuarios/{id?}',['middleware'=>'permission:'.$section.'.show','as'=>'admin.operativos.mesasUsuarios','uses'=>'Admin\OperativosController@mesasUsuarios']);
+        Route::get('/mesasUsuarios/edit/{id?}/{mesaId?}',['middleware'=>'permission:'.$section.'.show','as'=>'admin.operativos.mesasUsuarios.edit','uses'=>'Admin\OperativosController@mesasUsuariosEdit']);
 
         Route::post('/mesasUsuarios/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'admin.operativos.post.mesasUsuarios','uses'=>'Admin\OperativosController@postMesasUsuarios']);
 

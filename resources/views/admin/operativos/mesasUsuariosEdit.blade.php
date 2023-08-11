@@ -6,25 +6,28 @@
 
     @section('form_inputs')
     @if(Auth::user()->is('root'))
-        {!! Form::model($models,['route'=> ['admin.operativos.post.mesasUsuarios', $models->id] ]) !!}
-        {!! Form::hidden('operativos_id',$models->id) !!}
+        {!! Form::model($operativoId,['route'=> ['admin.operativos.post.mesasUsuarios', $operativoId] ]) !!}
+        {!! Form::hidden('operativos_id',$operativoId) !!}
     @endif
-
+    
     <div class="col-xs-12">
         <div class="table-responsive">
                 <table class="table" >
                     <thead>
-                        <td>Escuela</td>
-                        <td>Mesa</td>      
-                        <td>Estado</td>
-                        <td>Acciones</td>
+                        <td>Usuarios</td>
                     </thead>
                     <tbody>
-                        @if(Auth::user()->is('root'))
-                            @include('admin.operativos.partials.rootmesas')
-                        @else
-                            @include('admin.operativos.partials.adminmesas')
-                        @endif
+                        <td class="col-xs-8">
+                            <select name="mesas[]" class="form-control select2" multiple="multiple">
+                                @foreach($usuarios as $usuario)
+                                    @if($usuario->OperativosMesasUsers($operativoId, $mesaId,$usuario->id))
+                                        <option selected="selected" value="{{$mesaId}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
+                                    @else
+                                        <option  value="{{$mesaId}}_{{$usuario->id}}">{{$usuario->user_name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </td>
                     </tbody>
                 </table>
         </div>
