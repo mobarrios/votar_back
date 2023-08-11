@@ -186,9 +186,9 @@ class AjaxController extends Controller
     }
 
     public function updatePadron(OperativosMesasPadronRepo $operativosMesasPadron){
-        
+      
         $padron = $operativosMesasPadron->find($this->request->id);
-
+       
         if($padron->voto == 0)
             $padron->voto = 1;
         else

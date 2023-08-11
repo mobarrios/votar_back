@@ -113,7 +113,7 @@ Mesas Operativo
         <div class="box">
             <div class="box-body">
                 <div class="col-xs-12">
-                    <table id="padronTable" class="table" >
+                    <table id="padronTable" class="table " >
                         <thead>
                         <th>
                             Afiliado
@@ -136,9 +136,8 @@ Mesas Operativo
                                         <td>  {{ $padron->Padron->nro_afiliado }} </td>
                                         <td>  {{ $padron->Padron->apellido }} {{ $padron->Padron->nombre }}  </td>
                                         <td>  {{ $padron->Padron->dni }}</td>
-                                        <td>
+                                        <td data-id="{{$padron->id}}">
                                             <input type="checkbox" class="btn-cancel" data-id="{{$padron->id}}" {{ $padron->voto ? 'checked' : '' }} />
-                                    
                                         </td>
                                     </tr>
                                 @endforeach
@@ -169,6 +168,40 @@ Mesas Operativo
 
     <script>
 
+    $("#padronTable").on("click", ".btn-cancel", function() {
+      
+        var id = $(this).attr("data-id");
+        
+        //$(btn).prop("disabled",true);
+        //var id = $(this).attr('data-id');
+        var url = 'admin/update-padron';
+
+        swal({
+            title: "Desea modificar el registro?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "No",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si",
+            closeOnConfirm: false
+        }).then(function () {
+            swal(
+                    'Ok!',
+                    'Su Registro ha modificado correctamento.',
+                    'success'
+            )
+            $.ajax({
+                'url': url,
+                'data':{'id':id, '_token': '{{ csrf_token() }}'},
+                'method': 'POST',
+              
+            });
+        })
+   
+    });
+    
+
+    /*
     $('.btn-cancel').on('click',function(){
         var btn = $(this);
         //$(btn).prop("disabled",true);
@@ -196,8 +229,9 @@ Mesas Operativo
               
             });
         })
-    });
 
+    });
+    */
 
     </script>
 
